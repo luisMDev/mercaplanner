@@ -1,0 +1,178 @@
+{
+  "_nota": "Datos de ejemplo. Sustituir por las recetas y el plan reales; el formato esta documentado en README.md.",
+  "comidas": [
+    { "id": "desayuno", "label": "Desayuno", "hora": "08:00" },
+    { "id": "media-manana", "label": "Media mañana", "hora": "11:00" },
+    { "id": "comida", "label": "Comida", "hora": "14:00" },
+    { "id": "merienda", "label": "Merienda", "hora": "17:30" },
+    { "id": "cena", "label": "Cena", "hora": "21:00" }
+  ],
+  "recetas": [
+    {
+      "id": "avena-platano",
+      "nombre": "Avena con plátano y canela",
+      "tipos": ["desayuno"],
+      "descripcion": "Porridge cremoso con plátano en rodajas y un toque de canela.",
+      "minutos": 10,
+      "raciones": 1,
+      "kcal": 380,
+      "macros": { "proteinas": 14, "carbohidratos": 62, "grasas": 8 },
+      "ingredientes": ["50 g de copos de avena", "200 ml de leche semidesnatada o bebida de avena", "1 plátano", "Canela al gusto"],
+      "pasos": ["Calentar la leche con la avena a fuego medio, removiendo, 5 minutos.", "Servir con el plátano en rodajas y espolvorear la canela."]
+    },
+    {
+      "id": "tostada-aguacate-huevo",
+      "nombre": "Tostada de aguacate y huevo",
+      "tipos": ["desayuno"],
+      "descripcion": "Pan integral con aguacate machacado y huevo a la plancha.",
+      "minutos": 10,
+      "raciones": 1,
+      "kcal": 410,
+      "macros": { "proteinas": 17, "carbohidratos": 32, "grasas": 23 },
+      "ingredientes": ["2 rebanadas de pan integral", "1/2 aguacate", "1 huevo", "Sal, pimienta y unas gotas de limón"],
+      "pasos": ["Tostar el pan.", "Machacar el aguacate con sal, pimienta y limón y untarlo.", "Hacer el huevo a la plancha y ponerlo encima."]
+    },
+    {
+      "id": "yogur-frutos-rojos",
+      "nombre": "Yogur griego con frutos rojos",
+      "tipos": ["desayuno", "merienda"],
+      "descripcion": "Yogur natural con frutos rojos y un puñado de granola.",
+      "minutos": 3,
+      "raciones": 1,
+      "kcal": 260,
+      "macros": { "proteinas": 15, "carbohidratos": 28, "grasas": 9 },
+      "ingredientes": ["1 yogur griego natural sin azúcar", "80 g de frutos rojos", "20 g de granola"],
+      "pasos": ["Poner el yogur en un bol y añadir los frutos rojos y la granola por encima."]
+    },
+    {
+      "id": "manzana-nueces",
+      "nombre": "Manzana con nueces",
+      "tipos": ["media-manana", "merienda"],
+      "descripcion": "Tentempié rápido para llevar.",
+      "minutos": 1,
+      "raciones": 1,
+      "kcal": 180,
+      "macros": { "proteinas": 3, "carbohidratos": 22, "grasas": 10 },
+      "ingredientes": ["1 manzana", "15 g de nueces"],
+      "pasos": ["Lavar la manzana y acompañarla con las nueces."]
+    },
+    {
+      "id": "hummus-crudites",
+      "nombre": "Hummus con crudités",
+      "tipos": ["media-manana", "merienda"],
+      "descripcion": "Palitos de zanahoria y pepino con hummus.",
+      "minutos": 5,
+      "raciones": 1,
+      "kcal": 190,
+      "macros": { "proteinas": 6, "carbohidratos": 18, "grasas": 10 },
+      "ingredientes": ["50 g de hummus", "1 zanahoria", "1/2 pepino"],
+      "pasos": ["Cortar la zanahoria y el pepino en bastones.", "Servir con el hummus para mojar."]
+    },
+    {
+      "id": "pollo-arroz-verduras",
+      "nombre": "Pollo con arroz y verduras salteadas",
+      "tipos": ["comida"],
+      "descripcion": "Pechuga a la plancha con arroz integral y verduras al wok.",
+      "minutos": 30,
+      "raciones": 1,
+      "kcal": 560,
+      "macros": { "proteinas": 42, "carbohidratos": 58, "grasas": 14 },
+      "ingredientes": ["150 g de pechuga de pollo", "60 g de arroz integral (en crudo)", "1 calabacín pequeño", "1/2 pimiento rojo", "1 cucharada de aceite de oliva", "Salsa de soja baja en sal"],
+      "pasos": ["Cocer el arroz según el paquete.", "Hacer el pollo a la plancha y cortarlo en tiras.", "Saltear las verduras en el aceite, añadir el pollo y un chorrito de soja.", "Servir sobre el arroz."]
+    },
+    {
+      "id": "lentejas-verduras",
+      "nombre": "Lentejas estofadas con verduras",
+      "tipos": ["comida"],
+      "descripcion": "Plato de cuchara sencillo; se puede hacer para varios días.",
+      "minutos": 40,
+      "raciones": 4,
+      "kcal": 480,
+      "macros": { "proteinas": 26, "carbohidratos": 70, "grasas": 9 },
+      "ingredientes": ["300 g de lentejas pardinas", "1 cebolla", "2 zanahorias", "1 pimiento verde", "1 tomate", "1 cucharadita de pimentón", "2 cucharadas de aceite de oliva"],
+      "pasos": ["Pochar la cebolla, el pimiento y la zanahoria picados en el aceite.", "Añadir el tomate rallado y el pimentón.", "Incorporar las lentejas, cubrir de agua y cocer 30 minutos."],
+      "notas": "Se conserva 3 días en la nevera."
+    },
+    {
+      "id": "salmon-patata-brocoli",
+      "nombre": "Salmón al horno con patata y brócoli",
+      "tipos": ["comida", "cena"],
+      "descripcion": "Todo en la misma bandeja de horno.",
+      "minutos": 35,
+      "raciones": 1,
+      "kcal": 590,
+      "macros": { "proteinas": 36, "carbohidratos": 40, "grasas": 30 },
+      "ingredientes": ["150 g de lomo de salmón", "1 patata mediana", "150 g de brócoli", "1 cucharada de aceite de oliva", "Eneldo, sal y limón"],
+      "pasos": ["Hornear la patata en gajos con la mitad del aceite a 200 °C, 20 minutos.", "Añadir el salmón y el brócoli con el resto del aceite, el eneldo y la sal.", "Hornear 12-15 minutos más y servir con limón."]
+    },
+    {
+      "id": "pasta-integral-atun",
+      "nombre": "Pasta integral con atún y tomate",
+      "tipos": ["comida"],
+      "descripcion": "Rápida y saciante.",
+      "minutos": 20,
+      "raciones": 1,
+      "kcal": 540,
+      "macros": { "proteinas": 32, "carbohidratos": 72, "grasas": 12 },
+      "ingredientes": ["80 g de pasta integral", "1 lata de atún al natural", "150 g de tomate triturado", "1/2 cebolla", "Orégano"],
+      "pasos": ["Cocer la pasta.", "Sofreír la cebolla, añadir el tomate y cocinar 10 minutos.", "Mezclar con el atún escurrido, el orégano y la pasta."]
+    },
+    {
+      "id": "tortilla-espinacas",
+      "nombre": "Tortilla de espinacas",
+      "tipos": ["cena"],
+      "descripcion": "Tortilla francesa rellena de espinacas salteadas.",
+      "minutos": 10,
+      "raciones": 1,
+      "kcal": 320,
+      "macros": { "proteinas": 22, "carbohidratos": 6, "grasas": 23 },
+      "ingredientes": ["2 huevos", "100 g de espinacas frescas", "1 diente de ajo", "1 cucharadita de aceite de oliva"],
+      "pasos": ["Saltear el ajo y las espinacas hasta que reduzcan.", "Batir los huevos, añadirlos a la sartén y cuajar la tortilla."]
+    },
+    {
+      "id": "crema-calabacin",
+      "nombre": "Crema de calabacín con pavo",
+      "tipos": ["cena"],
+      "descripcion": "Crema ligera con unas lonchas de pavo a la plancha.",
+      "minutos": 25,
+      "raciones": 2,
+      "kcal": 300,
+      "macros": { "proteinas": 24, "carbohidratos": 18, "grasas": 13 },
+      "ingredientes": ["2 calabacines", "1 puerro", "1 patata pequeña", "1 quesito light", "100 g de pechuga de pavo en lonchas"],
+      "pasos": ["Cocer el calabacín, el puerro y la patata en agua 15 minutos.", "Triturar con el quesito y parte del caldo.", "Servir con el pavo a la plancha."]
+    },
+    {
+      "id": "ensalada-garbanzos",
+      "nombre": "Ensalada templada de garbanzos",
+      "tipos": ["cena", "comida"],
+      "descripcion": "Garbanzos con tomate, pepino, cebolla morada y feta.",
+      "minutos": 10,
+      "raciones": 1,
+      "kcal": 420,
+      "macros": { "proteinas": 18, "carbohidratos": 44, "grasas": 18 },
+      "ingredientes": ["200 g de garbanzos cocidos", "1 tomate", "1/2 pepino", "1/4 de cebolla morada", "30 g de queso feta", "1 cucharada de aceite de oliva"],
+      "pasos": ["Calentar los garbanzos en la sartén 2 minutos.", "Mezclar con las verduras picadas y el feta y aliñar."]
+    },
+    {
+      "id": "merluza-ensalada",
+      "nombre": "Merluza a la plancha con ensalada",
+      "tipos": ["cena"],
+      "descripcion": "Pescado blanco con ensalada verde.",
+      "minutos": 15,
+      "raciones": 1,
+      "kcal": 310,
+      "macros": { "proteinas": 32, "carbohidratos": 8, "grasas": 16 },
+      "ingredientes": ["180 g de merluza", "Lechuga, tomate y zanahoria", "1 cucharada de aceite de oliva", "Ajo y perejil"],
+      "pasos": ["Hacer la merluza a la plancha con ajo y perejil.", "Acompañar con la ensalada aliñada."]
+    }
+  ],
+  "semana": {
+    "lunes": { "desayuno": "avena-platano", "media-manana": "manzana-nueces", "comida": "pollo-arroz-verduras", "merienda": "yogur-frutos-rojos", "cena": "tortilla-espinacas" },
+    "martes": { "desayuno": "tostada-aguacate-huevo", "media-manana": "hummus-crudites", "comida": "lentejas-verduras", "merienda": "manzana-nueces", "cena": "crema-calabacin" },
+    "miercoles": { "desayuno": "yogur-frutos-rojos", "media-manana": "manzana-nueces", "comida": "salmon-patata-brocoli", "merienda": "hummus-crudites", "cena": "ensalada-garbanzos" },
+    "jueves": { "desayuno": "avena-platano", "media-manana": "hummus-crudites", "comida": "lentejas-verduras", "merienda": "yogur-frutos-rojos", "cena": "merluza-ensalada" },
+    "viernes": { "desayuno": "tostada-aguacate-huevo", "media-manana": "manzana-nueces", "comida": "pasta-integral-atun", "merienda": "hummus-crudites", "cena": "tortilla-espinacas" },
+    "sabado": { "desayuno": "avena-platano", "comida": "ensalada-garbanzos", "merienda": "manzana-nueces", "cena": "salmon-patata-brocoli" },
+    "domingo": { "desayuno": "tostada-aguacate-huevo", "comida": "pollo-arroz-verduras", "merienda": "yogur-frutos-rojos", "cena": "crema-calabacin" }
+  }
+}
