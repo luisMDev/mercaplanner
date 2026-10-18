@@ -454,10 +454,10 @@
           font-size: 0.84rem;
         }
       }
-      @media (max-width: 374px) {
-        .tab {
-          padding: 0 9px;
-          gap: 5px;
+      /* Four tabs with names do not fit a phone: only the active one keeps its name */
+      @media (max-width: 440px) {
+        .tab:not(.active) .tab-label {
+          display: none;
         }
       }
 
@@ -720,6 +720,136 @@
         color: var(--text-muted);
         font-size: 0.82rem;
         font-variant-numeric: tabular-nums;
+      }
+
+      /* ---------- Productos ---------- */
+      .product-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .product-filters .select-shell {
+        flex: 1 1 160px;
+        min-width: 0;
+      }
+      .select-shell {
+        position: relative;
+      }
+      .select-shell::after {
+        content: '';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        width: 7px;
+        height: 7px;
+        border-right: 2px solid var(--text-faint);
+        border-bottom: 2px solid var(--text-faint);
+        transform: translateY(-65%) rotate(45deg);
+        pointer-events: none;
+      }
+      .pill-select {
+        appearance: none;
+        -webkit-appearance: none;
+        display: block;
+        width: 100%;
+        height: 36px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 0 34px 0 14px;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
+      .pill-select option {
+        background: var(--surface);
+        color: var(--text);
+      }
+      .pill-select:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .product-card {
+        gap: 8px;
+      }
+      .product-name {
+        font-weight: 600;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .product-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 6px;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+      }
+      .product-price {
+        color: var(--text);
+        font-weight: 600;
+      }
+      /* Nutrition per 100 g/ml: six cells, three per row on a phone */
+      .nutri {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .nutri-cell {
+        background: var(--surface-2);
+        border-radius: var(--radius-s);
+        padding: 6px 8px;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .nutri-label {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 700;
+        color: var(--text-faint);
+      }
+      .nutri-value {
+        font-weight: 700;
+        font-size: 0.92rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .nutri-sub {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+      }
+      .nutri-cell.missing .nutri-value {
+        color: var(--text-faint);
+      }
+      .product-foot {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 6px;
+        font-size: 0.74rem;
+        color: var(--text-faint);
+      }
+      /* Source on its own line, then category and the shop link */
+      .product-foot span:first-child {
+        flex-basis: 100%;
+      }
+      .product-foot a {
+        margin-left: auto;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .more-button {
+        align-self: center;
+      }
+      @media (max-width: 560px) {
+        .nutri {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
       }
 
       /* ---------- Footer: data source + theme picker ---------- */
@@ -1181,13 +1311,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       }
 
       // Icons from Lucide (lucide.dev, ISC license), inlined so they render
-      // offline: calendar-1, calendar-days, utensils, search
+      // offline: calendar-1, calendar-days, utensils, shopping-basket, search, upload
       const ICONS = {
         hoy: '<path d="M11 13h1v4"/><path d="M16 2v3"/><path d="M3 9h18"/><path d="M8 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/>',
         semana:
           '<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/>',
         recetas:
           '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+        productos:
+          '<path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/>',
         search: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
         upload: '<path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>',
       };
@@ -1541,9 +1673,241 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       }
 
       /* ============================================================
+   Productos: food products from the Mercadona catalog (productos.json,
+   built by build-productos.py), with search, category filter and sorting.
+   Loaded the first time the tab opens, with the same fallbacks as recetas.json
+   ============================================================ */
+      const PRODUCTS_FILE = 'productos.json';
+      const PRODUCTS_CACHE = 'dieta-productos';
+      const PRODUCTS_PAGE = 40;
+
+      function parseProducts(raw) {
+        const d = typeof raw === 'string' ? JSON.parse(raw) : raw;
+        if (!d || !Array.isArray(d.productos)) throw new Error('El JSON necesita "productos".');
+        return d.productos.map((p) =>
+          Object.assign({}, p, { _text: normalize([p.nombre, p.marca, p.categoria, p.subcategoria, p.seccion].join(' ')) }),
+        );
+      }
+
+      // Sort orders; products without the value go last
+      const PRODUCT_SORTS = {
+        nombre: { label: 'Nombre', key: (p) => p.nombre.toLowerCase(), dir: 1 },
+        proteinas: { label: 'Más proteína', key: (p) => p.proteinas_100, dir: -1 },
+        kcal: { label: 'Menos calorías', key: (p) => p.kcal_100, dir: 1 },
+        precio: { label: 'Más barato (€/kg o €/l)', key: (p) => p.precio_referencia_eur, dir: 1 },
+      };
+
+      function fmtDec(n, digits) {
+        return n.toLocaleString('es-ES', { maximumFractionDigits: digits == null ? 1 : digits });
+      }
+      function fmtEur(n) {
+        return n.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+      }
+      // 1000 g -> 1 kg, 330 ml -> 330 ml
+      function fmtQty(p) {
+        if (p.cantidad_neta == null) return null;
+        let n = p.cantidad_neta,
+          u = p.unidad;
+        if ((u === 'g' || u === 'ml') && n >= 1000) {
+          n = n / 1000;
+          u = u === 'g' ? 'kg' : 'l';
+        }
+        return (p.peso_aproximado ? '~' : '') + fmtDec(n, 2) + ' ' + u;
+      }
+
+      function NutriCell(props) {
+        const v = props.value;
+        return h(
+          'div',
+          { className: 'nutri-cell' + (v == null ? ' missing' : '') },
+          h('span', { className: 'nutri-label' }, props.label),
+          h('span', { className: 'nutri-value' }, v == null ? '—' : fmtDec(v, props.digits) + (props.unit || '')),
+          props.sub != null ? h('span', { className: 'nutri-sub' }, props.subLabel + ' ' + fmtDec(props.sub) + ' g') : null,
+        );
+      }
+
+      function ProductCard(props) {
+        const p = props.p;
+        const per = p.unidad === 'ml' ? '100 ml' : '100 g';
+        const meta = [p.marca, p.envase, fmtQty(p), Number.isInteger(p.unidades_pack) && p.unidades_pack > 1 ? p.unidades_pack + ' uds.' : null].filter(Boolean);
+        const estimated = p.fuente_nutricion === 'generico_estimado';
+        return h(
+          'article',
+          { className: 'group-card product-card' },
+          h(
+            'div',
+            { className: 'group-heading' },
+            h('span', { className: 'product-name' }, p.nombre),
+            estimated ? h(Badge, { tone: 'warning' }, 'Estimado') : null,
+          ),
+          h(
+            'div',
+            { className: 'product-meta' },
+            meta.map((m, i) => h(React.Fragment, { key: i }, i ? h('span', { className: 'dot' }, '·') : null, h('span', null, m))),
+            meta.length ? h('span', { className: 'dot' }, '·') : null,
+            h('span', { className: 'product-price' }, fmtEur(p.precio_eur)),
+            p.precio_referencia_eur != null
+              ? h('span', null, '(' + fmtEur(p.precio_referencia_eur) + '/' + (p.formato_referencia || '') + ')')
+              : null,
+          ),
+          h(
+            'div',
+            { className: 'nutri', 'aria-label': 'Valores por ' + per },
+            h(NutriCell, { label: 'kcal', value: p.kcal_100, digits: 0 }),
+            h(NutriCell, { label: 'Proteínas', value: p.proteinas_100, unit: ' g' }),
+            h(NutriCell, { label: 'Hidratos', value: p.carbohidratos_100, unit: ' g', sub: p.azucares_100, subLabel: 'azúcares' }),
+            h(NutriCell, { label: 'Grasas', value: p.grasas_100, unit: ' g', sub: p.grasas_saturadas_100, subLabel: 'saturadas' }),
+            h(NutriCell, { label: 'Fibra', value: p.fibra_100, unit: ' g' }),
+            h(NutriCell, { label: 'Sal', value: p.sal_100, unit: ' g', digits: 2 }),
+          ),
+          h(
+            'div',
+            { className: 'product-foot' },
+            h('span', null, 'Por ' + per + ' · ' + (estimated ? 'valores genéricos estimados, no los de la etiqueta' : 'Open Food Facts')),
+            h('span', null, p.categoria + ' › ' + p.subcategoria),
+            p.url ? h('a', { href: p.url, target: '_blank', rel: 'noopener' }, 'Ver en Mercadona') : null,
+          ),
+        );
+      }
+
+      function ProductsView(props) {
+        const products = props.products;
+        const [query, setQuery] = React.useState('');
+        const [cat, setCat] = React.useState('');
+        const [sort, setSort] = React.useState('nombre');
+        const [limit, setLimit] = React.useState(PRODUCTS_PAGE);
+
+        const cats = React.useMemo(() => [...new Set(products.map((p) => p.categoria))].sort((a, b) => a.localeCompare(b, 'es')), [products]);
+        const list = React.useMemo(() => {
+          const words = normalize(query.trim()).split(/\s+/).filter(Boolean);
+          const s = PRODUCT_SORTS[sort];
+          return products
+            .filter((p) => (!cat || p.categoria === cat) && words.every((w) => p._text.includes(w)))
+            .sort((a, b) => {
+              const x = s.key(a),
+                y = s.key(b);
+              if (x == null || y == null) return x == null ? (y == null ? 0 : 1) : -1;
+              return (x < y ? -1 : x > y ? 1 : 0) * s.dir;
+            });
+        }, [products, query, cat, sort]);
+        // Back to the first page whenever the filters change
+        React.useEffect(() => setLimit(PRODUCTS_PAGE), [query, cat, sort]);
+
+        return h(
+          'section',
+          { className: 'view grouped-view' },
+          h(
+            'div',
+            { className: 'search-wrap' },
+            h(Icon, { name: 'search', size: 16 }),
+            h('input', {
+              type: 'search',
+              value: query,
+              placeholder: 'Buscar producto, marca o sección',
+              'aria-label': 'Buscar producto, marca o sección',
+              onChange: (e) => setQuery(e.target.value),
+            }),
+            query ? h('button', { type: 'button', className: 'search-clear', 'aria-label': 'Borrar', onClick: () => setQuery('') }, '✕') : null,
+          ),
+          h(
+            'div',
+            { className: 'product-filters' },
+            h(
+              'div',
+              { className: 'select-shell' },
+              h(
+                'select',
+                { className: 'pill-select', value: cat, onChange: (e) => setCat(e.target.value), 'aria-label': 'Categoría' },
+                h('option', { value: '' }, 'Todas las categorías'),
+                cats.map((c) => h('option', { key: c, value: c }, c)),
+              ),
+            ),
+            h(
+              'div',
+              { className: 'select-shell' },
+              h(
+                'select',
+                { className: 'pill-select', value: sort, onChange: (e) => setSort(e.target.value), 'aria-label': 'Ordenar' },
+                Object.keys(PRODUCT_SORTS).map((k) => h('option', { key: k, value: k }, 'Orden: ' + PRODUCT_SORTS[k].label)),
+              ),
+            ),
+          ),
+          h('p', { className: 'search-count' }, fmtNum(list.length) + (list.length === 1 ? ' producto' : ' productos') + ' · valores por 100 g o 100 ml'),
+          list.length
+            ? list.slice(0, limit).map((p) => h(ProductCard, { key: p.id, p }))
+            : h('p', { className: 'empty' }, 'Ningún producto coincide con la búsqueda.'),
+          list.length > limit
+            ? h(
+                'button',
+                { type: 'button', className: 'file-button more-button', onClick: () => setLimit((l) => l + PRODUCTS_PAGE * 2) },
+                'Ver más (' + fmtNum(list.length - limit) + ' restantes)',
+              )
+            : null,
+        );
+      }
+
+      // Fetches productos.json the first time the tab opens; falls back to the
+      // last copy saved, or asks for the file (opened as file://)
+      function ProductsTab(props) {
+        const st = props.state;
+        React.useEffect(() => {
+          if (st.status !== 'idle') return;
+          props.onState({ status: 'loading' });
+          fetch(PRODUCTS_FILE, { cache: 'no-store' })
+            .then((r) => {
+              if (!r.ok) throw new Error('HTTP ' + r.status);
+              return r.text();
+            })
+            .then((text) => {
+              const products = parseProducts(text);
+              try {
+                localStorage.setItem(PRODUCTS_CACHE, text);
+              } catch (e) {}
+              props.onState({ status: 'ready', products });
+            })
+            .catch((err) => {
+              let cached = null;
+              try {
+                const text = localStorage.getItem(PRODUCTS_CACHE);
+                cached = text ? parseProducts(text) : null;
+              } catch (e) {}
+              props.onState(cached ? { status: 'ready', products: cached } : { status: 'error', error: err.message });
+            });
+        }, [st.status]);
+
+        function pick(text) {
+          try {
+            const products = parseProducts(text);
+            try {
+              localStorage.setItem(PRODUCTS_CACHE, text);
+            } catch (e) {}
+            props.onState({ status: 'ready', products });
+          } catch (err) {
+            props.onState({ status: 'error', error: err.message });
+          }
+        }
+
+        if (st.status === 'ready') return h(ProductsView, { products: st.products });
+        if (st.status === 'error') {
+          return h(
+            'section',
+            { className: 'view' },
+            h(
+              'div',
+              { className: 'today-note' },
+              h('p', { className: 'today-note-title' }, 'No se han podido cargar los productos'),
+              h('p', null, 'No se pudo leer ' + PRODUCTS_FILE + ' (' + st.error + '). Elígelo a mano y quedará guardado para la próxima vez.'),
+              h(JsonPicker, { onText: pick, label: 'Elegir ' + PRODUCTS_FILE }),
+            ),
+          );
+        }
+        return h('p', { className: 'empty' }, 'Cargando productos…');
+      }
+
+      /* ============================================================
    Header, footer and App
    ============================================================ */
-      const TAB_LABELS = { hoy: 'Hoy', recetas: 'Recetas', semana: 'Semana' };
+      const TAB_LABELS = { hoy: 'Hoy', recetas: 'Recetas', semana: 'Semana', productos: 'Productos' };
 
       function Header() {
         const now = new Date();
@@ -1649,6 +2013,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         const [state, setState] = React.useState({ status: 'loading' });
         const [pickError, setPickError] = React.useState(null);
         const [target, setTarget] = React.useState({ id: null, tick: 0 });
+        // Productos loads on its own, the first time its tab opens: idle | loading | ready | error
+        const [productsState, setProductsState] = React.useState({ status: 'idle' });
 
         React.useEffect(() => {
           try {
@@ -1725,7 +2091,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         }
 
         let content;
-        if (state.status === 'loading') {
+        if (view === 'productos') {
+          content = h(ProductsTab, { state: productsState, onState: setProductsState });
+        } else if (state.status === 'loading') {
           content = h('p', { className: 'empty' }, 'Cargando recetas…');
         } else if (state.status === 'error') {
           content = h(
@@ -1774,9 +2142,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                       className: 'tab' + (view === v ? ' active' : ''),
                       onClick: () => selectView(v),
                       'aria-pressed': view === v,
+                      'aria-label': TAB_LABELS[v],
+                      title: TAB_LABELS[v],
                     },
                     h(Icon, { name: v }),
-                    TAB_LABELS[v],
+                    h('span', { className: 'tab-label' }, TAB_LABELS[v]),
                   ),
                 ),
               ),
