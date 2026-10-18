@@ -38,11 +38,11 @@
       "descripcion": "Capas de puré de patata con ají amarillo y lima, relleno de atún con queso fresco batido, aguacate y tomate, con cilantro y hierbabuena. Se sirve fría.",
       "minutos": 25,
       "raciones": 2,
-      "kcal": 447,
+      "kcal": 388,
       "macros": {
-        "proteinas": 35,
+        "proteinas": 22,
         "carbohidratos": 36,
-        "grasas": 16
+        "grasas": 15
       },
       "ingredientes": [
         {
@@ -52,9 +52,9 @@
           "producto_nombre": "Patatas cocidas Hacendado"
         },
         {
-          "texto": "3 latas de atún al natural, escurrido (unos 180 g)",
+          "texto": "1 lata de atún al natural, escurrida (unos 60 g)",
           "producto": "18018",
-          "gramos": 180,
+          "gramos": 60,
           "producto_nombre": "Atún claro al natural Hacendado"
         },
         {
@@ -102,7 +102,7 @@
       "pasos": [
         "Escurrir las patatas cocidas y aplastarlas con un tenedor hasta hacer un puré. Mezclarlo con la pasta de ají amarillo, el zumo de una lima, sal y pimienta.",
         "Descongelar el aguacate y machacarlo con el zumo de media lima y una pizca de sal.",
-        "Mezclar el atún escurrido y desmigado con el queso fresco batido y la mitad del cilantro y la hierbabuena picados.",
+        "Mezclar la lata de atún escurrida y desmigado con el queso fresco batido y la mitad del cilantro y la hierbabuena picados.",
         "Cortar el tomate en dados pequeños y aliñarlo con el resto de la lima.",
         "Montar en un aro o en vasos: una capa de puré de patata, otra de atún, otra de aguacate y otra de patata encima. Apretar un poco cada capa.",
         "Enfriar al menos 15 minutos, coronar con el tomate y decorar con el resto del cilantro y la hierbabuena antes de servir."
