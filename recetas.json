@@ -35,16 +35,22 @@
         "comida",
         "cena"
       ],
-      "descripcion": "Versión ligera y sin patata: capas de aguacate con lima, atún con queso fresco batido y ají amarillo, y tomate, con cilantro y hierbabuena. Se sirve fría.",
-      "minutos": 20,
+      "descripcion": "Capas de puré de patata con ají amarillo y lima, relleno de atún con queso fresco batido, aguacate y tomate, con cilantro y hierbabuena. Se sirve fría.",
+      "minutos": 25,
       "raciones": 2,
-      "kcal": 341,
+      "kcal": 447,
       "macros": {
-        "proteinas": 32,
-        "carbohidratos": 14,
+        "proteinas": 35,
+        "carbohidratos": 36,
         "grasas": 16
       },
       "ingredientes": [
+        {
+          "texto": "1 tarro de patatas cocidas, escurridas (unos 400 g)",
+          "producto": "15534",
+          "gramos": 400,
+          "producto_nombre": "Patatas cocidas Hacendado"
+        },
         {
           "texto": "3 latas de atún al natural, escurrido (unos 180 g)",
           "producto": "18018",
@@ -94,14 +100,14 @@
         "Sal y pimienta"
       ],
       "pasos": [
+        "Escurrir las patatas cocidas y aplastarlas con un tenedor hasta hacer un puré. Mezclarlo con la pasta de ají amarillo, el zumo de una lima, sal y pimienta.",
         "Descongelar el aguacate y machacarlo con el zumo de media lima y una pizca de sal.",
-        "Mezclar el queso fresco batido con la pasta de ají amarillo, el zumo de una lima, sal y pimienta.",
-        "Añadir el atún escurrido y desmigado a la mezcla de queso, con la mitad del cilantro y la hierbabuena picados.",
+        "Mezclar el atún escurrido y desmigado con el queso fresco batido y la mitad del cilantro y la hierbabuena picados.",
         "Cortar el tomate en dados pequeños y aliñarlo con el resto de la lima.",
-        "Montar en un aro o en vasos: una capa de aguacate, otra de atún y otra de tomate. Apretar un poco cada capa.",
-        "Enfriar al menos 15 minutos y decorar con el resto del cilantro y la hierbabuena antes de servir."
+        "Montar en un aro o en vasos: una capa de puré de patata, otra de atún, otra de aguacate y otra de patata encima. Apretar un poco cada capa.",
+        "Enfriar al menos 15 minutos, coronar con el tomate y decorar con el resto del cilantro y la hierbabuena antes de servir."
       ],
-      "notas": "Las kcal y los macros por ración se calculan con los productos enlazados (sin la pasta de ají, que no está en Mercadona). La causa tradicional lleva una base de patata amarilla; esta versión no la lleva."
+      "notas": "Las kcal y los macros por ración se calculan con los productos enlazados (sin la pasta de ají, que no está en Mercadona). La patata cocida de bote sustituye a la papa amarilla de la receta peruana."
     }
   ],
   "semana": {
