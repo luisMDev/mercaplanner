@@ -39,9 +39,10 @@ Pesa ~1,6 MB, asi que la app no lo pide hasta que se abre la pestaña Productos.
 
 - `comidas`: los huecos del dia en orden, `{id, label, hora}`. Los `id` `desayuno`, `media-manana`, `comida`, `merienda` y `cena` tienen color propio en el timeline (clases `tl-<id>` del CSS); uno nuevo sale en gris hasta que se le añada.
 - `recetas`: `{id, nombre, tipos, descripcion, minutos, raciones, kcal, macros: {proteinas, carbohidratos, grasas}, ingredientes, pasos, notas}`. Solo `id` y `nombre` son obligatorios. `tipos` son ids de `comidas`; el primero decide en que grupo sale en la pestaña Recetas.
+- Cada ingrediente es un texto o un objeto `{texto, producto, producto_nombre, gramos}` que lo enlaza con un producto de `productos.json` por su `id`; si Mercadona no lo vende, `{texto, sin_producto: true}`. En la receta, bajo el ingrediente sale el nombre del producto, y al tocarlo se abre su ficha en la pestaña Productos (con "Ver todos los productos" para volver al listado). `gramos` es la cantidad con la que se han calculado las kcal y los macros por racion; la app no los recalcula, se escriben en la receta.
 - `semana`: `{lunes, martes, miercoles, jueves, viernes, sabado, domingo}` (sin tildes), cada uno `{<id de comida>: <id de receta>}`. Un dia puede dejar fuera un hueco. Si un id de receta no existe, el plan lo marca como "Receta no encontrada".
 
-El `recetas.json` actual es de ejemplo: 13 recetas y una semana inventadas para probar la interfaz.
+El `recetas.json` actual es de ejemplo (18 oct 2026): una sola receta, causa limeña de atun y aguacate (version sin patata, 2 raciones), con todos sus ingredientes enlazados a productos de Mercadona salvo la pasta de aji amarillo, que no venden. Sus kcal y macros por racion (341 kcal, 32 g de proteinas, 14 g de hidratos, 16 g de grasas) salen de los valores por 100 g de esos productos y de los gramos de cada ingrediente; 4 de ellos (lima, tomate, cilantro, hierbabuena) tienen valores genericos estimados. La semana la pone en la comida de todos los dias.
 
 ## Resultados
 

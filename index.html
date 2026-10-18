@@ -648,6 +648,20 @@
         color: var(--accent);
         text-decoration-color: currentColor;
       }
+      /* Linked product under its ingredient, indented past the dash */
+      .ing-product {
+        margin: 0 0 4px 12px;
+        font-size: 0.8rem;
+      }
+      .product-ref {
+        font-weight: 500;
+        color: var(--accent);
+        text-decoration-color: currentColor;
+      }
+      .product-none {
+        color: var(--text-faint);
+        font-style: italic;
+      }
       .missing {
         color: var(--warning);
         font-style: italic;
@@ -1241,6 +1255,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
      recetas: [{id, nombre, tipos, descripcion, minutos, raciones, kcal,
                 macros: {proteinas, carbohidratos, grasas}, ingredientes,
                 pasos, notas}]
+                Each ingredient is a string, or {texto, producto, producto_nombre,
+                gramos} to link it to a product of productos.json by id
+                ({texto, sin_producto: true} when Mercadona does not sell it)
      semana:  {lunes: {<comida id>: <receta id>}, martes: {...}, ...}
    }
    A day may leave a slot out (no merienda on Saturday, say). The last copy
@@ -1275,6 +1292,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           byId[r.id] = Object.assign({ tipos: [], ingredientes: [], pasos: [] }, r);
         });
         return { comidas: d.comidas, recetas: d.recetas.map((r) => byId[r.id]), byId, semana: d.semana };
+      }
+
+      function ingText(i) {
+        return typeof i === 'string' ? i : i.texto || '';
       }
 
       function loadCached() {
@@ -1381,6 +1402,30 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         return parts.length ? parts.join(' · ') : null;
       }
 
+      // One ingredient line; a linked product opens its card in Productos
+      function Ingredient(props) {
+        const i = props.ing;
+        if (typeof i === 'string') return h('li', null, '– ' + i);
+        return h(
+          'li',
+          null,
+          '– ' + i.texto,
+          i.producto
+            ? h(
+                'div',
+                { className: 'ing-product' },
+                h(
+                  'button',
+                  { type: 'button', className: 'recipe-link product-ref', onClick: () => props.onOpenProduct(i.producto) },
+                  i.producto_nombre || 'Ver producto',
+                ),
+              )
+            : i.sin_producto
+              ? h('div', { className: 'ing-product product-none' }, 'No está en Mercadona')
+              : null,
+        );
+      }
+
       // Ingredients, steps and notes in the grey box under a recipe
       function RecipeBox(props) {
         const r = props.receta;
@@ -1388,7 +1433,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           'div',
           { className: 'tl-booking' },
           r.ingredientes.length ? h('div', { className: 'tl-booking-label' }, 'Ingredientes') : null,
-          r.ingredientes.length ? h('ul', null, r.ingredientes.map((t, i) => h('li', { key: i }, '– ' + t))) : null,
+          r.ingredientes.length ? h('ul', null, r.ingredientes.map((t, i) => h(Ingredient, { key: i, ing: t, onOpenProduct: props.onOpenProduct }))) : null,
           r.pasos.length ? h('div', { className: 'tl-booking-label' }, 'Preparación') : null,
           r.pasos.length ? h('ol', { className: 'tl-steps' }, r.pasos.map((t, i) => h('li', { key: i }, t))) : null,
           r.notas ? h('div', { className: 'tl-booking-label' }, 'Notas') : null,
@@ -1427,7 +1472,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                 props.full && macrosText(r.macros) ? h('li', null, macrosText(r.macros)) : null,
               )
             : null,
-          r && props.full ? h(RecipeBox, { receta: r }) : null,
+          r && props.full ? h(RecipeBox, { receta: r, onOpenProduct: props.onOpenProduct }) : null,
         );
       }
 
@@ -1442,6 +1487,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
               full: props.full,
               past: props.pastUntil != null && i < props.pastUntil,
               onOpenRecipe: props.onOpenRecipe,
+              onOpenProduct: props.onOpenProduct,
             }),
           ),
         );
@@ -1521,7 +1567,13 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
               h(
                 Section,
                 { label: 'Plan del día' },
-                h(DayTimeline, { meals, full: true, pastUntil: pastCount(meals, now), onOpenRecipe: props.onOpenRecipe }),
+                h(DayTimeline, {
+                  meals,
+                  full: true,
+                  pastUntil: pastCount(meals, now),
+                  onOpenRecipe: props.onOpenRecipe,
+                  onOpenProduct: props.onOpenProduct,
+                }),
               ),
             ),
           ),
@@ -1574,7 +1626,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       }
 
       function recipeText(r) {
-        return normalize([r.nombre, r.descripcion, r.notas].concat(r.ingredientes, r.tipos).join(' '));
+        return normalize(
+          [r.nombre, r.descripcion, r.notas]
+            .concat(r.ingredientes.map((i) => ingText(i) + ' ' + (i.producto_nombre || '')), r.tipos)
+            .join(' '),
+        );
       }
 
       function RecipeItem(props) {
@@ -1607,7 +1663,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             // key: re-mount when it becomes the target so it opens even if it was closed by hand
             { className: 'recipe-details', open: props.target || props.expanded, key: props.target ? 'target' : 'idle' },
             h('summary', null, 'Ingredientes y preparación'),
-            h(RecipeBox, { receta: r }),
+            h(RecipeBox, { receta: r, onOpenProduct: props.onOpenProduct }),
           ),
         );
       }
@@ -1663,7 +1719,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                     'ol',
                     { className: 'timeline' },
                     g.recetas.map((r) =>
-                      h(RecipeItem, { key: r.id, receta: r, data, target: props.target === r.id, expanded: !!q }),
+                      h(RecipeItem, {
+                        key: r.id,
+                        receta: r,
+                        data,
+                        target: props.target === r.id,
+                        expanded: !!q,
+                        onOpenProduct: props.onOpenProduct,
+                      }),
                     ),
                   ),
                 ),
@@ -1779,6 +1842,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
         const cats = React.useMemo(() => [...new Set(products.map((p) => p.categoria))].sort((a, b) => a.localeCompare(b, 'es')), [products]);
         const list = React.useMemo(() => {
+          // Opened from a recipe ingredient: only that product
+          if (props.target) return products.filter((p) => p.id === props.target);
           const words = normalize(query.trim()).split(/\s+/).filter(Boolean);
           const s = PRODUCT_SORTS[sort];
           return products
@@ -1789,9 +1854,21 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
               if (x == null || y == null) return x == null ? (y == null ? 0 : 1) : -1;
               return (x < y ? -1 : x > y ? 1 : 0) * s.dir;
             });
-        }, [products, query, cat, sort]);
+        }, [products, query, cat, sort, props.target]);
         // Back to the first page whenever the filters change
         React.useEffect(() => setLimit(PRODUCTS_PAGE), [query, cat, sort]);
+
+        if (props.target) {
+          return h(
+            'section',
+            { className: 'view grouped-view' },
+            h('p', { className: 'search-count' }, 'Producto de la receta'),
+            list.length
+              ? list.map((p) => h(ProductCard, { key: p.id, p }))
+              : h('p', { className: 'empty' }, 'Este producto ya no está en ' + PRODUCTS_FILE + '.'),
+            h('button', { type: 'button', className: 'file-button more-button', onClick: props.onClearTarget }, 'Ver todos los productos'),
+          );
+        }
 
         return h(
           'section',
@@ -1887,7 +1964,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           }
         }
 
-        if (st.status === 'ready') return h(ProductsView, { products: st.products });
+        if (st.status === 'ready') {
+          return h(ProductsView, { products: st.products, target: props.target, onClearTarget: props.onClearTarget });
+        }
         if (st.status === 'error') {
           return h(
             'section',
@@ -2015,6 +2094,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         const [target, setTarget] = React.useState({ id: null, tick: 0 });
         // Productos loads on its own, the first time its tab opens: idle | loading | ready | error
         const [productsState, setProductsState] = React.useState({ status: 'idle' });
+        // Product opened from a recipe ingredient (Productos shows only that one)
+        const [productTarget, setProductTarget] = React.useState(null);
 
         React.useEffect(() => {
           try {
@@ -2085,14 +2166,25 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           setTarget((t) => ({ id, tick: t.tick + 1 }));
           setView('recetas');
         }
+        function openProduct(id) {
+          setProductTarget(id);
+          setView('productos');
+          window.scrollTo({ top: 0 });
+        }
         function selectView(v) {
           if (v !== 'recetas') setTarget((t) => ({ id: null, tick: t.tick }));
+          setProductTarget(null);
           setView(v);
         }
 
         let content;
         if (view === 'productos') {
-          content = h(ProductsTab, { state: productsState, onState: setProductsState });
+          content = h(ProductsTab, {
+            state: productsState,
+            onState: setProductsState,
+            target: productTarget,
+            onClearTarget: () => setProductTarget(null),
+          });
         } else if (state.status === 'loading') {
           content = h('p', { className: 'empty' }, 'Cargando recetas…');
         } else if (state.status === 'error') {
@@ -2113,11 +2205,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             ),
           );
         } else if (view === 'hoy') {
-          content = h(TodayView, { data: state.data, onOpenRecipe: openRecipe });
+          content = h(TodayView, { data: state.data, onOpenRecipe: openRecipe, onOpenProduct: openProduct });
         } else if (view === 'semana') {
           content = h(WeekView, { data: state.data, onOpenRecipe: openRecipe });
         } else {
-          content = h(RecipesView, { data: state.data, target: target.id, targetTick: target.tick });
+          content = h(RecipesView, { data: state.data, target: target.id, targetTick: target.tick, onOpenProduct: openProduct });
         }
 
         return h(
