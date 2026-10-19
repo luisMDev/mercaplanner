@@ -10,20 +10,20 @@ import { reliefMaterial } from "./relief-material";
 const ASPECT = tienda.width / tienda.height;
 // How far the light parts of the depth map come forward, in plane heights
 const RELIEF = 0.16;
-// Largest tilt following the mouse, in radians (about 12° and 6°)
-const TILT_Y = 0.21;
-const TILT_X = 0.1;
+// Largest turn following the mouse left and right, in radians (about 12°).
+// Only sideways: moving the mouse up and down does not tilt it
+const TILT = 0.21;
 const FOV = 25;
 // The canvas overflows the drawing by this much (store-illustration.tsx), so
 // the tilted corners are not cut; the plane shrinks back to the drawing's size
 const OVERFLOW = 1.08;
 
-// Mouse position across the whole window, from -1 to 1 on each axis
-function usePointer() {
-  const pointer = useRef({ x: 0, y: 0 });
+// Horizontal mouse position across the whole window, from -1 to 1
+function usePointerX() {
+  const pointer = useRef(0);
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
-      pointer.current = { x: (e.clientX / window.innerWidth) * 2 - 1, y: (e.clientY / window.innerHeight) * 2 - 1 };
+      pointer.current = (e.clientX / window.innerWidth) * 2 - 1;
     };
     window.addEventListener("pointermove", onMove);
     return () => window.removeEventListener("pointermove", onMove);
@@ -35,7 +35,7 @@ function ReliefPlane({ onReady }: { onReady: () => void }) {
   const [map, depth] = useLoader(TextureLoader, [tienda.src, depthMap.src]);
   const material = useMemo(() => reliefMaterial(map, depth, RELIEF), [map, depth]);
   const mesh = useRef<Mesh>(null);
-  const pointer = usePointer();
+  const pointerX = usePointerX();
 
   useEffect(onReady, [onReady]);
   useEffect(() => () => material.dispose(), [material]);
@@ -44,9 +44,7 @@ function ReliefPlane({ onReady }: { onReady: () => void }) {
   useFrame(({ clock }) => {
     const m = mesh.current;
     if (!m) return;
-    const { x, y } = pointer.current;
-    m.rotation.y += (x * TILT_Y - m.rotation.y) * 0.06;
-    m.rotation.x += (y * TILT_X - m.rotation.x) * 0.06;
+    m.rotation.y += (pointerX.current * TILT - m.rotation.y) * 0.06;
     m.position.y = Math.sin(clock.elapsedTime * 0.8) * 0.006;
   });
 
