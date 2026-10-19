@@ -153,6 +153,50 @@
         "Servir cada hamburguesa con la mitad de las batatas."
       ],
       "notas": "Las kcal y los macros por ración se calculan con los productos enlazados. La carne de cordero tiene que quedar bien hecha por dentro."
+    },
+    {
+      "id": "burger-cordero-salteado-rustico",
+      "nombre": "Burger de cordero al romero y salteado rústico",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Burgers de cordero al romero a la plancha con salteado rústico congelado hecho en la air fryer.",
+      "minutos": 15,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "1 paquete de burgers de cordero al romero (2 unidades, 240 g)",
+          "producto": "8839",
+          "gramos": 240,
+          "producto_nombre": "Hamburguesa de cordero al romero"
+        },
+        {
+          "texto": "1 bolsa de salteado rústico ultracongelado (450 g)",
+          "producto": "21537",
+          "gramos": 450,
+          "producto_nombre": "Salteado rústico Hacendado ultracongelado"
+        },
+        {
+          "texto": "Unas pulverizaciones de aceite de oliva virgen extra en spray (unos 4 g)",
+          "producto": "4718",
+          "gramos": 4,
+          "producto_nombre": "Aceite de oliva virgen extra Hacendado"
+        },
+        "Sal y pimienta"
+      ],
+      "pasos": [
+        "Precalentar la air fryer a 200 °C. Echar el salteado rústico congelado en la cesta, sin descongelar, pulverizarlo con el aceite y hacerlo 12 minutos, removiendo la cesta a mitad.",
+        "Mientras, calentar bien una plancha o sartén y hacer las burgers 6 minutos en total, 3 por cada lado, hasta que estén hechas por dentro.",
+        "Salpimentar y servir cada burger con la mitad del salteado."
+      ],
+      "notas": "La carne de cordero tiene que quedar bien hecha por dentro. Las burgers llevan su propia grasa, así que no hace falta aceite en la plancha.",
+      "kcal": 401,
+      "macros": {
+        "proteinas": 27,
+        "carbohidratos": 34,
+        "grasas": 15
+      }
     }
   ],
   "semana": {
