@@ -13,10 +13,10 @@ import { usePointerX } from "./use-pointer-x";
 
 const ASPECT = tienda.width / tienda.height;
 // How far the light parts of each depth map come forward, in plane heights
-const RELIEF = 0.16;
-const PARK_RELIEF = 0.3;
+const RELIEF = 0.26;
+const PARK_RELIEF = 0.55;
 // How fast the scene catches up with the mouse, per frame (slow and calm)
-const EASE = 0.035;
+const EASE = 0.02;
 // Largest turn following the mouse left and right, in radians (about 12°).
 // Only sideways: moving the mouse up and down does not tilt it
 const TILT = 0.21;
@@ -31,7 +31,7 @@ const DISTANCE = 0.5 / Math.tan(((FOV / 2) * Math.PI) / 180);
 // The park behind the store: this far back, so turning the scene slides it
 // the other way (parallax). Sized and placed to look, from the camera, like
 // the flat park (layout.ts): a bit taller than the store and centred on it
-const BG_DEPTH = 0.9;
+const BG_DEPTH = 1.2;
 const BG_FAR = (DISTANCE + BG_DEPTH) / DISTANCE;
 
 type SceneProps = { onReady: () => void };
