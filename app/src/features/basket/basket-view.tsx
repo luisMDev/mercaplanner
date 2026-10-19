@@ -18,7 +18,7 @@ export function BasketView({ plan }: { plan: Plan }) {
   const empty =
     pendingCount(plan, state) === 0 && state.checked.length === 0 && !Object.keys(state.recipes).length;
   return (
-    <PageLayout title="La cesta" tagline="La compra de la semana · Mercadona">
+    <PageLayout title="La cesta">
       {empty ? (
         <Notice
           icon={<ShoppingBagIcon />}

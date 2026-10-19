@@ -16,7 +16,7 @@ export function ProductsView({ plan, openId }: { plan: Plan; openId?: string }) 
   const filters = useProductFilters();
   const open = (id: string) => navigate({ section: "productos", id });
   return (
-    <PageLayout title="La despensa" tagline="Lo que hay en Mercadona · Por 100 g" detail={!!openId}>
+    <PageLayout title="La despensa" detail={!!openId}>
       <WithCatalog
         fallback={
           <Panel>

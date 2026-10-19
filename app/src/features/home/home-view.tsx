@@ -25,7 +25,7 @@ export function HomeView({ plan, pending }: { plan: Plan; pending: number }) {
           <NextMealNote plan={plan} />
         </div>
       </div>
-      <div className="order-2 lg:order-none lg:pt-4 xl:sticky xl:top-6 xl:self-start">
+      <div className="order-2 lg:order-none lg:pt-4 xl:sticky xl:top-24 xl:self-start">
         <StoreIllustration preload className="mx-auto w-full max-w-[360px] sm:max-w-[420px] xl:max-w-[600px]" />
       </div>
       <div className="order-4 flex flex-col gap-5 lg:order-none lg:col-start-2 xl:col-start-auto xl:pt-4">

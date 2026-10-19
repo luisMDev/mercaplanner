@@ -13,7 +13,7 @@ export function RecipesView({ plan, openId }: { plan: Plan; openId?: string }) {
   const [filters, setFilters] = useState<RecipeFilters>({ query: "", type: null });
   const open = (id: string) => navigate({ section: "recetas", id });
   return (
-    <PageLayout title="El recetario" tagline="Hecho en casa · Pensado para la semana" detail={!!openId}>
+    <PageLayout title="El recetario" detail={!!openId}>
       {openId ? (
         <RecipeDetail
           plan={plan}

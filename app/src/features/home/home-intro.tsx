@@ -1,7 +1,7 @@
-import { ScriptHeading, Squiggle, Tagline } from "@/components/cozy/script-heading";
+import { ScriptHeading, Squiggle } from "@/components/cozy/script-heading";
 import { Sprig } from "@/components/cozy/sprig";
 
-// "Cosas ricas pasan aquí", handwritten, with the motto under it
+// "Cosas ricas pasan aquí", handwritten
 export function HomeIntro() {
   return (
     <div className="relative flex flex-col gap-4 pt-2 lg:pt-6">
@@ -12,7 +12,6 @@ export function HomeIntro() {
         <br />
         pasan aquí
       </ScriptHeading>
-      <Tagline className="pl-6">Recetas · Mercadona · Un día mejor</Tagline>
       <Squiggle className="ml-6" />
     </div>
   );

@@ -27,7 +27,7 @@ La sección abierta va en el hash de la URL (`#/recetas/causa-limena`), así que
 - **Semana**: calendario del mes (el plan se repite cada semana) y, al lado, el día elegido como una entrada con sus comidas.
 - **Cesta**: la compra de la semana. Suma lo que piden las comidas del plan (una ración por comida) más lo añadido a mano, en envases de Mercadona y agrupado por pasillo, con el total estimado. Se marca al comprar.
 
-En el móvil las secciones van en una barra fija abajo; en pantallas anchas, arriba. Los ajustes (tema automático, claro u oscuro y «Probar otro recetas.json») están en el engranaje de la cabecera.
+La cabecera se queda fija arriba. En el móvil las secciones van en una barra fija abajo; en pantallas anchas, en la cabecera. Al cambiar de sección hay una transición de vista (View Transitions del navegador): la tienda se encoge y se va a la izquierda, y el panel entra desde el lateral. Los ajustes (tema automático, claro u oscuro y «Probar otro recetas.json») están en el engranaje de la cabecera.
 
 ## Estructura
 
@@ -45,8 +45,8 @@ src/
 │   │                         fecha, cinta adhesiva, ramita, logo del tomate, título manuscrito y la tienda
 │   └── shared/               Buscador, aviso, selector de JSON, textos de recuento y vacío
 ├── features/
-│   ├── shell/                Armazón: rutas por hash, cabecera, menús (lateral, superior, inferior),
-│   │                         pie y la maqueta de las secciones (título a la izquierda, panel a la derecha)
+│   ├── shell/                Armazón: rutas por hash con transiciones, cabecera, menús (lateral,
+│   │                         superior, inferior) y la maqueta de las secciones (título a la izquierda, panel a la derecha)
 │   ├── home/                 Inicio: título, nota de la próxima comida, banner y paneles
 │   ├── plan/                 recetas.json: tipos, parseo y cálculos (model/), dibujo del plato y macros
 │   ├── today/                Hoy

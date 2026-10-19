@@ -21,12 +21,7 @@ export function ScriptHeading({
   );
 }
 
-// Uppercase line under a title: "RECETAS · MERCADONA · UN DÍA MEJOR"
-export function Tagline({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("caps text-[0.74rem] leading-relaxed text-muted-foreground", className)}>{children}</p>;
-}
-
-// Hand-drawn stroke under a tagline
+// Hand-drawn stroke under a title
 export function Squiggle({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 80 10" aria-hidden="true" className={cn("h-2.5 w-20 text-ink/70 dark:text-foreground/50", className)}>

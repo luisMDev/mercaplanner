@@ -25,10 +25,9 @@ export function TodayView({ plan }: { plan: Plan }) {
   const meals = dayMeals(plan, dia.id);
   const done = pastCount(meals, now);
   const totals = dayTotals(meals);
-  const date = now.toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
 
   return (
-    <PageLayout title="Hoy" tagline={date}>
+    <PageLayout title="Hoy">
       <div className="flex flex-col gap-5">
         {meals.length ? (
           <Panel className="animate-panel p-5 sm:p-8">
