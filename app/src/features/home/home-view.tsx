@@ -30,7 +30,11 @@ export function HomeView({ plan, pending }: { plan: Plan; pending: number }) {
           </div>
         </div>
         <div className="order-1 lg:order-none lg:pt-4">
-          <StoreSlot park="backdrop" className="mx-auto w-full max-w-[360px] sm:max-w-[420px] xl:max-w-[600px]" />
+          {/* Raised a fifth of its height over the bottom line of the menu */}
+          <StoreSlot
+            park="backdrop"
+            className="mx-auto w-full max-w-[360px] sm:max-w-[420px] lg:-translate-y-[20%] xl:max-w-[600px]"
+          />
         </div>
       </div>
       <div className="relative z-10 flex flex-col gap-5 [view-transition-name:home-panels] xl:pt-4">
