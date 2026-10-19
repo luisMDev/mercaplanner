@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { dishColors, dishVessel } from "../model/dish-colors";
 import { mealColor } from "../model/meals";
+import { recipeImage } from "../model/recipe-images";
 import type { Receta } from "../model/types";
 
 // Pieces of food piled on the dish: [x, y, radius], back to front
@@ -82,8 +84,9 @@ function Sides() {
   );
 }
 
-// Drawing of a recipe: a plate (or a bowl for breakfast and snacks) piled with
-// the colours of its ingredients. There are no photos of the recipes
+// Drawing of a recipe: its watercolour from imagenes/ when it has one; if not,
+// a plate (or a bowl for breakfast and snacks) piled with the colours of its
+// ingredients. Both fill the same 4:3 box
 export function DishArt({
   receta,
   sides = false,
@@ -93,6 +96,17 @@ export function DishArt({
   sides?: boolean;
   className?: string;
 }) {
+  const image = recipeImage(receta);
+  if (image) {
+    return (
+      <Image
+        src={image}
+        alt=""
+        sizes="(min-width: 768px) 440px, 260px"
+        className={cn("aspect-[4/3] h-auto w-full object-contain", className)}
+      />
+    );
+  }
   const colors = dishColors(receta);
   return (
     <svg viewBox="0 0 200 150" aria-hidden="true" className={cn("h-auto w-full", className)}>

@@ -71,7 +71,7 @@ Reglas que sigue el código:
 
 - **Fecha y localStorage**: lo que depende del dispositivo (el día de hoy, la sección abierta, la cesta, el tema) se pinta en el navegador; la página prerenderizada enseña un esqueleto mientras tanto. El tema se aplica con un script en `<head>` antes del primer pintado, sin parpadeo.
 - **Colores por comida**: cada `id` de `comidas` tiene su color en `features/plan/model/meals.ts`; uno nuevo sale en gris hasta que se añada ahí.
-- **Platos dibujados**: no hay fotos de las recetas; `features/plan/model/dish-colors.ts` elige los colores del plato por palabras de los ingredientes (patata, atún, aguacate…), y los desayunos y meriendas salen en bol.
+- **Platos dibujados**: si la receta tiene `imagen`, sale su acuarela de `../imagenes/` (`features/plan/model/recipe-images.ts` las importa todas en el build con `import.meta.glob`). Si no, `features/plan/model/dish-colors.ts` elige los colores del plato por palabras de los ingredientes (patata, atún, aguacate…), y los desayunos y meriendas salen en bol.
 - **Cesta**: los gramos de una receta son para todas sus raciones; cada comida del plan cuenta como una ración. Los envases se calculan con la cantidad neta del producto (un ml cuenta como un gramo) y, si no la tiene, uno. Se guarda en `localStorage` (`dieta-cesta`).
 - **Cargar JSON**: «Probar otro recetas.json» en los ajustes carga otro plan para probarlo; dura hasta recargar la página. Si `productos.json` no se puede descargar, las vistas que lo usan permiten elegirlo a mano.
 - Se guarda en `localStorage` el tema (`dieta-theme`).

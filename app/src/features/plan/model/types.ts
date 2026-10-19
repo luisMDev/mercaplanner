@@ -3,7 +3,7 @@
      comidas: [{id, label, hora}]          meal slots of the day, in order
      recetas: [{id, nombre, tipos, descripcion, minutos, raciones, kcal,
                 macros: {proteinas, carbohidratos, grasas}, ingredientes,
-                pasos, notas}]
+                pasos, notas, imagen}]
      semana:  {lunes: {<comida id>: <receta id>}, martes: {...}, ...}
    }
    A day may leave a slot out (no merienda on Saturday, say) */
@@ -36,6 +36,8 @@ export type Receta = {
   ingredientes: Ingredient[];
   pasos: string[];
   notas?: string;
+  // Path of its watercolour drawing, "imagenes/<id>.png" (scripts/imagen.py)
+  imagen?: string;
 };
 
 export type Plan = {
