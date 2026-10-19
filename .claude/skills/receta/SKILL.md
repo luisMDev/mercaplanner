@@ -58,7 +58,7 @@ python3 scripts/receta.py validar
 
 ## 5. Probar
 
-Sirve la carpeta (`python3 -m http.server 8765`) y abre la pestaña Recetas a 375 px: la receta sale en su grupo, el desplegable enseña ingredientes con sus productos y no hay errores en la consola. Para el servidor al acabar.
+Arranca la app (`cd app && npm install && npm run dev`) y abre `http://localhost:3000/#/recetas` a 375 px: la receta sale en el catalogo, su panel enseña ingredientes con sus productos y no hay errores en la consola. Para el servidor al acabar.
 
 ## 5b. Imagen (si Luis manda foto, o si dijo `Si` en el paso 0)
 
@@ -92,11 +92,11 @@ Enseña a Luis un resumen corto:
 Despues pregunta con la herramienta `AskUserQuestion` (no con texto suelto):
 
 - Pregunta "¿Quieres modificar la receta o enviarla?", cabecera `Receta`, con dos opciones:
-  - `Enviarla`: "Push a main con la receta y republicar el artifact".
+  - `Enviarla`: "Push a main con la receta".
   - `Modificarla`: "Dime que cambiar antes de subirla (receta o imagen)".
 - Si no esta en `semana` y Luis no dijo nada del plan, añade en la misma llamada una segunda pregunta: "¿La meto en el plan de la semana?", cabecera `Semana`, opciones `No` y `Si` (los dias los dice en "Other" o en la respuesta siguiente).
 
-Espera la respuesta. No hagas `git push` ni republiques el artifact antes.
+Espera la respuesta. No hagas `git push` antes.
 
 - `Modificarla`, o un texto propio con cambios: aplicalos, repite 4 y 5 (y 5b si cambia la imagen), haz `git commit --amend` y vuelve a preguntar con `AskUserQuestion`.
 - `Enviarla`: esa es la confirmacion explicita que pide `CLAUDE.md`; sigue con el paso 7 sin volver a preguntar.
@@ -114,5 +114,4 @@ Espera la respuesta. No hagas `git push` ni republiques el artifact antes.
    ```
 
    Si el rebase choca en `recetas.json`, quedate con las recetas de los dos lados, vuelve a pasar `validar` y sigue. Si el push falla por red, reintenta hasta 4 veces esperando 2, 4, 8 y 16 s; si falla por otra cosa (permisos, rama protegida), para y dile a Luis el error.
-2. Republicar el artifact https://claude.ai/artifact/DL15iPmJeDDpadwV4TQK1U con `index.html` y `files` `{"recetas.json": "recetas.json"}` (y `"imagenes/<id>.png": "imagenes/<id>.png"` si la receta tiene imagen).
-3. Responder con una linea: subida a `main`, con el enlace al artifact.
+2. Responder con una linea: subida a `main`, con el commit.

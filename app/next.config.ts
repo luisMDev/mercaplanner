@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   turbopack: {
     // recetas.json and productos.json live in the repository root, next to
-    // index.html and scripts/, so Turbopack has to resolve files from there
+    // scripts/, so Turbopack has to resolve files from there
     root: path.join(__dirname, ".."),
     rules: {
       "*.css": {
