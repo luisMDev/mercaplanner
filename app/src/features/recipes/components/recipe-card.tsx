@@ -22,6 +22,8 @@ export function RecipeCard({
     <button
       type="button"
       onClick={() => onOpen(r.id)}
+      // Grows into the recipe's panel when opened
+      data-morph
       className="group flex min-w-0 cursor-pointer flex-col gap-2 rounded-2xl p-2 text-left transition-all hover:-translate-y-0.5 hover:bg-secondary/60"
     >
       <span className="grid aspect-[4/3] place-items-center rounded-2xl bg-secondary px-3 transition-colors group-hover:bg-primary-soft/70">

@@ -8,17 +8,22 @@ import { CategoryArt } from "./category-art";
 export function ProductTile({
   p,
   compact = false,
+  morph = true,
   onOpen,
 }: {
   p: Producto;
   // Name and price only: the panel of Inicio and the strip of a product
   compact?: boolean;
+  // Grows into the product's panel when opened (off inside a panel, which
+  // makes that move itself)
+  morph?: boolean;
   onOpen: (id: string) => void;
 }) {
   return (
     <button
       type="button"
       onClick={() => onOpen(p.id)}
+      data-morph={morph || undefined}
       className="group flex min-w-0 cursor-pointer flex-col gap-2 rounded-2xl p-2 text-left transition-all hover:-translate-y-0.5 hover:bg-secondary/70"
     >
       <CategoryArt

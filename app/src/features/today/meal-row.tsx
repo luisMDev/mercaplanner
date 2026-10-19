@@ -32,6 +32,7 @@ export function MealRow({
         <span aria-hidden="true" className="w-0.5 flex-1 bg-border group-last/meal:hidden" />
       </div>
       <button
+        data-morph
         type="button"
         disabled={!r}
         onClick={() => r && onOpen(r.id)}

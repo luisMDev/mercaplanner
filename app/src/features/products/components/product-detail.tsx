@@ -72,7 +72,7 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
   const usedIn = recipesWithProduct(plan, p.id);
   const strip = related(catalog, p);
   return (
-    <Panel key={p.id} className="bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
+    <Panel key={p.id} className="[.vt_&]:[view-transition-name:open-card] bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
       <BackLink onClick={onBack} className="mb-4">
         Todos los productos
       </BackLink>
@@ -135,7 +135,7 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
           <div className="no-scrollbar -mx-2 flex snap-x gap-1 overflow-x-auto">
             {strip.map((o) => (
               <div key={o.id} className="w-32 shrink-0 snap-start">
-                <ProductTile p={o} compact onOpen={onOpenProduct} />
+                <ProductTile p={o} compact morph={false} onOpen={onOpenProduct} />
               </div>
             ))}
           </div>

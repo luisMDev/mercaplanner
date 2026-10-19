@@ -21,7 +21,7 @@ function RecipePanel({ plan, receta: r, onBack, onOpen, onOpenProduct }: DetailP
   const [servings, setServings] = useState(r.raciones ?? 1);
   const factor = servings / (r.raciones ?? 1);
   return (
-    <Panel className="bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
+    <Panel className="[.vt_&]:[view-transition-name:open-card] bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
       <BackLink onClick={onBack} className="mb-4">
         Todas las recetas
       </BackLink>

@@ -42,7 +42,12 @@ export function BasketRow({
   return (
     <li className="flex items-center gap-3 border-b border-dashed py-3 last:border-b-0">
       <Checkbox checked={checked} onCheckedChange={onToggle} aria-label={"Comprado: " + (p?.nombre ?? line.id)} className={CHECK_CLASS} />
-      <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 cursor-pointer flex-col text-left">
+      <button
+        type="button"
+        onClick={onOpen}
+        data-morph
+        className="flex min-w-0 flex-1 cursor-pointer flex-col text-left"
+      >
         <span className={cn("font-serif text-[1.05rem] leading-snug hover:text-primary", checked && "text-muted-foreground line-through")}>
           {p?.nombre ?? "Producto " + line.id + " (ya no está en productos.json)"}
         </span>

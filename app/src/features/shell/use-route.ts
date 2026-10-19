@@ -5,22 +5,47 @@ import { parseHash, routeHash, type Route } from "./model/routes";
 // Components reading the route, told when it changes
 const listeners = new Set<() => void>();
 
+// The card just clicked to open a recipe or product (data-morph): in the
+// transition it grows into the panel that opens, named open-card on both sides
+let clicked: { el: HTMLElement; at: number } | null = null;
+if (typeof document !== "undefined") {
+  document.addEventListener(
+    "click",
+    (e) => {
+      const el = (e.target as Element | null)?.closest<HTMLElement>("[data-morph]");
+      if (el) clicked = { el, at: e.timeStamp };
+    },
+    true,
+  );
+}
+
+// The card clicked a moment ago, if it is still on the page
+function morphSource() {
+  const source = clicked;
+  clicked = null;
+  return source && source.el.isConnected && performance.now() - source.at < 1000 ? source.el : null;
+}
+
 // Swaps the page inside a view transition where the browser has them: the
 // store glides from the middle of Inicio to the left of a section, the rest
 // cross-fades and the panels slide in (see globals.css)
-function withTransition(update: () => void) {
+function withTransition(update: () => void, source: HTMLElement | null = null) {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!document.startViewTransition || reduce) {
     update();
     return;
   }
+  if (source) source.style.viewTransitionName = "open-card";
   // The view-transition-name of the store, the header and the panels only
   // apply under html.vt, while a transition runs: an element with a name
   // stops the frosted cards inside it from blurring what is behind it
   const root = document.documentElement;
   root.classList.add("vt");
   const transition = document.startViewTransition(() => flushSync(update));
-  transition.finished.finally(() => root.classList.remove("vt"));
+  transition.finished.finally(() => {
+    root.classList.remove("vt");
+    if (source) source.style.viewTransitionName = "";
+  });
 }
 
 function notify() {
@@ -59,5 +84,5 @@ export function navigate(route: Route) {
     window.history.pushState(window.history.state, "", hash);
     notify();
     window.scrollTo({ top: 0, behavior: "instant" });
-  });
+  }, morphSource());
 }

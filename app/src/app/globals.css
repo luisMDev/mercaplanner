@@ -253,6 +253,7 @@
 }
 ::view-transition-group(panel),
 ::view-transition-group(panel-side),
+::view-transition-group(open-card),
 ::view-transition-group(home-menu),
 ::view-transition-group(home-panels) {
   z-index: 2;
@@ -280,6 +281,27 @@
 ::view-transition-old(home-panels):only-child {
   animation: 0.2s ease-out both vt-fade-out;
 }
+/* A card opening a recipe or product grows into its panel: the box moves and
+   resizes from the card to the panel while the card fades into it. Without
+   a card (back, the strip of a panel) the panel slides in or fades out */
+::view-transition-old(open-card),
+::view-transition-new(open-card) {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+::view-transition-old(open-card) {
+  animation: 0.25s ease-out both vt-fade-out;
+}
+::view-transition-new(open-card) {
+  animation: 0.35s 0.05s ease-out both vt-fade-in;
+}
+::view-transition-new(open-card):only-child {
+  animation:
+    0.12s ease-out both vt-fade-in,
+    0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both vt-slide-x;
+}
+
 /* Back to Inicio: its menu and panels fade in over the store */
 ::view-transition-new(home-menu):only-child,
 ::view-transition-new(home-panels):only-child {
