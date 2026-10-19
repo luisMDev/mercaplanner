@@ -197,8 +197,28 @@
    the park and the leaves behind it */
 @utility glass {
   background-color: color-mix(in oklab, var(--card) 50%, transparent);
-  -webkit-backdrop-filter: blur(8px) saturate(1.15);
-  backdrop-filter: blur(8px) saturate(1.15);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.15);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.15);
+}
+
+/* The view transition shows the cards without the blur (a named element
+   cannot blur what is behind it), so it fades back in afterwards instead of
+   snapping on at the end */
+@property --glass-blur {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 8px;
+}
+html.vt {
+  --glass-blur: 0px;
+}
+html:not(.vt) {
+  animation: glass-in 0.45s ease-out;
+}
+@keyframes glass-in {
+  from {
+    --glass-blur: 0px;
+  }
 }
 
 /* Horizontal rows of chips that scroll on a phone without a visible bar */
