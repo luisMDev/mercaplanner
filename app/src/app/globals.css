@@ -233,16 +233,42 @@
 }
 
 /* Page changes (features/shell/use-route.ts): the store glides between its
-   places and sizes, the header stays put, the rest cross-fades */
+   places and sizes behind the panels, which slide in from the side; the
+   header stays put and the rest cross-fades. Layers, back to front: page,
+   store, panels, header */
 ::view-transition-group(*) {
   animation-duration: 0.5s;
   animation-timing-function: cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+::view-transition-group(tienda) {
+  z-index: 1;
+}
+::view-transition-group(panel),
+::view-transition-group(panel-side) {
+  z-index: 2;
+}
+::view-transition-group(header) {
+  z-index: 3;
 }
 ::view-transition-old(root) {
   animation: 0.25s ease-out both vt-fade-out;
 }
 ::view-transition-new(root) {
-  animation: 0.4s 0.08s cubic-bezier(0.2, 0.7, 0.2, 1) both vt-slide-in;
+  animation: 0.3s 0.05s ease-out both vt-fade-in;
+}
+/* A panel that opens slides in; one that closes fades out */
+::view-transition-new(panel):only-child,
+::view-transition-new(panel-side):only-child {
+  animation: 0.5s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) both vt-slide-in;
+}
+::view-transition-old(panel):only-child,
+::view-transition-old(panel-side):only-child {
+  animation: 0.2s ease-out both vt-fade-out;
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
 }
 @keyframes vt-fade-out {
   to {
@@ -252,6 +278,6 @@
 @keyframes vt-slide-in {
   from {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateX(48px);
   }
 }

@@ -27,14 +27,16 @@ export function WeekView({ plan }: { plan: Plan }) {
 
   return (
     <div className="grid gap-8 pt-4 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)] lg:pt-8">
-      <MonthCalendar
-        plan={plan}
-        month={month}
-        onMonthChange={setMonth}
-        today={today}
-        selected={selected}
-        onSelect={select}
-      />
+      <div className="min-w-0 [view-transition-name:panel]">
+        <MonthCalendar
+          plan={plan}
+          month={month}
+          onMonthChange={setMonth}
+          today={today}
+          selected={selected}
+          onSelect={select}
+        />
+      </div>
       <div ref={ticket} className="flex scroll-mb-28 flex-col gap-6">
         <DayTicket plan={plan} date={selected} isToday={sameDay(selected, today)} />
         <StoreIllustration className="mx-auto mt-6 hidden w-full max-w-[360px] lg:block" />

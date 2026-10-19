@@ -23,7 +23,7 @@ export function RecipeCatalog({
 }) {
   const list = searchRecipes(plan, filters.query).filter((r) => !filters.type || r.tipos.includes(filters.type));
   return (
-    <Panel className="animate-panel flex flex-col gap-4">
+    <Panel className="flex flex-col gap-4">
       <PanelHeader title="Todas las recetas" className="mb-0" />
       <SearchField
         value={filters.query}

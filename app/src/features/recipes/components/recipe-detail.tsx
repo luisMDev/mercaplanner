@@ -21,7 +21,7 @@ function RecipePanel({ plan, receta: r, onBack, onOpen, onOpenProduct }: DetailP
   const [servings, setServings] = useState(r.raciones ?? 1);
   const factor = servings / (r.raciones ?? 1);
   return (
-    <Panel className="animate-panel bg-linear-to-br from-card via-card to-primary-soft/40 p-5 sm:p-8">
+    <Panel className="bg-linear-to-br from-card via-card to-primary-soft/40 p-5 sm:p-8">
       <BackLink onClick={onBack} className="mb-2 @3xl:hidden">
         Todas las recetas
       </BackLink>
@@ -69,7 +69,7 @@ export function RecipeDetail({ id, ...props }: DetailProps & { id: string }) {
   const r = props.plan.byId[id];
   if (!r) {
     return (
-      <Panel className="animate-panel flex flex-col items-start gap-3">
+      <Panel className="flex flex-col items-start gap-3">
         <BackLink onClick={props.onBack}>Todas las recetas</BackLink>
         <EmptyText>
           No hay ninguna receta «{id}» en {DATA_FILE}.

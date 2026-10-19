@@ -25,7 +25,7 @@ export function ProductCatalog({
   const list = useMemo(() => filterProducts(products, filters), [products, filters]);
 
   return (
-    <Panel className="animate-panel flex flex-col gap-4">
+    <Panel className="flex flex-col gap-4">
       <PanelHeader title="Todos los productos" className="mb-0" />
       <SearchField
         value={filters.query}

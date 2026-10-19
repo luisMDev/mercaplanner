@@ -32,7 +32,7 @@ export function BasketPanel({ plan, catalog }: { plan: Plan; catalog: Catalog })
   const added = Object.entries(state.recipes).filter(([id]) => plan.byId[id]);
 
   return (
-    <Panel className="animate-panel flex flex-col gap-7 p-5 sm:p-8">
+    <Panel className="flex flex-col gap-7 p-5 sm:p-8">
       <BasketSummary
         total={total}
         left={left}

@@ -63,7 +63,7 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
   const p = catalog.byId.get(id);
   if (!p) {
     return (
-      <Panel className="animate-panel flex flex-col items-start gap-3">
+      <Panel className="flex flex-col items-start gap-3">
         <BackLink onClick={onBack}>Todos los productos</BackLink>
         <EmptyText>Este producto ya no está en {PRODUCTS_FILE}.</EmptyText>
       </Panel>
@@ -72,7 +72,7 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
   const usedIn = recipesWithProduct(plan, p.id);
   const strip = related(catalog, p);
   return (
-    <Panel key={p.id} className="animate-panel bg-linear-to-br from-card via-card to-primary-soft/40 p-5 sm:p-8">
+    <Panel key={p.id} className="bg-linear-to-br from-card via-card to-primary-soft/40 p-5 sm:p-8">
       <BackLink onClick={onBack} className="mb-4 @3xl:hidden">
         Todos los productos
       </BackLink>

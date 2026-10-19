@@ -26,7 +26,8 @@ export function PageLayout({
         <Squiggle className="max-lg:hidden" />
         <StoreIllustration here className="mt-16 hidden w-full max-w-[300px] lg:block" />
       </aside>
-      <div className="min-w-0">{children}</div>
+      {/* Its own layer in view transitions, over the store (globals.css) */}
+      <div className="min-w-0 [view-transition-name:panel]">{children}</div>
     </div>
   );
 }

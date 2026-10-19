@@ -29,7 +29,7 @@ export function TodayView({ plan }: { plan: Plan }) {
     <PageLayout title="Hoy">
       <div className="flex flex-col gap-5">
         {meals.length ? (
-          <Panel className="animate-panel p-5 sm:p-8">
+          <Panel className="p-5 sm:p-8">
             <div className="flex items-stretch gap-5">
               <DateStub date={now} />
               <div className="flex min-w-0 flex-col justify-center gap-1.5">
