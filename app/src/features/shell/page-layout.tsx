@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { BackLink } from "@/components/cozy/back-link";
 import { ScriptHeading, Squiggle } from "@/components/cozy/script-heading";
-import { StoreIllustration } from "@/components/cozy/store/store-illustration";
+import { StoreSlot } from "@/components/cozy/store/store-stage";
 import { cn } from "@/lib/utils";
 import { navigate } from "./use-route";
 
@@ -24,7 +24,7 @@ export function PageLayout({
         <BackLink onClick={() => navigate({ section: "inicio" })}>Volver a la tienda</BackLink>
         <ScriptHeading className="mt-1 text-[clamp(3.2rem,2.6rem+2.4vw,4.6rem)]">{title}</ScriptHeading>
         <Squiggle className="max-lg:hidden" />
-        <StoreIllustration here className="mt-16 hidden w-full max-w-[300px] lg:block" />
+        <StoreSlot here className="mt-16 hidden w-full max-w-[300px] lg:block" />
       </aside>
       {/* Its own layer in view transitions, over the store (globals.css) */}
       <div className="min-w-0 [view-transition-name:panel]">{children}</div>

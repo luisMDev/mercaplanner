@@ -1,6 +1,6 @@
 "use client";
 
-import { StoreIllustration } from "@/components/cozy/store/store-illustration";
+import { StoreSlot } from "@/components/cozy/store/store-stage";
 import type { Plan } from "@/features/plan/model/types";
 import { SideMenu } from "@/features/shell/nav/side-menu";
 import { HomeIntro } from "./home-intro";
@@ -27,11 +27,7 @@ export function HomeView({ plan, pending }: { plan: Plan; pending: number }) {
         </div>
       </div>
       <div className="order-2 lg:order-none lg:pt-4 xl:sticky xl:top-24 xl:self-start">
-        <StoreIllustration
-          preload
-          park="backdrop"
-          className="mx-auto w-full max-w-[360px] sm:max-w-[420px] xl:max-w-[600px]"
-        />
+        <StoreSlot park="backdrop" className="mx-auto w-full max-w-[360px] sm:max-w-[420px] xl:max-w-[600px]" />
       </div>
       <div className="relative z-10 order-4 flex flex-col gap-5 lg:order-none lg:col-start-2 xl:col-start-auto xl:pt-4">
         <WeekBanner plan={plan} />

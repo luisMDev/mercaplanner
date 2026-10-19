@@ -1,5 +1,6 @@
 "use client";
 
+import { StoreStage } from "@/components/cozy/store/store-stage";
 import { BasketProvider, useBasket } from "@/features/basket/basket-context";
 import { pendingCount } from "@/features/basket/model/basket";
 import { usePlan } from "@/features/plan/use-plan";
@@ -35,7 +36,9 @@ export function DietApp() {
   return (
     <CatalogProvider>
       <BasketProvider>
-        <DietAppClient />
+        <StoreStage>
+          <DietAppClient />
+        </StoreStage>
       </BasketProvider>
     </CatalogProvider>
   );

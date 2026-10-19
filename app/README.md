@@ -43,7 +43,7 @@ src/
 │   ├── ui/                   Componentes de shadcn/ui, generados con la CLI
 │   ├── cozy/                 Piezas del estilo: panel, botón grande, etiqueta, contador, entrada con
 │   │   │                     fecha, cinta adhesiva, logo del tomate y título manuscrito
-│   │   └── store/            La tienda: dibujo plano y su versión 3D con three.js (relieve y material)
+│   │   └── store/            La tienda: una sola para toda la app (escenario y huecos), dibujo plano y 3D con three.js
 │   └── shared/               Buscador, aviso, selector de JSON, textos de recuento y vacío
 ├── features/
 │   ├── shell/                Armazón: rutas por hash con transiciones, cabecera, menús (lateral,
@@ -76,3 +76,4 @@ Reglas que sigue el código:
 - **Cargar JSON**: «Probar otro recetas.json» en los ajustes carga otro plan para probarlo; dura hasta recargar la página. Si `productos.json` no se puede descargar, las vistas que lo usan permiten elegirlo a mano.
 - Se guarda en `localStorage` el tema (`dieta-theme`), con la misma clave que `index.html`.
 - **Tienda en 3D**: con ratón, la tienda se dibuja con three.js (React Three Fiber) sobre un plano con relieve: cada punto se adelanta según `assets/tienda-profundidad.webp` y el plano gira un poco a los lados siguiendo el ratón (solo en horizontal). Detrás, más lejos y más grande, va el parque (`assets/fondo.webp`): al girar se desliza al revés que la tienda (parallax). El parque mide lo que la tienda y un 20 % más de alto, centrado detrás de ella y entero (contain); las medidas están en `store/layout.ts`. El parque también tiene relieve con su propio mapa (`assets/fondo-profundidad.webp`). En Inicio sobresale por los lados, por detrás del menú y los paneles: ahí el lienzo 3D se ensancha para contenerlo. Las dos capas siguen al ratón despacio, sin flotar. El mapa de profundidad se sacó de la ilustración con Depth Anything V2. En el móvil, sin WebGL o con «reducir movimiento» se queda el dibujo plano; three.js solo se descarga donde se usa.
+- **Una sola tienda**: `store/store-stage.tsx` monta la tienda una vez para toda la app y no la desmonta nunca, así la escena 3D se carga una sola vez. Cada página deja un hueco (`StoreSlot`) donde va la tienda, y esta se coloca encima de ese hueco. Al cambiar de sección, la transición de vista mueve esa misma tienda a su nuevo hueco.

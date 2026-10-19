@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { StoreIllustration } from "@/components/cozy/store/store-illustration";
+import { StoreSlot } from "@/components/cozy/store/store-stage";
 import type { Plan } from "@/features/plan/model/types";
 import { useNow } from "@/hooks/use-now";
 import { DayTicket } from "./components/day-ticket";
@@ -39,7 +39,7 @@ export function WeekView({ plan }: { plan: Plan }) {
       </div>
       <div ref={ticket} className="flex scroll-mb-28 flex-col gap-6">
         <DayTicket plan={plan} date={selected} isToday={sameDay(selected, today)} />
-        <StoreIllustration className="mx-auto mt-6 hidden w-full max-w-[360px] lg:block" />
+        <StoreSlot className="mx-auto mt-6 hidden w-full max-w-[360px] lg:block" />
       </div>
     </div>
   );
