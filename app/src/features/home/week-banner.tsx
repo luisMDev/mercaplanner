@@ -1,6 +1,5 @@
 import { ArrowRightIcon, HeartIcon } from "lucide-react";
 import { CtaButton } from "@/components/cozy/cta-button";
-import { Sprig } from "@/components/cozy/sprig";
 import { DishArt } from "@/features/plan/components/dish-art";
 import { weekSummary } from "@/features/plan/model/week";
 import type { Plan } from "@/features/plan/model/types";
@@ -21,7 +20,7 @@ export function WeekBanner({ plan }: { plan: Plan }) {
       </p>
       <div className="relative z-10 flex max-w-[64%] flex-col items-start gap-3">
         <p className="caps flex items-center gap-2 font-semibold">
-          <Sprig /> Esta semana
+          Esta semana
         </p>
         <h2 className="font-display text-[clamp(2rem,1.6rem+1.4vw,2.6rem)] leading-[1.02] font-semibold text-primary italic">
           La dieta de la semana

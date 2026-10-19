@@ -1,5 +1,4 @@
 import { RotateCcwIcon } from "lucide-react";
-import { Sprig } from "@/components/cozy/sprig";
 import { fmtEur } from "@/lib/format";
 
 // Top of the basket: the estimated total, how much is left and a fresh start
@@ -21,7 +20,7 @@ export function BasketSummary({
     <div className="flex flex-wrap items-end gap-x-6 gap-y-4">
       <div className="flex min-w-60 flex-1 flex-col gap-1.5">
         <p className="caps flex items-center gap-2 font-semibold">
-          <Sprig /> La compra de la semana
+          La compra de la semana
         </p>
         <p className="font-display text-[clamp(2.2rem,1.8rem+1.6vw,3rem)] leading-none font-semibold text-primary italic tabular-nums">
           ≈ {fmtEur(total)}

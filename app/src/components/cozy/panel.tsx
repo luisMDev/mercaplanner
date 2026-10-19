@@ -1,6 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Sprig } from "./sprig";
 
 // Rounded paper card that holds a section: "Las recetas", the open recipe…
 export function Panel({ className, ...props }: ComponentProps<"section">) {
@@ -15,10 +14,10 @@ export function Panel({ className, ...props }: ComponentProps<"section">) {
   );
 }
 
-// "✿ LAS RECETAS ········ VER TODAS →"
+// "LAS RECETAS ········ VER TODAS →", with an optional icon first
 export function PanelHeader({
   title,
-  icon = <Sprig />,
+  icon,
   action,
   className,
 }: {

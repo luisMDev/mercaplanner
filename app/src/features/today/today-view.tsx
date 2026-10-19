@@ -3,7 +3,6 @@
 import { CalendarX2Icon } from "lucide-react";
 import { DateStub } from "@/components/cozy/date-stub";
 import { Panel, PanelHeader } from "@/components/cozy/panel";
-import { Sprig } from "@/components/cozy/sprig";
 import { Notice } from "@/components/shared/notice";
 import { MacroBars } from "@/features/plan/components/macro-bars";
 import { todayDia } from "@/features/plan/model/days";
@@ -35,7 +34,7 @@ export function TodayView({ plan }: { plan: Plan }) {
               <DateStub date={now} />
               <div className="flex min-w-0 flex-col justify-center gap-1.5">
                 <p className="caps flex items-center gap-2 font-semibold">
-                  <Sprig /> El plan de hoy
+                  El plan de hoy
                 </p>
                 <h2 className="font-display text-[clamp(2rem,1.6rem+1.4vw,2.8rem)] leading-none font-semibold text-primary italic">
                   {dia.label}

@@ -1,6 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import { Sprig } from "@/components/cozy/sprig";
 import { WashiTape } from "@/components/cozy/washi-tape";
 import type { Plan } from "@/features/plan/model/types";
 import { cn } from "@/lib/utils";
@@ -53,7 +52,7 @@ export function MonthCalendar({
           <ChevronRightIcon />
         </MonthButton>
         <p className="caps ml-auto hidden items-center gap-2 text-muted-foreground xl:flex">
-          La dieta de cada día <Sprig />
+          La dieta de cada día
         </p>
       </header>
       <div className="grid grid-cols-7 border-b">

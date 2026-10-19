@@ -1,7 +1,6 @@
 import { ArrowRightIcon, ChefHatIcon } from "lucide-react";
 import { CtaButton } from "@/components/cozy/cta-button";
 import { DateStub } from "@/components/cozy/date-stub";
-import { Sprig } from "@/components/cozy/sprig";
 import { todayDia } from "@/features/plan/model/days";
 import { dayTotals, mealColor } from "@/features/plan/model/meals";
 import type { Plan } from "@/features/plan/model/types";
@@ -16,7 +15,7 @@ export function DayTicket({ plan, date, isToday }: { plan: Plan; date: Date; isT
   return (
     <section className="flex flex-col gap-3">
       <p className="caps flex items-center gap-2 font-semibold">
-        <Sprig /> {isToday ? "Hoy" : "El día"}
+        {isToday ? "Hoy" : "El día"}
       </p>
       <div key={date.toDateString()} className="animate-panel flex rounded-3xl border border-white/70 bg-card p-3 shadow-lift dark:border-white/5">
         <DateStub date={date} />

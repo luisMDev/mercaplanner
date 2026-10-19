@@ -42,7 +42,7 @@ src/
 ├── components/
 │   ├── ui/                   Componentes de shadcn/ui, generados con la CLI
 │   ├── cozy/                 Piezas del estilo: panel, botón grande, etiqueta, contador, entrada con
-│   │                         fecha, cinta adhesiva, ramita, logo del tomate, título manuscrito y la tienda
+│   │                         fecha, cinta adhesiva, logo del tomate, título manuscrito y la tienda
 │   └── shared/               Buscador, aviso, selector de JSON, textos de recuento y vacío
 ├── features/
 │   ├── shell/                Armazón: rutas por hash con transiciones, cabecera, menús (lateral,
