@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-figtree), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  /* App palette on top of the shadcn tokens: faint text, the strong and soft
+     terracotta, and one colour per meal slot (see lib/meals.ts) */
+  --color-faint: var(--faint);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-plum: var(--plum);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --shadow-card: var(--card-shadow);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Same colours as the original index.html: grey-green paper, terracotta accent */
+:root {
+  --background: #eaedee;
+  --foreground: #212729;
+  --card: #ffffff;
+  --card-foreground: #212729;
+  --popover: #ffffff;
+  --popover-foreground: #212729;
+  --primary: #ad3a2c;
+  --primary-foreground: #ffffff;
+  --primary-strong: #8f2e23;
+  --primary-soft: #f3dcd7;
+  --secondary: #f2f4f4;
+  --secondary-foreground: #212729;
+  --muted: #f2f4f4;
+  --muted-foreground: #5b6567;
+  --faint: #8b9496;
+  --accent: #f3dcd7;
+  --accent-foreground: #8f2e23;
+  --destructive: #ad3a2c;
+  --border: #d7dcdd;
+  --input: #d7dcdd;
+  --ring: #ad3a2c;
+  --gold: #a8781f;
+  --gold-soft: #f0e3c4;
+  --teal: #276e69;
+  --teal-soft: #d9ebe8;
+  --plum: #6f4a8e;
+  --success: #3a7a4e;
+  --success-soft: #dceee0;
+  --warning: #9c5f19;
+  --radius: 0.625rem;
+  --card-shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 20px -12px rgb(20 20 20 / 0.18);
+}
+
+.dark {
+  --background: #14181a;
+  --foreground: #e9ecec;
+  --card: #1c2224;
+  --card-foreground: #e9ecec;
+  --popover: #1c2224;
+  --popover-foreground: #e9ecec;
+  --primary: #dd7c67;
+  --primary-foreground: #14181a;
+  --primary-strong: #e89686;
+  --primary-soft: #3a2521;
+  --secondary: #20272a;
+  --secondary-foreground: #e9ecec;
+  --muted: #20272a;
+  --muted-foreground: #a4aeb0;
+  --faint: #707b7d;
+  --accent: #3a2521;
+  --accent-foreground: #e89686;
+  --destructive: #dd7c67;
+  --border: #323b3e;
+  --input: #323b3e;
+  --ring: #dd7c67;
+  --gold: #d9ae5a;
+  --gold-soft: #392e19;
+  --teal: #63b3ac;
+  --teal-soft: #173330;
+  --plum: #b896d6;
+  --success: #69b583;
+  --success-soft: #1b3324;
+  --warning: #dda25b;
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 20px -12px rgb(0 0 0 / 0.5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-[15px] leading-[1.55] text-foreground;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Recipe card opened from a meal in Hoy or Semana: flash it once */
+@keyframes target-flash {
+  from {
+    background-color: var(--primary-soft);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@utility animate-target {
+  animation: target-flash 1.6s ease-out;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

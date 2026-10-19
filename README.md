@@ -8,6 +8,7 @@ Nacio en el vault `luisMDev/jarvis` (`brain/04-sandbox/diet-app/`) y se movio aq
 
 | Fichero | Que es |
 | --- | --- |
+| `app/` | La app rehecha en Next.js con shadcn/ui (ver abajo) |
 | `index.html` | La app entera: React 18.3.1 y las fuentes (Newsreader y Figtree) van dentro, entre los marcadores `@offline-react` y `@offline-fonts`, asi que funciona sin conexion |
 | `recetas.json` | Recetas y plan de la semana (formato abajo) |
 | `productos.json` | 2.966 alimentos de Mercadona, generado por `scripts/build-productos.py` |
@@ -25,9 +26,17 @@ python3 -m http.server
 
 y abrir `http://localhost:8000`. Abierta como fichero, la pagina ofrece elegir `recetas.json` a mano. Cada JSON que carga se guarda en `localStorage` (`dieta-recetas`, `dieta-productos`) y, si la proxima vez no puede leer el fichero, usa esa copia y lo indica en el pie. El boton "Cargar JSON" del pie sirve tambien para probar otro plan sin tocar el fichero.
 
-## Artifact
+## Version en Next.js (`app/`)
 
-Publicada como Claude Artifact privado en https://claude.ai/artifact/DL15iPmJeDDpadwV4TQK1U: el propio `index.html` con `recetas.json` y `productos.json` al lado, que la pagina lee con `fetch`. Se actualiza volviendo a publicar `index.html` con esos ficheros en el mismo artifact. Compartirlo se decide desde su menu Share.
+La misma app rehecha con Next.js 16, Tailwind CSS 4 y componentes de shadcn/ui, organizada por funcionalidades. Lee `recetas.json` y `productos.json` de la raiz, sin copiarlos:
+
+```
+cd app
+npm install
+npm run dev
+```
+
+y abrir `http://localhost:3000`. Estructura y detalles en `app/README.md`.
 
 ## Formato de `recetas.json`
 
