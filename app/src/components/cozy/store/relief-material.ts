@@ -15,15 +15,12 @@ const vertexShader = /* glsl */ `
   }
 `;
 
-// The drawing as is, with the straight edges of the picture (trees and
-// pavement cut by the frame) faded out; the transparent background is dropped
+// The drawing as is; the transparent background is dropped
 const fragmentShader = /* glsl */ `
   uniform sampler2D uMap;
   varying vec2 vUv;
   void main() {
     vec4 color = texture2D(uMap, vUv);
-    float edge = smoothstep(0.0, 0.1, vUv.x) * smoothstep(0.0, 0.1, 1.0 - vUv.x) * smoothstep(0.0, 0.12, vUv.y);
-    color.a *= edge;
     if (color.a < 0.02) discard;
     gl_FragColor = color;
   }

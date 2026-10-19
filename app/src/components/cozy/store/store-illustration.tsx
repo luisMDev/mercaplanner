@@ -8,13 +8,9 @@ import tienda from "@/assets/tienda.webp";
 import { cn } from "@/lib/utils";
 import { STORE_BOTTOM, STORE_SCALE } from "./layout";
 
-// Fades the straight edges of the picture (trees and pavement) into the paper
-const EDGE_MASK =
-  "[mask-image:linear-gradient(to_right,transparent,black_9%,black_91%,transparent),linear-gradient(to_bottom,black_86%,transparent)] [mask-composite:intersect]";
-
-// The store picture's own straight edges, faded like in the 3D shader
-const STORE_EDGES =
-  "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent),linear-gradient(to_top,transparent,black_12%)] [mask-composite:intersect]";
+// Fades the park's straight edges into the paper, when it is behind the store
+const PARK_EDGES =
+  "[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent),linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)] [mask-composite:intersect]";
 
 // three.js only downloads where the 3D store is shown
 const StoreScene = dynamic(() => import("./store-scene"), { ssr: false });
@@ -35,7 +31,14 @@ function HereArrow() {
   return (
     <svg viewBox="0 0 40 46" aria-hidden="true" className="ml-8 h-10 w-9 text-primary">
       <path d="M6 3c14 4 24 16 22 36" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M21 33l7 8 5-9" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M21 33l7 8 5-9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -87,7 +90,10 @@ export function StoreIllustration({
       {PETALS.map((p) => (
         <span key={p} aria-hidden="true" className={cn("absolute rounded-[60%_10%] animate-float", p)} />
       ))}
-      <div className={cn("relative aspect-[1080/1350] dark:brightness-[.82] dark:saturate-[.9]", EDGE_MASK)}>
+      <div
+        className={cn("relative dark:brightness-[.82] dark:saturate-[.9]", park && PARK_EDGES)}
+        style={{ aspectRatio: tienda.width / tienda.height }}
+      >
         {/* The park behind the store; in 3D it is a layer further back */}
         {park && (
           <Image
@@ -108,7 +114,7 @@ export function StoreIllustration({
           preload={preload}
           loading="eager"
           sizes="(min-width: 1024px) 40vw, 90vw"
-          className={cn("absolute h-auto select-none transition-opacity duration-500", STORE_EDGES, ready && "opacity-0")}
+          className={cn("absolute h-auto select-none transition-opacity duration-500", ready && "opacity-0")}
           style={{
             width: STORE_SCALE * 100 + "%",
             left: ((1 - STORE_SCALE) / 2) * 100 + "%",
