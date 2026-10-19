@@ -190,6 +190,58 @@
         "grasas": 26
       },
       "imagen": "imagenes/arroz-marinera-alioli.png"
+    },
+    {
+      "id": "kebab-patatas-asadas-salsa-yogur",
+      "nombre": "Carne de kebab con patatas asadas y salsa de yogur",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Relleno de kebab de pollo con patatas cocidas de bote troceadas y doradas en la air fryer, con salsa de yogur por encima.",
+      "minutos": 20,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "1 paquete de relleno para kebab de pollo ultracongelado (300 g)",
+          "producto": "13778",
+          "gramos": 300,
+          "producto_nombre": "Relleno para kebab con carne de pollo asado Hacendado ultracongelado"
+        },
+        {
+          "texto": "1 tarro de patatas cocidas, escurridas y troceadas (unos 400 g)",
+          "producto": "15534",
+          "gramos": 400,
+          "producto_nombre": "Patatas cocidas Hacendado"
+        },
+        {
+          "texto": "Unas pulverizaciones de aceite de oliva virgen extra en spray (unos 4 g)",
+          "producto": "4718",
+          "gramos": 4,
+          "producto_nombre": "Aceite de oliva virgen extra Hacendado"
+        },
+        {
+          "texto": "4 cucharadas de salsa de yogur (unos 40 g)",
+          "producto": "17327",
+          "gramos": 40,
+          "producto_nombre": "Salsa Yogur Hacendado"
+        },
+        "Sal, pimentón y comino"
+      ],
+      "pasos": [
+        "Precalentar la air fryer a 200 °C. Escurrir las patatas, secarlas con papel y cortarlas en dados grandes.",
+        "Ponerlas en la cesta, pulverizarlas con el aceite, salpimentar con pimentón y comino y hacerlas 12-15 minutos, removiendo a mitad, hasta que estén doradas.",
+        "Mientras, hacer la carne de kebab congelada en una sartén caliente sin aceite 5-6 minutos, removiendo, hasta que esté bien caliente y algo tostada (o los últimos 5 minutos en la air fryer junto a las patatas).",
+        "Servir las patatas con la carne encima y la salsa de yogur por encima."
+      ],
+      "notas": "La salsa de yogur de bote es muy grasa (unas 25 kcal por cucharada); si quieres aligerar, mezcla mitad salsa y mitad yogur griego ligero. El tarro de patatas cocidas pesa 660 g; escurridas salen unos 400 g.",
+      "kcal": 460,
+      "macros": {
+        "proteinas": 36,
+        "carbohidratos": 28,
+        "grasas": 22
+      },
+      "imagen": "imagenes/kebab-patatas-asadas-salsa-yogur.png"
     }
   ],
   "semana": {
