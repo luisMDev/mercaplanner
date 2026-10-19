@@ -13,6 +13,9 @@ Nacio en el vault `luisMDev/jarvis` (`brain/04-sandbox/diet-app/`) y se movio aq
 | `recetas.json` | Recetas y plan de la semana (formato abajo) |
 | `productos.json` | 2.966 alimentos de Mercadona, generado por `scripts/build-productos.py` |
 | `scripts/receta.py` | Buscar productos, calcular kcal y macros de una receta y validar `recetas.json` |
+| `scripts/imagen.py` | Ilustracion en acuarela de una receta (a partir de una foto del plato) con fondo transparente, con Nano Banana 2.1 o GPT Image 2 |
+| `imagenes/` | `estilo-referencia.webp` (el estilo que copian las ilustraciones) y una `<id>.png` por receta con imagen |
+| `.env.example` | Plantilla de `.env` (no se sube a git) con las claves `GEMINI_API_KEY` / `OPENAI_API_KEY` |
 | `scripts/build-productos.py` | Regenera `productos.json` desde el catalogo completo de Mercadona |
 | `.claude/skills/receta/` | Skill `/receta` de Claude Code para añadir recetas |
 
@@ -41,7 +44,7 @@ y abrir `http://localhost:3000`. Estructura y detalles en `app/README.md`.
 ## Formato de `recetas.json`
 
 - `comidas`: los huecos del dia en orden, `{id, label, hora}`. Los `id` `desayuno`, `media-manana`, `comida`, `merienda` y `cena` tienen color propio en el timeline (clases `tl-<id>` del CSS); uno nuevo sale en gris hasta que se le añada.
-- `recetas`: `{id, nombre, tipos, descripcion, minutos, raciones, kcal, macros: {proteinas, carbohidratos, grasas}, ingredientes, pasos, notas}`. Solo `id` y `nombre` son obligatorios. `tipos` son ids de `comidas`; el primero decide en que grupo sale en la pestaña Recetas.
+- `recetas`: `{id, nombre, tipos, descripcion, minutos, raciones, kcal, macros: {proteinas, carbohidratos, grasas}, ingredientes, pasos, notas, imagen}`. `imagen` es la ruta de su PNG en `imagenes/` (la escribe `scripts/imagen.py`; la app aun no la enseña). Solo `id` y `nombre` son obligatorios. `tipos` son ids de `comidas`; el primero decide en que grupo sale en la pestaña Recetas.
 - Cada ingrediente es un texto o un objeto `{texto, producto, producto_nombre, gramos}` que lo enlaza con un producto de `productos.json` por su `id`; si Mercadona no lo vende, `{texto, sin_producto: true}`. Bajo el ingrediente sale el nombre del producto y al tocarlo se abre su ficha en Productos. `kcal` y `macros` son por racion y se calculan con `python3 scripts/receta.py calcular <id>` a partir de los `gramos`; la app no los recalcula.
 - `semana`: `{lunes, martes, miercoles, jueves, viernes, sabado, domingo}` (sin tildes), cada uno `{<id de comida>: <id de receta>}`. Un dia puede dejar fuera un hueco. Si un id de receta no existe, el plan lo marca como "Receta no encontrada".
 
@@ -63,3 +66,13 @@ Pesa ~1,6 MB, asi que la app no lo pide hasta que se abre la pestaña Productos.
 - **Productos**: los alimentos de Mercadona con precio, precio por kg o litro y kcal, proteinas, hidratos, grasas, fibra y sal por 100 g o 100 ml. Buscador, filtro por categoria y orden por nombre, proteina, calorias o precio.
 
 En el movil (hasta 440 px) las pestañas que no estan abiertas solo enseñan el icono. Selector de tema (automatico, claro, oscuro) en el pie.
+
+## Imagenes de las recetas
+
+`scripts/imagen.py` convierte la foto de un plato en una ilustracion de acuarela con el estilo de `imagenes/estilo-referencia.webp`: manda la foto, la referencia y un prompt a Nano Banana 2.1 (`GEMINI_API_KEY`, ~0,034 $ por imagen) o a GPT Image 2 en calidad baja (`OPENAI_API_KEY`, ~0,006 $), segun la clave que haya en `.env` o en el entorno. Ninguno de los dos devuelve fondo transparente, asi que se pide fondo blanco y el script lo quita (canal alfa, bordes suaves sin halo) y recorta:
+
+```
+cp .env.example .env    # y rellenar una clave
+python3 scripts/imagen.py <id-receta> --foto foto.jpg
+python3 scripts/imagen.py <id-receta> --prompt        # solo ver el prompt y el proveedor
+```
