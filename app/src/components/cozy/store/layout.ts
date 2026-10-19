@@ -9,6 +9,6 @@ export const STORE_BOTTOM = 0.05;
 // Middle of the store, from the bottom of the frame
 export const STORE_CENTER = STORE_BOTTOM + STORE_SCALE / 2;
 // The park behind: whole (contain), as wide as its proportions make it,
-// centred a little under the middle of the frame
+// centred a little over the middle of the frame
 export const PARK_HEIGHT = 1.08;
-export const PARK_CENTER = 0.45;
+export const PARK_CENTER = 0.55;
