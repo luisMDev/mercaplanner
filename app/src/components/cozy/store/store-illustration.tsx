@@ -63,8 +63,8 @@ export function StoreIllustration({
 }: {
   // "estás aquí" with an arrow, when the store is small next to a panel
   here?: boolean;
-  // The park behind the store: inside the frame (and in the 3D scene), or as
-  // a backdrop that overflows it behind the page's panels (Inicio)
+  // The park behind the store: clipped to the frame, or as a backdrop that
+  // overflows it behind the page's panels (Inicio)
   park?: "frame" | "backdrop";
   preload?: boolean;
   className?: string;
@@ -95,12 +95,8 @@ export function StoreIllustration({
         className={cn("relative dark:brightness-[.82] dark:saturate-[.9]", park === "frame" && PARK_EDGES)}
         style={{ aspectRatio: tienda.width / tienda.height }}
       >
-        {/* In the frame, the 3D scene draws the park itself once loaded */}
-        {park === "frame" ? (
-          <ParkLayer className={cn("transition-opacity duration-500", ready && "opacity-0")} />
-        ) : (
-          <ParkLayer drift />
-        )}
+        {/* Flat park until the 3D scene, which draws it with relief, is ready */}
+        <ParkLayer className={cn("transition-opacity duration-500", ready && "opacity-0")} />
         <Image
           src={tienda}
           alt="Ilustración de una tienda de Mercadona en una esquina, con toldos verdes, plantas y fruta en la puerta"
@@ -116,9 +112,16 @@ export function StoreIllustration({
           draggable={false}
         />
         {show3d && (
-          // 4% over each side: OVERFLOW in store-scene.tsx
-          <div className={cn("absolute -inset-[4%] opacity-0 transition-opacity duration-500", ready && "opacity-100")}>
-            <StoreScene park={park === "frame"} onReady={onReady} />
+          // 4% over each side (OVERFLOW in store-scene.tsx); as a backdrop it
+          // widens to hold the whole park, behind the page's panels
+          <div
+            className={cn(
+              "pointer-events-none absolute -inset-y-[4%] opacity-0 transition-opacity duration-500",
+              park === "frame" ? "-inset-x-[4%]" : "-inset-x-[40%]",
+              ready && "opacity-100",
+            )}
+          >
+            <StoreScene onReady={onReady} />
           </div>
         )}
       </div>

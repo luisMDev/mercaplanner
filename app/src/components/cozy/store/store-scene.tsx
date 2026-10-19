@@ -3,6 +3,7 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { TextureLoader, type Group } from "three";
+import parkDepthMap from "@/assets/fondo-profundidad.webp";
 import fondo from "@/assets/fondo.webp";
 import depthMap from "@/assets/tienda-profundidad.webp";
 import tienda from "@/assets/tienda.webp";
@@ -11,8 +12,11 @@ import { reliefMaterial } from "./relief-material";
 import { usePointerX } from "./use-pointer-x";
 
 const ASPECT = tienda.width / tienda.height;
-// How far the light parts of the depth map come forward, in plane heights
+// How far the light parts of each depth map come forward, in plane heights
 const RELIEF = 0.16;
+const PARK_RELIEF = 0.3;
+// How fast the scene catches up with the mouse, per frame (slow and calm)
+const EASE = 0.035;
 // Largest turn following the mouse left and right, in radians (about 12°).
 // Only sideways: moving the mouse up and down does not tilt it
 const TILT = 0.21;
@@ -30,38 +34,45 @@ const DISTANCE = 0.5 / Math.tan(((FOV / 2) * Math.PI) / 180);
 const BG_DEPTH = 0.9;
 const BG_FAR = (DISTANCE + BG_DEPTH) / DISTANCE;
 
-type SceneProps = {
-  // The park behind the store; off where the page has it as a backdrop
-  park: boolean;
-  onReady: () => void;
-};
+type SceneProps = { onReady: () => void };
 
-function Scene({ park: showPark, onReady }: SceneProps) {
-  const [map, depth, park] = useLoader(TextureLoader, [tienda.src, depthMap.src, fondo.src]);
+function Scene({ onReady }: SceneProps) {
+  const [map, depth, park, parkDepth] = useLoader(TextureLoader, [
+    tienda.src,
+    depthMap.src,
+    fondo.src,
+    parkDepthMap.src,
+  ]);
   const material = useMemo(() => reliefMaterial(map, depth, RELIEF), [map, depth]);
+  const parkMaterial = useMemo(() => reliefMaterial(park, parkDepth, PARK_RELIEF), [park, parkDepth]);
   const group = useRef<Group>(null);
   const pointerX = usePointerX();
 
   useEffect(onReady, [onReady]);
-  useEffect(() => () => material.dispose(), [material]);
+  useEffect(
+    () => () => {
+      material.dispose();
+      parkMaterial.dispose();
+    },
+    [material, parkMaterial],
+  );
 
   // The store and the park turn together around the store, easing towards
-  // the mouse, with a slow breathing float on top
-  useFrame(({ clock }) => {
+  // the mouse
+  useFrame(() => {
     const g = group.current;
-    if (!g) return;
-    g.rotation.y += (pointerX.current * TILT - g.rotation.y) * 0.06;
-    g.position.y = Math.sin(clock.elapsedTime * 0.8) * 0.006;
+    if (g) g.rotation.y += (pointerX.current * TILT - g.rotation.y) * EASE;
   });
 
   return (
     <group ref={group}>
-      {showPark && (
-        <mesh position={[0, (STORE_Y * BG_FAR) / OVERFLOW, -BG_DEPTH]} scale={(PARK_HEIGHT * BG_FAR) / OVERFLOW}>
-          <planeGeometry args={[fondo.width / fondo.height, 1]} />
-          <meshBasicMaterial map={park} transparent depthWrite={false} />
-        </mesh>
-      )}
+      <mesh
+        material={parkMaterial}
+        position={[0, (STORE_Y * BG_FAR) / OVERFLOW, -BG_DEPTH]}
+        scale={(PARK_HEIGHT * BG_FAR) / OVERFLOW}
+      >
+        <planeGeometry args={[fondo.width / fondo.height, 1, 96, 72]} />
+      </mesh>
       <mesh material={material} position={[0, STORE_Y / OVERFLOW, 0]} scale={STORE_SCALE / OVERFLOW}>
         <planeGeometry args={[ASPECT, 1, 112, 140]} />
       </mesh>
@@ -69,8 +80,8 @@ function Scene({ park: showPark, onReady }: SceneProps) {
   );
 }
 
-// The store drawing on a plane with relief from its depth map, in front of a
-// park further back, turning with the mouse. Loaded on its own (three.js is
+// The store drawing on a plane with relief from its depth map, in front of the
+// park, further back and with its own relief, turning with the mouse. Loaded on its own (three.js is
 // heavy), only where it is used
 export default function StoreScene(props: SceneProps) {
   return (
