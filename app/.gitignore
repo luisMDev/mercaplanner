@@ -20,6 +20,9 @@
 # production
 /build
 
+# copy of ../imagenes/productos, made by scripts/copy-product-photos.mjs
+/public/imagenes/
+
 # misc
 .DS_Store
 *.pem

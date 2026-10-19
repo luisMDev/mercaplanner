@@ -4,9 +4,10 @@ import { cn } from "@/lib/utils";
 import type { Producto } from "../model/types";
 import { CategoryArt } from "./category-art";
 
-// The photos of imagenes/productos/ (repository root) are served through the
-// public/imagenes symlink. build-imagenes.py already resized them and made
-// them WebP, so they are served as is
+// The photos of imagenes/productos/ (repository root) are copied to
+// public/imagenes/productos/ before dev and build (scripts/copy-product-photos.mjs).
+// build-imagenes.py already resized them and made them WebP, so they are
+// served as is
 
 // Front photo of the product, on white as they come; its category drawing if
 // it has none or it cannot load. Takes the classes of a CategoryArt
