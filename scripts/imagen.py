@@ -129,7 +129,7 @@ def generar_gemini(key, texto, imagenes):
     entrada = [{'type': 'text', 'text': texto}]
     entrada += [{'type': 'image', 'mime_type': 'image/png', 'data': base64.b64encode(b).decode()} for b in imagenes]
     body = {'model': GEMINI_MODEL, 'input': entrada, 'store': False,
-            'response_format': {'type': 'image', 'aspect_ratio': '1:1', 'image_size': '1K', 'mime_type': 'image/png'}}
+            'response_format': {'type': 'image', 'aspect_ratio': '1:1', 'image_size': '1K', 'mime_type': 'image/jpeg'}}
     res = requests.post(GEMINI_URL, json=body, headers={'x-goog-api-key': key}, timeout=300)
     if not res.ok:
         sys.exit(f'Gemini respondio {res.status_code}: {res.text[:800]}')
