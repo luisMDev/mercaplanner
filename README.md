@@ -56,6 +56,10 @@ El `recetas.json` actual es de ejemplo (18 oct 2026): una sola receta, causa lim
 - Pestaña Productos probada el 18 oct 2026 en Chromium a 360, 375 y 768 px, en claro y oscuro (busqueda, filtro, orden y "Ver más"), sin errores ni scroll lateral.
 - Probado el 16 oct 2026 en Chromium a 375 px, servido por HTTP y como fichero (eligiendo el JSON a mano), en claro y oscuro: sin errores ni scroll lateral.
 
+## Artifact
+
+Publicado como Claude Artifact privado en https://claude.ai/artifact/DL15iPmJeDDpadwV4TQK1U (version 1, 19 oct 2026): el propio `index.html` con `recetas.json` y `productos.json` al lado en `files`, que la pagina lee con `fetch` igual que servida por HTTP. Para actualizarlo, volver a publicar `index.html` con esos dos ficheros en el mismo artifact.
+
 ## Next steps
 
 - Sustituir `recetas.json` por las recetas y el plan reales.
