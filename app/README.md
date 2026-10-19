@@ -38,11 +38,12 @@ src/
 ├── app/                      Rutas de Next.js: layout (fuentes, tema), página y estilos globales
 │   ├── fonts/                Jost, Newsreader, Playfair Display (cursiva) y Great Vibes en woff2
 │   └── globals.css           Tokens de shadcn con la paleta cozy (claro y noche) y utilidades
-├── assets/tienda.webp        La tienda de Mercadona, sin el cielo para fundirse con el papel
+├── assets/                   La tienda de Mercadona (fondo transparente) y su mapa de profundidad
 ├── components/
 │   ├── ui/                   Componentes de shadcn/ui, generados con la CLI
 │   ├── cozy/                 Piezas del estilo: panel, botón grande, etiqueta, contador, entrada con
-│   │                         fecha, cinta adhesiva, logo del tomate, título manuscrito y la tienda
+│   │   │                     fecha, cinta adhesiva, logo del tomate y título manuscrito
+│   │   └── store/            La tienda: dibujo plano y su versión 3D con three.js (relieve y material)
 │   └── shared/               Buscador, aviso, selector de JSON, textos de recuento y vacío
 ├── features/
 │   ├── shell/                Armazón: rutas por hash con transiciones, cabecera, menús (lateral,
@@ -74,3 +75,4 @@ Reglas que sigue el código:
 - **Cesta**: los gramos de una receta son para todas sus raciones; cada comida del plan cuenta como una ración. Los envases se calculan con la cantidad neta del producto (un ml cuenta como un gramo) y, si no la tiene, uno. Se guarda en `localStorage` (`dieta-cesta`).
 - **Cargar JSON**: «Probar otro recetas.json» en los ajustes carga otro plan para probarlo; dura hasta recargar la página. Si `productos.json` no se puede descargar, las vistas que lo usan permiten elegirlo a mano.
 - Se guarda en `localStorage` el tema (`dieta-theme`), con la misma clave que `index.html`.
+- **Tienda en 3D**: con ratón, la tienda se dibuja con three.js (React Three Fiber) sobre un plano con relieve: cada punto se adelanta según `assets/tienda-profundidad.webp` y el plano se inclina un poco siguiendo el ratón. El mapa de profundidad se sacó de la ilustración con Depth Anything V2. En el móvil, sin WebGL o con «reducir movimiento» se queda el dibujo plano; three.js solo se descarga donde se usa.

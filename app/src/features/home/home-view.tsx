@@ -1,6 +1,6 @@
 "use client";
 
-import { StoreIllustration } from "@/components/cozy/store-illustration";
+import { StoreIllustration } from "@/components/cozy/store/store-illustration";
 import type { Plan } from "@/features/plan/model/types";
 import { SideMenu } from "@/features/shell/nav/side-menu";
 import { HomeIntro } from "./home-intro";

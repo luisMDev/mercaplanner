@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { BackLink } from "@/components/cozy/back-link";
 import { ScriptHeading, Squiggle } from "@/components/cozy/script-heading";
-import { StoreIllustration } from "@/components/cozy/store-illustration";
+import { StoreIllustration } from "@/components/cozy/store/store-illustration";
 import { cn } from "@/lib/utils";
 import { navigate } from "./use-route";
 

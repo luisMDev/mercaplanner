@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { StoreIllustration } from "@/components/cozy/store-illustration";
+import { StoreIllustration } from "@/components/cozy/store/store-illustration";
 import type { Plan } from "@/features/plan/model/types";
 import { useNow } from "@/hooks/use-now";
 import { DayTicket } from "./components/day-ticket";
