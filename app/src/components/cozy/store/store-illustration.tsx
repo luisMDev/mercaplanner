@@ -3,12 +3,12 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import fondo from "@/assets/fondo.webp";
 import tienda from "@/assets/tienda.webp";
 import { cn } from "@/lib/utils";
 import { STORE_BOTTOM, STORE_SCALE } from "./layout";
+import { ParkLayer } from "./park-layer";
 
-// Fades the park's straight edges into the paper, when it is behind the store
+// Fades the park's straight edges into the paper, when it stays in the frame
 const PARK_EDGES =
   "[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent),linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)] [mask-composite:intersect]";
 
@@ -57,14 +57,15 @@ const PETALS = [
 // once loaded
 export function StoreIllustration({
   here = false,
-  park = true,
+  park = "frame",
   preload = false,
   className,
 }: {
   // "estás aquí" with an arrow, when the store is small next to a panel
   here?: boolean;
-  // The park behind the store; off in Inicio, where it is the page's backdrop
-  park?: boolean;
+  // The park behind the store: inside the frame (and in the 3D scene), or as
+  // a backdrop that overflows it behind the page's panels (Inicio)
+  park?: "frame" | "backdrop";
   preload?: boolean;
   className?: string;
 }) {
@@ -91,22 +92,14 @@ export function StoreIllustration({
         <span key={p} aria-hidden="true" className={cn("absolute rounded-[60%_10%] animate-float", p)} />
       ))}
       <div
-        className={cn("relative dark:brightness-[.82] dark:saturate-[.9]", park && PARK_EDGES)}
+        className={cn("relative dark:brightness-[.82] dark:saturate-[.9]", park === "frame" && PARK_EDGES)}
         style={{ aspectRatio: tienda.width / tienda.height }}
       >
-        {/* The park behind the store; in 3D it is a layer further back */}
-        {park && (
-          <Image
-            src={fondo}
-            alt=""
-            loading="eager"
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className={cn(
-              "absolute inset-0 size-full object-cover select-none transition-opacity duration-500",
-              ready && "opacity-0",
-            )}
-            draggable={false}
-          />
+        {/* In the frame, the 3D scene draws the park itself once loaded */}
+        {park === "frame" ? (
+          <ParkLayer className={cn("transition-opacity duration-500", ready && "opacity-0")} />
+        ) : (
+          <ParkLayer drift />
         )}
         <Image
           src={tienda}
@@ -125,7 +118,7 @@ export function StoreIllustration({
         {show3d && (
           // 4% over each side: OVERFLOW in store-scene.tsx
           <div className={cn("absolute -inset-[4%] opacity-0 transition-opacity duration-500", ready && "opacity-100")}>
-            <StoreScene park={park} onReady={onReady} />
+            <StoreScene park={park === "frame"} onReady={onReady} />
           </div>
         )}
       </div>

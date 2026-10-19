@@ -6,7 +6,7 @@ import { TextureLoader, type Group } from "three";
 import fondo from "@/assets/fondo.webp";
 import depthMap from "@/assets/tienda-profundidad.webp";
 import tienda from "@/assets/tienda.webp";
-import { STORE_BOTTOM, STORE_SCALE } from "./layout";
+import { PARK_HEIGHT, STORE_CENTER, STORE_SCALE } from "./layout";
 import { reliefMaterial } from "./relief-material";
 import { usePointerX } from "./use-pointer-x";
 
@@ -21,13 +21,14 @@ const FOV = 25;
 // the tilted corners are not cut; the plane shrinks back to the drawing's size
 const OVERFLOW = 1.08;
 // Centre of the store, from the middle of a frame one unit high
-const STORE_Y = -0.5 + STORE_BOTTOM + STORE_SCALE / 2;
+const STORE_Y = STORE_CENTER - 0.5;
 // Distance at which a plane one unit high fills the canvas height
 const DISTANCE = 0.5 / Math.tan(((FOV / 2) * Math.PI) / 180);
 // The park behind the store: this far back, so turning the scene slides it
-// the other way (parallax), and big enough to fill the canvas while it moves
+// the other way (parallax). Sized and placed to look, from the camera, like
+// the flat park (layout.ts): a bit taller than the store and centred on it
 const BG_DEPTH = 0.9;
-const BG_HEIGHT = ((DISTANCE + BG_DEPTH) / DISTANCE) * 1.15;
+const BG_FAR = (DISTANCE + BG_DEPTH) / DISTANCE;
 
 type SceneProps = {
   // The park behind the store; off where the page has it as a backdrop
@@ -56,7 +57,7 @@ function Scene({ park: showPark, onReady }: SceneProps) {
   return (
     <group ref={group}>
       {showPark && (
-        <mesh position={[0, 0, -BG_DEPTH]} scale={BG_HEIGHT}>
+        <mesh position={[0, (STORE_Y * BG_FAR) / OVERFLOW, -BG_DEPTH]} scale={(PARK_HEIGHT * BG_FAR) / OVERFLOW}>
           <planeGeometry args={[fondo.width / fondo.height, 1]} />
           <meshBasicMaterial map={park} transparent depthWrite={false} />
         </mesh>
