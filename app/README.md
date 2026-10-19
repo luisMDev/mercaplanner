@@ -1,8 +1,8 @@
-# Plan de dieta · app en Next.js
+# Mercaplanner · app en Next.js
 
-La misma app que `../index.html` (pestañas Hoy, Recetas, Semana y Productos), rehecha con Next.js 16 (App Router), React 19, Tailwind CSS 4 y componentes de [shadcn/ui](https://ui.shadcn.com) (estilo Nova sobre Radix, iconos Lucide).
+La app de dieta con estilo *cozy*: papel crema, títulos manuscritos, rojo tomate y verde Mercadona, y en el centro una ilustración de una tienda de Mercadona. Hecha con Next.js 16 (App Router), React 19, Tailwind CSS 4 y componentes de [shadcn/ui](https://ui.shadcn.com) (Radix, iconos Lucide).
 
-Lee los mismos datos que la app original, sin copiarlos: `../recetas.json` se importa en el build y `../productos.json` sale como fichero estático (con hash en el nombre) que se descarga la primera vez que se abre Productos. Se siguen editando con `scripts/receta.py` y `scripts/build-productos.py`.
+Lee los datos de la raíz del repositorio, sin copiarlos: `../recetas.json` se importa en el build y `../productos.json` sale como fichero estático (con hash en el nombre) que se descarga la primera vez que una vista lo necesita. Se siguen editando con `scripts/receta.py` y `scripts/build-productos.py`.
 
 ## Comandos
 
@@ -16,27 +16,45 @@ npm start        # sirve el build en http://localhost:3000
 npm run lint
 ```
 
+## Secciones
+
+La sección abierta va en el hash de la URL (`#/recetas/causa-limena`), así que el botón atrás del navegador cierra el panel abierto.
+
+- **Inicio** (`#/`): menú a la izquierda con la próxima comida en una nota, alineados abajo con el pie de la tienda, la tienda en el centro y a la derecha el banner «La dieta de la semana», el panel de recetas y el de productos del plan.
+- **Hoy**: las comidas de hoy en orden, con kcal y macros del día; las pasadas salen marcadas y la siguiente, destacada. Debajo, lo de mañana.
+- **Recetas**: buscador, filtro por comida y tarjetas con un plato dibujado (los colores salen de los ingredientes). El panel de una receta trae kcal, macros, raciones (los gramos se ajustan), «Añadir a la cesta», ingredientes enlazados a Mercadona, pasos, notas y una tira con las demás.
+- **Productos**: los 2.966 alimentos de Mercadona con buscador, categoría y orden. El panel de un producto trae precio, valores por 100 g, «Añadir a la cesta», las recetas que lo usan y más de su sección.
+- **Semana**: calendario del mes (el plan se repite cada semana) y, al lado, el día elegido como una entrada con sus comidas.
+- **Cesta**: la compra de la semana. Suma lo que piden las comidas del plan (una ración por comida) más lo añadido a mano, en envases de Mercadona y agrupado por pasillo, con el total estimado. Se marca al comprar.
+
+La cabecera se queda fija arriba. En el móvil las secciones van en una barra fija abajo; en pantallas anchas, en la cabecera. Al cambiar de sección hay una transición de vista (View Transitions del navegador): la tienda se encoge y se va a la izquierda, y el panel entra desde el lateral. Los ajustes (tema claro, que es el de por defecto, oscuro o automático y «Probar otro recetas.json») están en el engranaje de la cabecera.
+
 ## Estructura
 
-Organizada por funcionalidad: cada carpeta de `features/` tiene su lógica y sus componentes, y la lógica pura (sin React) va en `model/` para poder probarla y reutilizarla sin la interfaz.
+Organizada por funcionalidad: cada carpeta de `features/` tiene su vista, sus componentes y, en `model/`, la lógica pura (sin React).
 
 ```
 src/
 ├── app/                      Rutas de Next.js: layout (fuentes, tema), página y estilos globales
-│   ├── fonts/                Newsreader y Figtree en woff2 (las mismas que llevaba index.html)
-│   ├── globals.css           Tokens de shadcn con la paleta de la app (claro y oscuro)
-│   ├── layout.tsx
-│   └── page.tsx              Título y <DietApp />
+│   ├── fonts/                Jost, Newsreader, Playfair Display (cursiva) y Great Vibes en woff2
+│   └── globals.css           Tokens de shadcn con la paleta cozy (claro y noche) y utilidades
+├── assets/                   La tienda de Mercadona (fondo transparente), el parque de fondo y el mapa de profundidad de cada uno
 ├── components/
 │   ├── ui/                   Componentes de shadcn/ui, generados con la CLI
-│   └── shared/               Piezas propias reutilizables: timeline, buscador, aviso, selector de JSON…
+│   ├── cozy/                 Piezas del estilo: panel, botón grande, etiqueta, contador, entrada con
+│   │   │                     fecha, cinta adhesiva, logo del tomate y título manuscrito
+│   │   └── store/            La tienda: una sola para toda la app (escenario y huecos), dibujo plano y 3D con three.js
+│   └── shared/               Buscador, aviso, selector de JSON, textos de recuento y vacío
 ├── features/
-│   ├── app-shell/            Armazón: pestañas fijas, navegación entre pestañas, pie y esqueleto de carga
-│   ├── plan/                 recetas.json: tipos, parseo y cálculos (model/), timeline del día y caja de receta
-│   ├── today/                Pestaña Hoy
-│   ├── recipes/              Pestaña Recetas
-│   ├── week/                 Pestaña Semana
-│   ├── products/             Pestaña Productos: modelo (carga, filtros, formato) y componentes
+│   ├── shell/                Armazón: rutas por hash con transiciones, cabecera, menús (lateral,
+│   │                         superior, inferior) y la maqueta de las secciones (título a la izquierda, panel a la derecha)
+│   ├── home/                 Inicio: título, nota de la próxima comida, banner y paneles
+│   ├── plan/                 recetas.json: tipos, parseo y cálculos (model/), dibujo del plato y macros
+│   ├── today/                Hoy
+│   ├── recipes/              Recetas: catálogo y panel de una receta
+│   ├── products/             Productos: catálogo compartido (contexto), modelo y componentes
+│   ├── week/                 Semana: calendario del mes y el día elegido
+│   ├── basket/               Cesta: modelo de la compra y estado guardado en el dispositivo
 │   └── theme/                Tema automático, claro u oscuro
 ├── hooks/                    useMounted (solo en el navegador) y useNow (hora actual, cada minuto)
 └── lib/                      Utilidades: formato de números, localStorage y cn()
@@ -44,15 +62,20 @@ src/
 
 Reglas que sigue el código:
 
-- `model/` no importa React: funciones puras sobre los datos (`dayMeals`, `filterProducts`…).
-- Una feature puede usar `plan/`, `components/` y `lib/`; solo `app-shell/` junta las pestañas.
+- `model/` no importa React: funciones puras sobre los datos (`dayMeals`, `basketLines`, `monthWeeks`…).
+- Una feature puede usar `plan/`, `products/`, `components/` y `lib/`; solo `shell/` junta las secciones.
 - Ficheros cortos, un componente principal por fichero.
 - Los componentes de `components/ui/` no se editan a mano: se personalizan con `className` donde se usan. Para añadir otro: `npx shadcn@latest add <componente>`.
 
 ## Detalles
 
-- **Fecha y localStorage**: lo que depende del dispositivo (el día de hoy, la pestaña abierta, el tema) se pinta en el navegador; la página prerenderizada enseña un esqueleto mientras tanto. El tema se aplica con un script en `<head>` antes del primer pintado, sin parpadeo.
+- **Fecha y localStorage**: lo que depende del dispositivo (el día de hoy, la sección abierta, la cesta, el tema) se pinta en el navegador; la página prerenderizada enseña un esqueleto mientras tanto. El tema se aplica con un script en `<head>` antes del primer pintado, sin parpadeo.
 - **Colores por comida**: cada `id` de `comidas` tiene su color en `features/plan/model/meals.ts`; uno nuevo sale en gris hasta que se añada ahí.
-- **Fotos de los productos**: `public/imagenes` es un enlace simbólico a `../imagenes` de la raíz, así que Next sirve las fotos en `/imagenes/productos/...` sin copiarlas. Ya van reducidas y en WebP, así que `next/image` las sirve tal cual (`unoptimized`). Si una no carga, la tarjeta sale sin ella.
-- **Cargar JSON**: el botón del pie carga otro `recetas.json` para probarlo; dura hasta recargar la página. Si `productos.json` no se puede descargar, la pestaña Productos permite elegirlo a mano.
-- Se guarda en `localStorage` la pestaña abierta (`dieta-view`) y el tema (`dieta-theme`), con las mismas claves que `index.html`.
+- **Platos dibujados**: si la receta tiene `imagen`, sale su acuarela de `../imagenes/` (`features/plan/model/recipe-images.ts` las importa todas en el build con `import.meta.glob`). Si no, `features/plan/model/dish-colors.ts` elige los colores del plato por palabras de los ingredientes (patata, atún, aguacate…), y los desayunos y meriendas salen en bol.
+- **Fotos de los productos**: `public/imagenes` es un enlace simbólico a `../imagenes` de la raíz, así que Next sirve las fotos de `imagenes/productos/` en `/imagenes/productos/...` sin copiarlas ni meterlas en el build. Ya van reducidas y en WebP, así que `next/image` las sirve tal cual (`unoptimized`). `features/products/components/product-photo.tsx` enseña la foto del producto y, si no tiene o no carga, el dibujo de su categoría.
+- **Cesta**: los gramos de una receta son para todas sus raciones; cada comida del plan cuenta como una ración. Los envases se calculan con la cantidad neta del producto (un ml cuenta como un gramo) y, si no la tiene, uno. Se guarda en `localStorage` (`dieta-cesta`).
+- **Cargar JSON**: «Probar otro recetas.json» en los ajustes carga otro plan para probarlo; dura hasta recargar la página. Si `productos.json` no se puede descargar, las vistas que lo usan permiten elegirlo a mano.
+- Se guarda en `localStorage` el tema (`dieta-theme`).
+- **Tienda en 3D**: con ratón, la tienda se dibuja con three.js (React Three Fiber) sobre un plano con relieve: cada punto se adelanta según `assets/tienda-profundidad.webp` y el plano gira un poco a los lados siguiendo el ratón (solo en horizontal). Detrás, más lejos y más grande, va el parque (`assets/fondo.webp`): al girar se desliza al revés que la tienda (parallax). El parque mide lo que la tienda y un 20 % más de alto, centrado detrás de ella y entero (contain); las medidas están en `store/layout.ts`. El parque también tiene relieve con su propio mapa (`assets/fondo-profundidad.webp`). En Inicio sobresale por los lados, por detrás del menú y los paneles: ahí el lienzo 3D se ensancha para contenerlo. Las dos capas siguen al ratón despacio, sin flotar. El mapa de profundidad se sacó de la ilustración con Depth Anything V2. En el móvil, sin WebGL o con «reducir movimiento» se queda el dibujo plano; three.js solo se descarga donde se usa.
+- **Una sola tienda**: `store/store-stage.tsx` monta la tienda una vez para toda la app y no la desmonta nunca, así la escena 3D se carga una sola vez. Cada página deja un hueco (`StoreSlot`) donde va la tienda, y esta se coloca encima de ese hueco. Al cambiar de sección, la transición de vista mueve esa misma tienda a su nuevo hueco.
+- **Hojas al viento**: en la escena 3D caen hojas pequeñas (`store/falling-leaves.tsx`) que giran sobre sí mismas, se mecen con una brisa muy leve hacia la derecha y se desvanecen antes de llegar al suelo; van en el mismo grupo que la tienda y el parque, así que se inclinan con ellos al mover el ratón.

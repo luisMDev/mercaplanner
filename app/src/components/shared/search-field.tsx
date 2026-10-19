@@ -13,7 +13,7 @@ export function SearchField({
   placeholder: string;
 }) {
   return (
-    <InputGroup className="h-11 rounded-full bg-card shadow-card dark:bg-card">
+    <InputGroup className="h-11 rounded-full border-border bg-background/70 dark:bg-background/40">
       <InputGroupAddon className="pl-4">
         <SearchIcon className="text-faint" />
       </InputGroupAddon>
@@ -23,7 +23,7 @@ export function SearchField({
         placeholder={placeholder}
         aria-label={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="text-[0.92rem] placeholder:text-faint [&::-webkit-search-cancel-button]:appearance-none"
+        className="font-serif text-[1rem] placeholder:text-faint [&::-webkit-search-cancel-button]:appearance-none"
       />
       {value && (
         <InputGroupAddon align="inline-end" className="pr-3">

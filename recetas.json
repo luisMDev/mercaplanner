@@ -107,52 +107,142 @@
         "Montar en un aro o en vasos: una capa de puré de patata, otra de atún, otra de aguacate y otra de patata encima. Apretar un poco cada capa.",
         "Enfriar al menos 15 minutos, coronar con el tomate y decorar con el resto del cilantro y la hierbabuena antes de servir."
       ],
-      "notas": "Las kcal y los macros por ración se calculan con los productos enlazados (sin la pasta de ají, que no está en Mercadona). La patata cocida de bote sustituye a la papa amarilla de la receta peruana."
+      "notas": "Las kcal y los macros por ración se calculan con los productos enlazados (sin la pasta de ají, que no está en Mercadona). La patata cocida de bote sustituye a la papa amarilla de la receta peruana.",
+      "imagen": "imagenes/causa-limena.png"
     },
     {
-      "id": "hamburguesa-cordero-batata",
-      "nombre": "Hamburguesa de cordero al romero con batata",
+      "id": "burger-cordero-salteado-rustico",
+      "nombre": "Burger de cordero al romero y salteado rústico",
       "tipos": [
         "comida",
         "cena"
       ],
-      "descripcion": "Hamburguesas de cordero a la plancha con batata hecha en el microondas en su propia bolsa.",
+      "descripcion": "Burgers de cordero al romero a la plancha con salteado rústico congelado hecho en la air fryer.",
       "minutos": 15,
       "raciones": 2,
-      "kcal": 372,
-      "macros": {
-        "proteinas": 27,
-        "carbohidratos": 25,
-        "grasas": 18
-      },
       "ingredientes": [
         {
-          "texto": "1 paquete de hamburguesas de cordero al romero (2 unidades, 240 g)",
+          "texto": "1 paquete de burgers de cordero al romero (2 unidades, 240 g)",
           "producto": "8839",
           "gramos": 240,
           "producto_nombre": "Hamburguesa de cordero al romero"
         },
         {
-          "texto": "1 paquete de batatas para microondas (400 g)",
-          "producto": "69465",
-          "gramos": 400,
-          "producto_nombre": "Batatas para microondas"
+          "texto": "1 bolsa de salteado rústico ultracongelado (450 g)",
+          "producto": "21537",
+          "gramos": 450,
+          "producto_nombre": "Salteado rústico Hacendado ultracongelado"
         },
         {
-          "texto": "1 cucharada de aceite de oliva virgen extra (unos 10 g)",
-          "producto": "4740",
-          "gramos": 10,
+          "texto": "Unas pulverizaciones de aceite de oliva virgen extra en spray (unos 4 g)",
+          "producto": "4718",
+          "gramos": 4,
           "producto_nombre": "Aceite de oliva virgen extra Hacendado"
         },
-        "Sal, pimienta y una pizca de pimentón (opcional)"
+        "Sal y pimienta"
       ],
       "pasos": [
-        "Hacer las batatas en el microondas en su bolsa, siguiendo el tiempo del paquete (unos 8 minutos).",
-        "Mientras, calentar una sartén o plancha con unas gotas del aceite y hacer las hamburguesas 3-4 minutos por cada lado, hasta que estén hechas por dentro.",
-        "Abrir las batatas, cortarlas por la mitad o en rodajas y aliñarlas con el resto del aceite, sal, pimienta y el pimentón.",
-        "Servir cada hamburguesa con la mitad de las batatas."
+        "Precalentar la air fryer a 200 °C. Echar el salteado rústico congelado en la cesta, sin descongelar, pulverizarlo con el aceite y hacerlo 12 minutos, removiendo la cesta a mitad.",
+        "Mientras, calentar bien una plancha o sartén y hacer las burgers 6 minutos en total, 3 por cada lado, hasta que estén hechas por dentro.",
+        "Salpimentar y servir cada burger con la mitad del salteado."
       ],
-      "notas": "Las kcal y los macros por ración se calculan con los productos enlazados. La carne de cordero tiene que quedar bien hecha por dentro."
+      "notas": "La carne de cordero tiene que quedar bien hecha por dentro. Las burgers llevan su propia grasa, así que no hace falta aceite en la plancha.",
+      "kcal": 401,
+      "macros": {
+        "proteinas": 27,
+        "carbohidratos": 34,
+        "grasas": 15
+      }
+    },
+    {
+      "id": "arroz-marinera-alioli",
+      "nombre": "Arroz a la marinera con alioli",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Bolsa de arroz a la marinera ultracongelado hecho en la sartén, servido con un sobre de alioli.",
+      "minutos": 10,
+      "raciones": 1,
+      "ingredientes": [
+        {
+          "texto": "1 bolsa de arroz a la marinera ultracongelado (350 g)",
+          "producto": "12782",
+          "gramos": 350,
+          "producto_nombre": "Arroz marinera Hacendado ultracongelado"
+        },
+        {
+          "texto": "1 sobre de alioli (unos 20 g)",
+          "producto": "7973",
+          "gramos": 20,
+          "producto_nombre": "Alioli con perejil Hacendado"
+        }
+      ],
+      "pasos": [
+        "Echar el arroz congelado, sin descongelar, en una sartén a fuego medio-alto con un chorrito de agua (unos 50 ml).",
+        "Taparlo y cocinarlo 8-10 minutos, removiendo de vez en cuando, hasta que esté caliente y sin líquido.",
+        "Servir con el alioli por encima."
+      ],
+      "notas": "Mercadona no vende alioli en sobres: las kcal cuentan 20 g del alioli con perejil Hacendado en bote, que es lo que suele traer un sobre. También se puede hacer en el microondas siguiendo el envase.",
+      "kcal": 532,
+      "macros": {
+        "proteinas": 15,
+        "carbohidratos": 60,
+        "grasas": 26
+      },
+      "imagen": "imagenes/arroz-marinera-alioli.png"
+    },
+    {
+      "id": "kebab-patatas-asadas-salsa-yogur",
+      "nombre": "Carne de kebab con patatas asadas y salsa de yogur",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Relleno de kebab de pollo con patatas cocidas de bote troceadas y doradas en la air fryer, con salsa de yogur por encima.",
+      "minutos": 20,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "1 paquete de relleno para kebab de pollo ultracongelado (300 g)",
+          "producto": "13778",
+          "gramos": 300,
+          "producto_nombre": "Relleno para kebab con carne de pollo asado Hacendado ultracongelado"
+        },
+        {
+          "texto": "1 tarro de patatas cocidas, escurridas y troceadas (unos 400 g)",
+          "producto": "15534",
+          "gramos": 400,
+          "producto_nombre": "Patatas cocidas Hacendado"
+        },
+        {
+          "texto": "Unas pulverizaciones de aceite de oliva virgen extra en spray (unos 4 g)",
+          "producto": "4718",
+          "gramos": 4,
+          "producto_nombre": "Aceite de oliva virgen extra Hacendado"
+        },
+        {
+          "texto": "4 cucharadas de salsa de yogur (unos 40 g)",
+          "producto": "17327",
+          "gramos": 40,
+          "producto_nombre": "Salsa Yogur Hacendado"
+        },
+        "Sal, pimentón y comino"
+      ],
+      "pasos": [
+        "Precalentar la air fryer a 200 °C. Escurrir las patatas, secarlas con papel y cortarlas en dados grandes.",
+        "Ponerlas en la cesta, pulverizarlas con el aceite, salpimentar con pimentón y comino y hacerlas 12-15 minutos, removiendo a mitad, hasta que estén doradas.",
+        "Mientras, hacer la carne de kebab congelada en una sartén caliente sin aceite 5-6 minutos, removiendo, hasta que esté bien caliente y algo tostada (o los últimos 5 minutos en la air fryer junto a las patatas).",
+        "Servir las patatas con la carne encima y la salsa de yogur por encima."
+      ],
+      "notas": "La salsa de yogur de bote es muy grasa (unas 25 kcal por cucharada); si quieres aligerar, mezcla mitad salsa y mitad yogur griego ligero. El tarro de patatas cocidas pesa 660 g; escurridas salen unos 400 g.",
+      "kcal": 460,
+      "macros": {
+        "proteinas": 36,
+        "carbohidratos": 28,
+        "grasas": 22
+      },
+      "imagen": "imagenes/kebab-patatas-asadas-salsa-yogur.png"
     }
   ],
   "semana": {

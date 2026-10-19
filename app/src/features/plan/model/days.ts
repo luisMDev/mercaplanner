@@ -11,8 +11,6 @@ export const DIAS = [
 
 export type Dia = (typeof DIAS)[number];
 
-export const MONTHS_SHORT = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
-
 // Monday-first index into DIAS of the device's local date
 export function todayDia(now: Date): Dia {
   return DIAS[(now.getDay() + 6) % 7];

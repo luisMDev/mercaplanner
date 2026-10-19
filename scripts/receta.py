@@ -12,7 +12,8 @@
 
   python3 scripts/receta.py validar
       Checks recetas.json: required keys, unique ids, meal types and plan
-      entries that exist, product ids that exist in productos.json.
+      entries that exist, product ids that exist in productos.json, image
+      files that exist.
       Exit code 1 if anything is wrong.
 """
 import json
@@ -109,6 +110,8 @@ def validar(_args):
         for t in r.get('tipos', []):
             if t not in comidas:
                 errores.append(f"{r['id']}: tipo '{t}' no esta en comidas")
+        if r.get('imagen') and not (ROOT / r['imagen']).is_file():
+            errores.append(f"{r['id']}: imagen {r['imagen']} no existe")
         for ing in r.get('ingredientes', []):
             if isinstance(ing, dict) and ing.get('producto') and ing['producto'] not in prods:
                 errores.append(f"{r['id']}: producto {ing['producto']} no existe en productos.json")

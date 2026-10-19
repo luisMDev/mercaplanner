@@ -1,42 +1,43 @@
 import Image from "next/image";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import type { Producto } from "../model/types";
+import { CategoryArt } from "./category-art";
 
-type ProductPhotoProps = {
-  // Path in productos.json, "imagenes/productos/..."
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  className?: string;
-  // Link to the photo full size, in a new tab
-  zoom?: boolean;
-  // Shown in its place if it cannot load
-  fallback?: ReactNode;
-};
+// The photos of imagenes/productos/ (repository root) are served through the
+// public/imagenes symlink. build-imagenes.py already resized them and made
+// them WebP, so they are served as is
 
-// Photo of imagenes/productos/ (repository root, served through the
-// public/imagenes symlink). build-imagenes.py already resized it and made it
-// WebP, so it is served as is. The photos come on white, so they keep it in
-// the dark theme too
-export function ProductPhoto({ src, alt, className, zoom, fallback = null, ...props }: ProductPhotoProps) {
+// Front photo of the product, on white as they come; its category drawing if
+// it has none or it cannot load. Takes the classes of a CategoryArt
+export function ProductPhoto({ p, className }: { p: Producto; className?: string }) {
   const [failed, setFailed] = useState(false);
-  if (failed) return fallback;
-  const img = (
-    <Image
-      src={"/" + src}
-      alt={alt}
-      unoptimized
-      className={cn("rounded-lg bg-white ring-1 ring-border", className)}
-      onError={() => setFailed(true)}
-      {...props}
-    />
+  if (!p.imagen || failed) return <CategoryArt categoria={p.categoria} className={className} />;
+  return (
+    <div className={cn("relative aspect-square overflow-hidden rounded-2xl bg-white", className)}>
+      <Image src={"/" + p.imagen} alt="" fill unoptimized className="object-contain p-[6%]" onError={() => setFailed(true)} />
+    </div>
   );
-  return zoom ? (
-    <a href={"/" + src} target="_blank" rel="noopener">
-      {img}
+}
+
+// Back of the pack with the nutrition facts, a link to it full size to zoom
+// in on the table
+export function ProductLabel({ p }: { p: Producto }) {
+  const [failed, setFailed] = useState(false);
+  if (!p.imagen_etiqueta || failed) {
+    return <p className="text-[0.9rem] text-muted-foreground">No se ha podido cargar la foto de la etiqueta.</p>;
+  }
+  return (
+    <a href={"/" + p.imagen_etiqueta} target="_blank" rel="noopener" className="block">
+      <Image
+        src={"/" + p.imagen_etiqueta}
+        alt={"Etiqueta de " + p.nombre}
+        width={900}
+        height={900}
+        unoptimized
+        className="h-auto w-full rounded-2xl bg-white ring-1 ring-border"
+        onError={() => setFailed(true)}
+      />
     </a>
-  ) : (
-    img
   );
 }
