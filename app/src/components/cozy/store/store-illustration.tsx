@@ -8,10 +8,6 @@ import { cn } from "@/lib/utils";
 import { STORE_BOTTOM, STORE_SCALE } from "./layout";
 import { ParkLayer } from "./park-layer";
 
-// Fades the park's straight edges into the paper, when it stays in the frame
-const PARK_EDGES =
-  "[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent),linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)] [mask-composite:intersect]";
-
 // three.js only downloads where the 3D store is shown
 const StoreScene = dynamic(() => import("./store-scene"), { ssr: false });
 
@@ -57,15 +53,11 @@ const PETALS = [
 // once loaded
 export function StoreIllustration({
   here = false,
-  park = "frame",
   preload = false,
   className,
 }: {
   // "estás aquí" with an arrow, when the store is small next to a panel
   here?: boolean;
-  // The park behind the store: clipped to the frame, or as a backdrop that
-  // overflows it behind the page's panels (Inicio)
-  park?: "frame" | "backdrop";
   preload?: boolean;
   className?: string;
 }) {
@@ -92,7 +84,7 @@ export function StoreIllustration({
         <span key={p} aria-hidden="true" className={cn("absolute rounded-[60%_10%] animate-float", p)} />
       ))}
       <div
-        className={cn("relative dark:brightness-[.82] dark:saturate-[.9]", park === "frame" && PARK_EDGES)}
+        className="relative dark:brightness-[.82] dark:saturate-[.9]"
         style={{ aspectRatio: tienda.width / tienda.height }}
       >
         {/* Flat park until the 3D scene, which draws it with relief, is ready */}
@@ -112,12 +104,11 @@ export function StoreIllustration({
           draggable={false}
         />
         {show3d && (
-          // 4% over each side (OVERFLOW in store-scene.tsx); as a backdrop it
-          // widens to hold the whole park, behind the page's panels
+          // Room for the whole park and for the store over the frame (OVERFLOW in
+          // store-scene.tsx); the park spreads behind the page's panels
           <div
             className={cn(
-              "pointer-events-none absolute -inset-y-[4%] opacity-0 transition-opacity duration-500",
-              park === "frame" ? "-inset-x-[4%]" : "-inset-x-[40%]",
+              "pointer-events-none absolute -inset-x-[40%] -inset-y-[12%] opacity-0 transition-opacity duration-500",
               ready && "opacity-100",
             )}
           >

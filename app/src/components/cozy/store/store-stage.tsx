@@ -9,7 +9,6 @@ type Slot = {
   el: HTMLElement;
   // "estás aquí" with an arrow
   here: boolean;
-  park: "frame" | "backdrop";
 };
 
 const StageContext = createContext<(slot: Slot | null, el?: HTMLElement) => void>(() => {});
@@ -21,7 +20,7 @@ const StageContext = createContext<(slot: Slot | null, el?: HTMLElement) => void
 export function StoreStage({ children }: { children: ReactNode }) {
   const box = useRef<HTMLDivElement>(null);
   const slotRef = useRef<Slot | null>(null);
-  const [look, setLook] = useState<Omit<Slot, "el">>({ here: false, park: "backdrop" });
+  const [look, setLook] = useState<Omit<Slot, "el">>({ here: false });
 
   // Copies the slot's place and width onto the store; hidden when the page
   // has no slot or hides it (the aside on a phone)
@@ -44,7 +43,7 @@ export function StoreStage({ children }: { children: ReactNode }) {
     (slot: Slot | null, el?: HTMLElement) => {
       if (slot) {
         slotRef.current = slot;
-        setLook({ here: slot.here, park: slot.park });
+        setLook({ here: slot.here });
       } else if (slotRef.current?.el === el) {
         slotRef.current = null;
       }
@@ -64,9 +63,9 @@ export function StoreStage({ children }: { children: ReactNode }) {
   return (
     <StageContext value={register}>
       {children}
-      {/* Above the page, below the header (z-30) and the panels of Inicio (z-10) */}
+      {/* Above the page, below the header (z-30) and the panels and titles (z-10) */}
       <div ref={box} className="pointer-events-none fixed top-0 left-0 z-[5]" style={{ visibility: "hidden" }}>
-        <StoreIllustration preload here={look.here} park={look.park} className="w-full" />
+        <StoreIllustration preload here={look.here} className="w-full" />
       </div>
     </StageContext>
   );
@@ -74,24 +73,16 @@ export function StoreStage({ children }: { children: ReactNode }) {
 
 // The place a page keeps for the store: an empty box of the store's
 // proportions, sized with className like the store used to be
-export function StoreSlot({
-  here = false,
-  park = "frame",
-  className,
-}: {
-  here?: boolean;
-  park?: "frame" | "backdrop";
-  className?: string;
-}) {
+export function StoreSlot({ here = false, className }: { here?: boolean; className?: string }) {
   const el = useRef<HTMLDivElement>(null);
   const register = use(StageContext);
 
   useLayoutEffect(() => {
     const node = el.current;
     if (!node) return;
-    register({ el: node, here, park });
+    register({ el: node, here });
     return () => register(null, node);
-  }, [register, here, park]);
+  }, [register, here]);
 
   return (
     <div ref={el} aria-hidden="true" className={className} style={{ aspectRatio: tienda.width / tienda.height }} />

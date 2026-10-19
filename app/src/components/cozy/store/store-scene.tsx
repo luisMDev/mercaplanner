@@ -21,9 +21,10 @@ const EASE = 0.02;
 // Only sideways: moving the mouse up and down does not tilt it
 const TILT = 0.21;
 const FOV = 25;
-// The canvas overflows the drawing by this much (store-illustration.tsx), so
-// the tilted corners are not cut; the plane shrinks back to the drawing's size
-const OVERFLOW = 1.08;
+// The canvas is this much taller than the frame (12% over and under it,
+// store-illustration.tsx), so the store reaching over the frame and the
+// tilted corners are not cut; the planes shrink back to the frame's scale
+const OVERFLOW = 1.24;
 // Centre of the store, from the middle of a frame one unit high
 const STORE_Y = STORE_CENTER - 0.5;
 // Distance at which a plane one unit high fills the canvas height

@@ -20,14 +20,19 @@ export function PageLayout({
 }) {
   return (
     <div className="grid gap-6 pt-2 lg:grid-cols-[minmax(240px,300px)_minmax(0,1fr)] lg:gap-10 lg:pt-8">
-      <aside className={cn("flex flex-col items-start gap-3 lg:sticky lg:top-28 lg:self-start", detail && "max-lg:hidden")}>
+      <aside
+        className={cn(
+          "relative z-10 flex flex-col items-start gap-3 lg:sticky lg:top-28 lg:self-start",
+          detail && "max-lg:hidden",
+        )}
+      >
         <BackLink onClick={() => navigate({ section: "inicio" })}>Volver a la tienda</BackLink>
         <ScriptHeading className="mt-1 text-[clamp(3.2rem,2.6rem+2.4vw,4.6rem)]">{title}</ScriptHeading>
         <Squiggle className="max-lg:hidden" />
         <StoreSlot here className="mt-16 hidden w-full max-w-[300px] lg:block" />
       </aside>
-      {/* Its own layer in view transitions, over the store (globals.css) */}
-      <div className="min-w-0 [view-transition-name:panel]">{children}</div>
+      {/* Over the store and its park (z-10), also in view transitions (globals.css) */}
+      <div className="relative z-10 min-w-0 [view-transition-name:panel]">{children}</div>
     </div>
   );
 }
