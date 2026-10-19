@@ -31,7 +31,7 @@ const DISTANCE = 0.5 / Math.tan(((FOV / 2) * Math.PI) / 180);
 // The park behind the store: this far back, so turning the scene slides it
 // the other way (parallax). Sized and placed to look, from the camera, like
 // the flat park (layout.ts): a bit taller than the store, a little above it
-const BG_DEPTH = 1.2;
+const BG_DEPTH = 0.6;
 const BG_FAR = (DISTANCE + BG_DEPTH) / DISTANCE;
 
 type SceneProps = { onReady: () => void };
