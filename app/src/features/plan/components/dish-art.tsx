@@ -73,7 +73,7 @@ function Bowl({ colors, band }: { colors: string[]; band: string }) {
 function Sides() {
   return (
     <g stroke={INK} strokeWidth="2">
-      <circle cx="26" cy="118" r="15" fill="var(--primary)" />
+      <circle cx="26" cy="118" r="15" fill="var(--tomato)" />
       <path d="M20 106l6 3 6-3-3 5 5 2-6 1-2 4-2-4-6-1 5-2Z" fill="var(--green)" strokeWidth="1.4" strokeLinejoin="round" />
       <circle cx="176" cy="120" r="13" fill="#d7ec9c" />
       <circle cx="176" cy="120" r="9" fill="#b9dc6a" strokeWidth="1" />

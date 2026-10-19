@@ -5,7 +5,7 @@ import type { Macros } from "../model/types";
 const MACROS = [
   { key: "proteinas", label: "Proteínas", kcal: 4, color: "var(--primary)" },
   { key: "carbohidratos", label: "Hidratos", kcal: 4, color: "var(--gold)" },
-  { key: "grasas", label: "Grasas", kcal: 9, color: "var(--green)" },
+  { key: "grasas", label: "Grasas", kcal: 9, color: "var(--teal)" },
 ] as const;
 
 // Grams of protein, carbs and fat, each with a bar of its share of the kcal

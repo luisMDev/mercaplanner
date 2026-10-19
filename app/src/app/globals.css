@@ -30,13 +30,17 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  /* Cozy palette on top of the shadcn tokens: tomato red, Mercadona green,
-     awning gold, teal trim and plum, each with a soft tint for backgrounds */
+  /* Cozy palette on top of the shadcn tokens: the store's greens (primary for
+     highlights, sage for leaves and ticks), awning gold, teal trim, clay and
+     plum, each with a soft tint for backgrounds. Tomato is only for drawings */
   --color-faint: var(--faint);
   --color-primary-strong: var(--primary-strong);
   --color-primary-soft: var(--primary-soft);
   --color-green: var(--green);
   --color-green-soft: var(--green-soft);
+  --color-clay: var(--clay);
+  --color-clay-soft: var(--clay-soft);
+  --color-tomato: var(--tomato);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-teal: var(--teal);
@@ -64,23 +68,26 @@
   --card-foreground: #3d3029;
   --popover: #fffbf3;
   --popover-foreground: #3d3029;
-  --primary: #d6503f;
+  --primary: #237537;
   --primary-foreground: #ffffff;
-  --primary-strong: #b43b2c;
-  --primary-soft: #fbe1d8;
+  --primary-strong: #1a5a2a;
+  --primary-soft: #e2eed8;
   --secondary: #f4ebdb;
   --secondary-foreground: #3d3029;
   --muted: #f5ecdd;
   --muted-foreground: #7b6a5e;
   --faint: #a8988a;
-  --accent: #fbe1d8;
-  --accent-foreground: #b43b2c;
+  --accent: #e2eed8;
+  --accent-foreground: #1a5a2a;
   --destructive: #c4412f;
   --border: #ebdfcb;
   --input: #e3d5bf;
-  --ring: #d6503f;
-  --green: #3c7f4c;
-  --green-soft: #e2eedb;
+  --ring: #237537;
+  --green: #70a05b;
+  --green-soft: #e6f0dc;
+  --clay: #b4652c;
+  --clay-soft: #f7e8d6;
+  --tomato: #d6503f;
   --gold: #c08a22;
   --gold-soft: #f8eac4;
   --teal: #3a817c;
@@ -93,8 +100,8 @@
   --radius: 0.75rem;
   --card-shadow: 0 1px 2px rgb(110 75 40 / 0.05), 0 10px 30px -16px rgb(110 75 40 / 0.28);
   --lift-shadow: 0 2px 4px rgb(110 75 40 / 0.06), 0 18px 40px -18px rgb(110 75 40 / 0.4);
-  --paper-blush: rgb(251 214 200 / 0.55);
-  --paper-leaf: rgb(214 232 200 / 0.5);
+  --paper-glow: rgb(208 230 192 / 0.6);
+  --paper-sun: rgb(247 230 190 / 0.5);
   --grain-opacity: 0.35;
 }
 
@@ -106,23 +113,26 @@
   --card-foreground: #f3e9db;
   --popover: #2d241e;
   --popover-foreground: #f3e9db;
-  --primary: #ef7c6a;
+  --primary: #86bf70;
   --primary-foreground: #1e1814;
-  --primary-strong: #f6a090;
-  --primary-soft: #432820;
+  --primary-strong: #a6d493;
+  --primary-soft: #26341f;
   --secondary: #332923;
   --secondary-foreground: #f3e9db;
   --muted: #322822;
   --muted-foreground: #bfac99;
   --faint: #8c7b6c;
-  --accent: #432820;
-  --accent-foreground: #f6a090;
+  --accent: #26341f;
+  --accent-foreground: #a6d493;
   --destructive: #ef7c6a;
   --border: #3f332a;
   --input: #4a3c31;
-  --ring: #ef7c6a;
-  --green: #86c493;
+  --ring: #86bf70;
+  --green: #9cc68a;
   --green-soft: #1f3322;
+  --clay: #e0a06a;
+  --clay-soft: #3a2a1b;
+  --tomato: #e8705f;
   --gold: #e3b75c;
   --gold-soft: #3b2f17;
   --teal: #72c0b8;
@@ -133,8 +143,8 @@
   --ink: #2a1f19;
   --card-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px -16px rgb(0 0 0 / 0.6);
   --lift-shadow: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -18px rgb(0 0 0 / 0.7);
-  --paper-blush: rgb(120 50 35 / 0.18);
-  --paper-leaf: rgb(60 100 60 / 0.14);
+  --paper-glow: rgb(60 100 55 / 0.2);
+  --paper-sun: rgb(110 80 40 / 0.14);
   --grain-opacity: 0.18;
 }
 
@@ -152,10 +162,10 @@
   }
   body {
     @apply min-h-dvh bg-background text-[15px] leading-[1.55] text-foreground;
-    /* Paper: a blush in one corner, a leaf tint in the other and a fine grain */
+    /* Paper: a leaf tint in one corner, warm sun in the other and a fine grain */
     background-image:
-      radial-gradient(60rem 40rem at 100% 0%, var(--paper-blush), transparent 70%),
-      radial-gradient(50rem 36rem at 0% 100%, var(--paper-leaf), transparent 70%);
+      radial-gradient(60rem 40rem at 100% 0%, var(--paper-glow), transparent 70%),
+      radial-gradient(50rem 36rem at 0% 100%, var(--paper-sun), transparent 70%);
     background-attachment: fixed;
   }
   body::before {

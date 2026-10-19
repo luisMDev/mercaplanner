@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Tone = "red" | "green" | "gold" | "teal" | "plum";
+type Tone = "clay" | "green" | "gold" | "teal" | "plum";
 
 // Icon and colour of each Mercadona category; a new one gets a basket
 const CATEGORY_ART: Record<string, [LucideIcon, Tone]> = {
@@ -35,23 +35,23 @@ const CATEGORY_ART: Record<string, [LucideIcon, Tone]> = {
   "Azúcar, caramelos y chocolate": [CandyIcon, "plum"],
   Bebé: [BabyIcon, "teal"],
   Bodega: [WineIcon, "plum"],
-  "Cacao, café e infusiones": [CoffeeIcon, "red"],
-  Carne: [BeefIcon, "red"],
+  "Cacao, café e infusiones": [CoffeeIcon, "clay"],
+  Carne: [BeefIcon, "clay"],
   "Cereales y galletas": [CookieIcon, "gold"],
-  "Charcutería y quesos": [HamIcon, "red"],
+  "Charcutería y quesos": [HamIcon, "clay"],
   Congelados: [SnowflakeIcon, "teal"],
-  "Conservas, caldos y cremas": [SoupIcon, "red"],
+  "Conservas, caldos y cremas": [SoupIcon, "clay"],
   "Fruta y verdura": [AppleIcon, "green"],
   "Huevos, leche y mantequilla": [EggIcon, "gold"],
   "Marisco y pescado": [FishIcon, "teal"],
   "Panadería y pastelería": [CroissantIcon, "gold"],
-  "Pizzas y platos preparados": [PizzaIcon, "red"],
+  "Pizzas y platos preparados": [PizzaIcon, "clay"],
   "Postres y yogures": [CakeSliceIcon, "plum"],
   Zumos: [CitrusIcon, "green"],
 };
 
 const TONES: Record<Tone, string> = {
-  red: "bg-primary-soft text-primary",
+  clay: "bg-clay-soft text-clay",
   green: "bg-green-soft text-green",
   gold: "bg-gold-soft text-gold",
   teal: "bg-teal-soft text-teal",

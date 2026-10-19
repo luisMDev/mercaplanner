@@ -39,7 +39,7 @@ export function MonthCalendar({
 }) {
   return (
     <section className="relative rounded-3xl border border-white/70 bg-card bg-linear-to-br from-card from-50% to-primary-soft/40 px-3 pt-6 pb-4 shadow-lift sm:px-7 sm:pt-8 dark:border-white/5">
-      <WashiTape tone="pink" className="-top-3 left-10 -rotate-3" />
+      <WashiTape tone="sage" className="-top-3 left-10 -rotate-3" />
       <WashiTape tone="mint" className="-top-3 right-16 rotate-2 max-sm:hidden" />
       <header className="flex flex-wrap items-center gap-3 px-1 pb-4 sm:gap-5">
         <MonthButton label="Mes anterior" onClick={() => onMonthChange(addMonths(month, -1))}>

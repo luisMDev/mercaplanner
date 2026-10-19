@@ -36,7 +36,7 @@ const MEAL_COLORS: Record<string, string> = {
   desayuno: "var(--gold)",
   "media-manana": "var(--teal)",
   comida: "var(--primary)",
-  merienda: "var(--green)",
+  merienda: "var(--clay)",
   cena: "var(--plum)",
 };
 
