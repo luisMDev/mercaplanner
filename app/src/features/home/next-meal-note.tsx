@@ -24,7 +24,7 @@ export function NextMealNote({ plan }: { plan: Plan }) {
   const next = nextMeal(plan, useNow());
   const r = next?.meal.receta;
   return (
-    <div className="relative mt-4 -rotate-1 rounded-2xl bg-card p-2 shadow-card">
+    <div className="relative mt-4 -rotate-1 rounded-2xl glass p-2 shadow-card">
       <Clip />
       <TomatoLogo className="absolute -bottom-3 -left-5 size-24 -rotate-12 drop-shadow-sm" />
       <div className="flex min-h-28 flex-col justify-center gap-1 rounded-xl border border-dashed border-primary/40 py-4 pr-4 pl-24">

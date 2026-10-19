@@ -38,9 +38,12 @@ export function WeekView({ plan }: { plan: Plan }) {
           onSelect={select}
         />
       </div>
-      <div ref={ticket} className="relative z-10 flex scroll-mb-28 flex-col gap-6">
+      <div
+        ref={ticket}
+        className="relative z-10 flex scroll-mb-28 flex-col gap-6 lg:sticky lg:top-28 lg:h-[calc(100dvh-8.5rem)] lg:self-start"
+      >
         <DayTicket plan={plan} date={selected} isToday={sameDay(selected, today)} />
-        <StoreSlot className="mx-auto mt-6 hidden w-full max-w-[360px] lg:block" />
+        <StoreSlot className="mx-auto mt-auto hidden w-full max-w-[360px] lg:block" />
       </div>
     </div>
   );

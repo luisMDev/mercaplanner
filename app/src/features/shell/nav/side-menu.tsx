@@ -15,7 +15,7 @@ export function SideMenu({ active, pending }: { active: Section; pending: number
           onClick={() => navigate({ section: id })}
           aria-current={id === active ? "page" : undefined}
           className={cn(
-            "group flex h-14 cursor-pointer items-center gap-4 rounded-2xl border border-white/70 bg-card/90 px-5 text-left shadow-card transition-all hover:-translate-y-0.5 hover:shadow-lift dark:border-white/5",
+            "group flex h-14 cursor-pointer items-center gap-4 rounded-2xl border border-white/70 glass px-5 text-left shadow-card transition-all hover:-translate-y-0.5 hover:shadow-lift dark:border-white/5",
             id === active && "border-transparent bg-primary text-primary-foreground shadow-[0_12px_24px_-12px_var(--primary)]",
           )}
         >

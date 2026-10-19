@@ -72,7 +72,7 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
   const usedIn = recipesWithProduct(plan, p.id);
   const strip = related(catalog, p);
   return (
-    <Panel key={p.id} className="bg-linear-to-br from-card via-card to-primary-soft/40 p-5 sm:p-8">
+    <Panel key={p.id} className="bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
       <BackLink onClick={onBack} className="mb-4 @3xl:hidden">
         Todos los productos
       </BackLink>

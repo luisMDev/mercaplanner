@@ -11,7 +11,7 @@ import { fmtNum, plural } from "@/lib/format";
 export function WeekBanner({ plan }: { plan: Plan }) {
   const { days, meals, avgKcal, star } = weekSummary(plan);
   return (
-    <section className="@container relative min-h-64 overflow-hidden rounded-3xl border border-white/70 bg-linear-to-br from-primary-soft via-[color-mix(in_oklab,var(--primary-soft)_45%,var(--card))] to-card p-6 shadow-card dark:border-white/5">
+    <section className="@container relative min-h-64 overflow-hidden rounded-3xl border border-white/70 glass bg-linear-to-br from-primary-soft/80 via-primary-soft/35 to-card/40 p-6 shadow-card dark:border-white/5">
       <p className="pointer-events-none absolute top-5 right-6 hidden rotate-[-8deg] text-right font-script @sm:block text-[1.6rem] leading-[0.9] text-primary/70">
         Días ricos
         <br />

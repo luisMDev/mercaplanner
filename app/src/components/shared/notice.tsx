@@ -15,7 +15,7 @@ export function Notice({
   children?: ReactNode;
 }) {
   return (
-    <Card className="py-0 shadow-card">
+    <Card className="glass py-0 shadow-card">
       <Empty className="gap-3 px-5 py-7">
         <EmptyHeader>
           {icon && <EmptyMedia variant="icon">{icon}</EmptyMedia>}

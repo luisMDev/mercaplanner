@@ -1,12 +1,12 @@
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-// Rounded paper card that holds a section: "Las recetas", the open recipe…
+// Rounded frosted card that holds a section: "Las recetas", the open recipe…
 export function Panel({ className, ...props }: ComponentProps<"section">) {
   return (
     <section
       className={cn(
-        "@container rounded-3xl border border-white/70 bg-card p-5 shadow-card sm:p-6 dark:border-white/5",
+        "@container rounded-3xl border border-white/70 glass p-5 shadow-card sm:p-6 dark:border-white/5",
         className,
       )}
       {...props}

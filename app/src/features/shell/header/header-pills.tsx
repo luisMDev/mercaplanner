@@ -13,7 +13,7 @@ function Pill({ className, ...props }: ComponentProps<"button">) {
     <button
       type="button"
       className={cn(
-        "relative inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border border-white/70 bg-card/85 px-4 shadow-card transition-all hover:-translate-y-px hover:shadow-lift dark:border-white/5 [&_svg]:size-[18px]",
+        "relative inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border border-white/70 glass px-4 shadow-card transition-all hover:-translate-y-px hover:shadow-lift dark:border-white/5 [&_svg]:size-[18px]",
         className,
       )}
       {...props}
