@@ -196,9 +196,9 @@
 /* Frosted card: the paper colour a little see-through, blurring the store,
    the park and the leaves behind it */
 @utility glass {
-  background-color: color-mix(in oklab, var(--card) 70%, transparent);
-  -webkit-backdrop-filter: blur(16px) saturate(1.15);
-  backdrop-filter: blur(16px) saturate(1.15);
+  background-color: color-mix(in oklab, var(--card) 50%, transparent);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  backdrop-filter: blur(8px) saturate(1.15);
 }
 
 /* Horizontal rows of chips that scroll on a phone without a visible bar */
