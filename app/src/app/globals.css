@@ -7,8 +7,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-figtree), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Jost for labels and numbers, Newsreader for names and prose, Playfair
+     Display italic for the red titles and Great Vibes for the handwritten ones */
+  --font-sans: var(--font-jost), "Avenir Next", "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
   --font-heading: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-display: var(--font-playfair), "Iowan Old Style", Georgia, serif;
+  --font-script: var(--font-great-vibes), "Snell Roundhand", cursive;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -25,95 +30,112 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  /* App palette on top of the shadcn tokens: faint text, the strong and soft
-     terracotta, and one colour per meal slot (see lib/meals.ts) */
+  /* Cozy palette on top of the shadcn tokens: tomato red, Mercadona green,
+     awning gold, teal trim and plum, each with a soft tint for backgrounds */
   --color-faint: var(--faint);
   --color-primary-strong: var(--primary-strong);
   --color-primary-soft: var(--primary-soft);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-teal: var(--teal);
   --color-teal-soft: var(--teal-soft);
   --color-plum: var(--plum);
-  --color-success: var(--success);
-  --color-success-soft: var(--success-soft);
+  --color-plum-soft: var(--plum-soft);
   --color-warning: var(--warning);
+  --color-ink: var(--ink);
   --shadow-card: var(--card-shadow);
+  --shadow-lift: var(--lift-shadow);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-3xl: calc(var(--radius) * 2.4);
+  --radius-4xl: calc(var(--radius) * 3);
 }
 
-/* Same colours as the original index.html: grey-green paper, terracotta accent */
+/* Cream paper, the same tone as the background of the store illustration */
 :root {
-  --background: #eaedee;
-  --foreground: #212729;
-  --card: #ffffff;
-  --card-foreground: #212729;
-  --popover: #ffffff;
-  --popover-foreground: #212729;
-  --primary: #ad3a2c;
+  --background: #f9f2e3;
+  --foreground: #3d3029;
+  --card: #fffbf3;
+  --card-foreground: #3d3029;
+  --popover: #fffbf3;
+  --popover-foreground: #3d3029;
+  --primary: #d6503f;
   --primary-foreground: #ffffff;
-  --primary-strong: #8f2e23;
-  --primary-soft: #f3dcd7;
-  --secondary: #f2f4f4;
-  --secondary-foreground: #212729;
-  --muted: #f2f4f4;
-  --muted-foreground: #5b6567;
-  --faint: #8b9496;
-  --accent: #f3dcd7;
-  --accent-foreground: #8f2e23;
-  --destructive: #ad3a2c;
-  --border: #d7dcdd;
-  --input: #d7dcdd;
-  --ring: #ad3a2c;
-  --gold: #a8781f;
-  --gold-soft: #f0e3c4;
-  --teal: #276e69;
-  --teal-soft: #d9ebe8;
-  --plum: #6f4a8e;
-  --success: #3a7a4e;
-  --success-soft: #dceee0;
-  --warning: #9c5f19;
-  --radius: 0.625rem;
-  --card-shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 20px -12px rgb(20 20 20 / 0.18);
+  --primary-strong: #b43b2c;
+  --primary-soft: #fbe1d8;
+  --secondary: #f4ebdb;
+  --secondary-foreground: #3d3029;
+  --muted: #f5ecdd;
+  --muted-foreground: #7b6a5e;
+  --faint: #a8988a;
+  --accent: #fbe1d8;
+  --accent-foreground: #b43b2c;
+  --destructive: #c4412f;
+  --border: #ebdfcb;
+  --input: #e3d5bf;
+  --ring: #d6503f;
+  --green: #3c7f4c;
+  --green-soft: #e2eedb;
+  --gold: #c08a22;
+  --gold-soft: #f8eac4;
+  --teal: #3a817c;
+  --teal-soft: #d9eeea;
+  --plum: #8b5a9b;
+  --plum-soft: #eee1f1;
+  --warning: #a8661c;
+  /* Outline of the drawings (plates, logo) */
+  --ink: #4a3a30;
+  --radius: 0.75rem;
+  --card-shadow: 0 1px 2px rgb(110 75 40 / 0.05), 0 10px 30px -16px rgb(110 75 40 / 0.28);
+  --lift-shadow: 0 2px 4px rgb(110 75 40 / 0.06), 0 18px 40px -18px rgb(110 75 40 / 0.4);
+  --paper-blush: rgb(251 214 200 / 0.55);
+  --paper-leaf: rgb(214 232 200 / 0.5);
+  --grain-opacity: 0.35;
 }
 
+/* Cozy night: warm cocoa instead of cream */
 .dark {
-  --background: #14181a;
-  --foreground: #e9ecec;
-  --card: #1c2224;
-  --card-foreground: #e9ecec;
-  --popover: #1c2224;
-  --popover-foreground: #e9ecec;
-  --primary: #dd7c67;
-  --primary-foreground: #14181a;
-  --primary-strong: #e89686;
-  --primary-soft: #3a2521;
-  --secondary: #20272a;
-  --secondary-foreground: #e9ecec;
-  --muted: #20272a;
-  --muted-foreground: #a4aeb0;
-  --faint: #707b7d;
-  --accent: #3a2521;
-  --accent-foreground: #e89686;
-  --destructive: #dd7c67;
-  --border: #323b3e;
-  --input: #323b3e;
-  --ring: #dd7c67;
-  --gold: #d9ae5a;
-  --gold-soft: #392e19;
-  --teal: #63b3ac;
-  --teal-soft: #173330;
-  --plum: #b896d6;
-  --success: #69b583;
-  --success-soft: #1b3324;
-  --warning: #dda25b;
-  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 20px -12px rgb(0 0 0 / 0.5);
+  --background: #1e1814;
+  --foreground: #f3e9db;
+  --card: #29211c;
+  --card-foreground: #f3e9db;
+  --popover: #2d241e;
+  --popover-foreground: #f3e9db;
+  --primary: #ef7c6a;
+  --primary-foreground: #1e1814;
+  --primary-strong: #f6a090;
+  --primary-soft: #432820;
+  --secondary: #332923;
+  --secondary-foreground: #f3e9db;
+  --muted: #322822;
+  --muted-foreground: #bfac99;
+  --faint: #8c7b6c;
+  --accent: #432820;
+  --accent-foreground: #f6a090;
+  --destructive: #ef7c6a;
+  --border: #3f332a;
+  --input: #4a3c31;
+  --ring: #ef7c6a;
+  --green: #86c493;
+  --green-soft: #1f3322;
+  --gold: #e3b75c;
+  --gold-soft: #3b2f17;
+  --teal: #72c0b8;
+  --teal-soft: #183431;
+  --plum: #c9a0dc;
+  --plum-soft: #33243a;
+  --warning: #e3a65d;
+  --ink: #2a1f19;
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px -16px rgb(0 0 0 / 0.6);
+  --lift-shadow: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -18px rgb(0 0 0 / 0.7);
+  --paper-blush: rgb(120 50 35 / 0.18);
+  --paper-leaf: rgb(60 100 60 / 0.14);
+  --grain-opacity: 0.18;
 }
 
 @layer base {
@@ -129,7 +151,21 @@
     color-scheme: dark;
   }
   body {
-    @apply bg-background text-[15px] leading-[1.55] text-foreground;
+    @apply min-h-dvh bg-background text-[15px] leading-[1.55] text-foreground;
+    /* Paper: a blush in one corner, a leaf tint in the other and a fine grain */
+    background-image:
+      radial-gradient(60rem 40rem at 100% 0%, var(--paper-blush), transparent 70%),
+      radial-gradient(50rem 36rem at 0% 100%, var(--paper-leaf), transparent 70%);
+    background-attachment: fixed;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -138,18 +174,50 @@
   }
 }
 
-/* Recipe card opened from a meal in Hoy or Semana: flash it once */
-@keyframes target-flash {
-  from {
-    background-color: var(--primary-soft);
-  }
-  to {
-    background-color: transparent;
+/* Small uppercase labels with wide tracking: "ESTA SEMANA", "VER TODAS" */
+@utility caps {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Horizontal rows of chips that scroll on a phone without a visible bar */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
-@utility animate-target {
-  animation: target-flash 1.6s ease-out;
+
+/* Panels open with a short slide from the right */
+@utility animate-panel {
+  animation: panel-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   @media (prefers-reduced-motion: reduce) {
     animation: none;
+  }
+}
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The store and the plates float gently */
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-6px);
   }
 }

@@ -5,7 +5,7 @@ const ALL_CATEGORIES = "todas";
 
 // Long values ("Todas las categorías") end in an ellipsis on a phone
 const TRIGGER_CLASS =
-  "min-w-0 flex-[1_1_160px] rounded-full bg-card pl-3.5 font-semibold data-[size=default]:h-9 dark:bg-card *:data-[slot=select-value]:block *:data-[slot=select-value]:truncate";
+  "min-w-0 flex-[1_1_180px] rounded-full border-border bg-background/70 pl-4 font-medium data-[size=default]:h-11 dark:bg-background/40 *:data-[slot=select-value]:block *:data-[slot=select-value]:truncate";
 
 // Category filter and sort order, side by side (stacked on a narrow phone)
 export function ProductFilterSelects({

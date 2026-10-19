@@ -8,7 +8,7 @@ Nacio en el vault `luisMDev/jarvis` (`brain/04-sandbox/diet-app/`) y se movio aq
 
 | Fichero | Que es |
 | --- | --- |
-| `app/` | La app rehecha en Next.js con shadcn/ui (ver abajo) |
+| `app/` | La app rehecha en Next.js con shadcn/ui y estilo cozy, con calendario y cesta de la compra (ver abajo) |
 | `index.html` | La app entera: React 18.3.1 y las fuentes (Newsreader y Figtree) van dentro, entre los marcadores `@offline-react` y `@offline-fonts`, asi que funciona sin conexion |
 | `recetas.json` | Recetas y plan de la semana (formato abajo) |
 | `productos.json` | 2.966 alimentos de Mercadona, generado por `scripts/build-productos.py` |
@@ -28,7 +28,7 @@ y abrir `http://localhost:8000`. Abierta como fichero, la pagina ofrece elegir `
 
 ## Version en Next.js (`app/`)
 
-La misma app rehecha con Next.js 16, Tailwind CSS 4 y componentes de shadcn/ui, organizada por funcionalidades. Lee `recetas.json` y `productos.json` de la raiz, sin copiarlos:
+La app rehecha con Next.js 16, Tailwind CSS 4 y componentes de shadcn/ui, organizada por funcionalidades y con un estilo cozy: menu a la izquierda, una ilustracion de una tienda de Mercadona en el centro y paneles a la derecha que se abren al elegir una receta o un producto. Ademas de Hoy, Recetas, Semana y Productos trae un calendario del mes y una cesta con la compra de la semana. Lee `recetas.json` y `productos.json` de la raiz, sin copiarlos:
 
 ```
 cd app

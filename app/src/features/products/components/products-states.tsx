@@ -2,14 +2,15 @@ import { PackageXIcon } from "lucide-react";
 import { JsonPicker } from "@/components/shared/json-picker";
 import { Notice } from "@/components/shared/notice";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 import { PRODUCTS_FILE } from "../model/parse";
 
-export function ProductsSkeleton() {
+// Grey tiles in place of the products while productos.json downloads
+export function ProductsSkeleton({ tiles = 8, className }: { tiles?: number; className?: string }) {
   return (
-    <div aria-busy="true" aria-label="Cargando productos" className="flex flex-col gap-3">
-      <Skeleton className="h-11 rounded-full bg-card" />
-      {[0, 1, 2].map((i) => (
-        <Skeleton key={i} className="h-44 rounded-xl bg-card" />
+    <div aria-busy="true" aria-label="Cargando productos" className={cn("grid grid-cols-2 gap-3 @lg:grid-cols-4", className)}>
+      {Array.from({ length: tiles }, (_, i) => (
+        <Skeleton key={i} className="aspect-[3/4] rounded-2xl bg-secondary" />
       ))}
     </div>
   );
