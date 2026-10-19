@@ -11,13 +11,15 @@ export const THEMES: Record<Theme, string> = {
 const THEME_KEY = "dieta-theme";
 const DARK_QUERY = "(prefers-color-scheme: dark)";
 
-// Runs in <head> before the first paint so a forced light/dark theme does not
-// flash the system one while React loads. Same rule as applyTheme
-export const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem(${JSON.stringify(THEME_KEY)});var d=t==="dark"||(t!=="light"&&matchMedia(${JSON.stringify(DARK_QUERY)}).matches);document.documentElement.classList.toggle("dark",d)}catch(e){}})()`;
+// Runs in <head> before the first paint so a saved dark theme does not flash
+// the light one while React loads. Same rule as applyTheme and loadTheme:
+// light unless "dark", or "auto" on a dark system
+export const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem(${JSON.stringify(THEME_KEY)});var d=t==="dark"||(t==="auto"&&matchMedia(${JSON.stringify(DARK_QUERY)}).matches);document.documentElement.classList.toggle("dark",d)}catch(e){}})()`;
 
+// Light by default; "auto" (follow the system) and dark only when picked
 export function loadTheme(): Theme {
   const theme = readStorage(THEME_KEY);
-  return theme === "light" || theme === "dark" ? theme : "auto";
+  return theme === "auto" || theme === "dark" ? theme : "light";
 }
 
 export function saveTheme(theme: Theme) {

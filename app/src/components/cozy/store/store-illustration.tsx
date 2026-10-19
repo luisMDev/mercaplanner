@@ -54,11 +54,14 @@ const PETALS = [
 // once loaded
 export function StoreIllustration({
   here = false,
+  park = true,
   preload = false,
   className,
 }: {
   // "estás aquí" with an arrow, when the store is small next to a panel
   here?: boolean;
+  // The park behind the store; off in Inicio, where it is the page's backdrop
+  park?: boolean;
   preload?: boolean;
   className?: string;
 }) {
@@ -86,17 +89,19 @@ export function StoreIllustration({
       ))}
       <div className={cn("relative aspect-[1080/1350] dark:brightness-[.82] dark:saturate-[.9]", EDGE_MASK)}>
         {/* The park behind the store; in 3D it is a layer further back */}
-        <Image
-          src={fondo}
-          alt=""
-          loading="eager"
-          sizes="(min-width: 1024px) 40vw, 90vw"
-          className={cn(
-            "absolute inset-0 size-full object-cover select-none transition-opacity duration-500",
-            ready && "opacity-0",
-          )}
-          draggable={false}
-        />
+        {park && (
+          <Image
+            src={fondo}
+            alt=""
+            loading="eager"
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className={cn(
+              "absolute inset-0 size-full object-cover select-none transition-opacity duration-500",
+              ready && "opacity-0",
+            )}
+            draggable={false}
+          />
+        )}
         <Image
           src={tienda}
           alt="Ilustración de una tienda de Mercadona en una esquina, con toldos verdes, plantas y fruta en la puerta"
@@ -114,7 +119,7 @@ export function StoreIllustration({
         {show3d && (
           // 4% over each side: OVERFLOW in store-scene.tsx
           <div className={cn("absolute -inset-[4%] opacity-0 transition-opacity duration-500", ready && "opacity-100")}>
-            <StoreScene onReady={onReady} />
+            <StoreScene park={park} onReady={onReady} />
           </div>
         )}
       </div>

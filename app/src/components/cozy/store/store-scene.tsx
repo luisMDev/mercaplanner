@@ -8,6 +8,7 @@ import depthMap from "@/assets/tienda-profundidad.webp";
 import tienda from "@/assets/tienda.webp";
 import { STORE_BOTTOM, STORE_SCALE } from "./layout";
 import { reliefMaterial } from "./relief-material";
+import { usePointerX } from "./use-pointer-x";
 
 const ASPECT = tienda.width / tienda.height;
 // How far the light parts of the depth map come forward, in plane heights
@@ -28,20 +29,13 @@ const DISTANCE = 0.5 / Math.tan(((FOV / 2) * Math.PI) / 180);
 const BG_DEPTH = 0.9;
 const BG_HEIGHT = ((DISTANCE + BG_DEPTH) / DISTANCE) * 1.15;
 
-// Horizontal mouse position across the whole window, from -1 to 1
-function usePointerX() {
-  const pointer = useRef(0);
-  useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      pointer.current = (e.clientX / window.innerWidth) * 2 - 1;
-    };
-    window.addEventListener("pointermove", onMove);
-    return () => window.removeEventListener("pointermove", onMove);
-  }, []);
-  return pointer;
-}
+type SceneProps = {
+  // The park behind the store; off where the page has it as a backdrop
+  park: boolean;
+  onReady: () => void;
+};
 
-function Scene({ onReady }: { onReady: () => void }) {
+function Scene({ park: showPark, onReady }: SceneProps) {
   const [map, depth, park] = useLoader(TextureLoader, [tienda.src, depthMap.src, fondo.src]);
   const material = useMemo(() => reliefMaterial(map, depth, RELIEF), [map, depth]);
   const group = useRef<Group>(null);
@@ -61,10 +55,12 @@ function Scene({ onReady }: { onReady: () => void }) {
 
   return (
     <group ref={group}>
-      <mesh position={[0, 0, -BG_DEPTH]} scale={BG_HEIGHT}>
-        <planeGeometry args={[fondo.width / fondo.height, 1]} />
-        <meshBasicMaterial map={park} transparent depthWrite={false} />
-      </mesh>
+      {showPark && (
+        <mesh position={[0, 0, -BG_DEPTH]} scale={BG_HEIGHT}>
+          <planeGeometry args={[fondo.width / fondo.height, 1]} />
+          <meshBasicMaterial map={park} transparent depthWrite={false} />
+        </mesh>
+      )}
       <mesh material={material} position={[0, STORE_Y / OVERFLOW, 0]} scale={STORE_SCALE / OVERFLOW}>
         <planeGeometry args={[ASPECT, 1, 112, 140]} />
       </mesh>
@@ -75,7 +71,7 @@ function Scene({ onReady }: { onReady: () => void }) {
 // The store drawing on a plane with relief from its depth map, in front of a
 // park further back, turning with the mouse. Loaded on its own (three.js is
 // heavy), only where it is used
-export default function StoreScene({ onReady }: { onReady: () => void }) {
+export default function StoreScene(props: SceneProps) {
   return (
     <Canvas
       // linear and flat: the drawing's colours untouched, no tone mapping
@@ -87,7 +83,7 @@ export default function StoreScene({ onReady }: { onReady: () => void }) {
       aria-hidden="true"
     >
       <Suspense fallback={null}>
-        <Scene onReady={onReady} />
+        <Scene {...props} />
       </Suspense>
     </Canvas>
   );
