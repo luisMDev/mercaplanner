@@ -20,7 +20,7 @@ npm run lint
 
 La sección abierta va en el hash de la URL (`#/recetas/causa-limena`), así que el botón atrás del navegador cierra el panel abierto.
 
-- **Inicio** (`#/`): menú a la izquierda con la próxima comida en una nota, la tienda en el centro y a la derecha el banner «La dieta de la semana», el panel de recetas y el de productos del plan.
+- **Inicio** (`#/`): menú a la izquierda con la próxima comida en una nota, alineados abajo con el pie de la tienda, la tienda en el centro y a la derecha el banner «La dieta de la semana», el panel de recetas y el de productos del plan.
 - **Hoy**: las comidas de hoy en orden, con kcal y macros del día; las pasadas salen marcadas y la siguiente, destacada. Debajo, lo de mañana.
 - **Recetas**: buscador, filtro por comida y tarjetas con un plato dibujado (los colores salen de los ingredientes). El panel de una receta trae kcal, macros, raciones (los gramos se ajustan), «Añadir a la cesta», ingredientes enlazados a Mercadona, pasos, notas y una tira con las demás.
 - **Productos**: los 2.966 alimentos de Mercadona con buscador, categoría y orden. El panel de un producto trae precio, valores por 100 g, «Añadir a la cesta», las recetas que lo usan y más de su sección.
