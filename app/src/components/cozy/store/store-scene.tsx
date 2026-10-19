@@ -7,7 +7,7 @@ import parkDepthMap from "@/assets/fondo-profundidad.webp";
 import fondo from "@/assets/fondo.webp";
 import depthMap from "@/assets/tienda-profundidad.webp";
 import tienda from "@/assets/tienda.webp";
-import { PARK_HEIGHT, STORE_CENTER, STORE_SCALE } from "./layout";
+import { PARK_CENTER, PARK_HEIGHT, STORE_CENTER, STORE_SCALE } from "./layout";
 import { reliefMaterial } from "./relief-material";
 import { usePointerX } from "./use-pointer-x";
 
@@ -30,7 +30,7 @@ const STORE_Y = STORE_CENTER - 0.5;
 const DISTANCE = 0.5 / Math.tan(((FOV / 2) * Math.PI) / 180);
 // The park behind the store: this far back, so turning the scene slides it
 // the other way (parallax). Sized and placed to look, from the camera, like
-// the flat park (layout.ts): a bit taller than the store and centred on it
+// the flat park (layout.ts): a bit taller than the store, a little above it
 const BG_DEPTH = 1.2;
 const BG_FAR = (DISTANCE + BG_DEPTH) / DISTANCE;
 
@@ -68,7 +68,7 @@ function Scene({ onReady }: SceneProps) {
     <group ref={group}>
       <mesh
         material={parkMaterial}
-        position={[0, (STORE_Y * BG_FAR) / OVERFLOW, -BG_DEPTH]}
+        position={[0, ((PARK_CENTER - 0.5) * BG_FAR) / OVERFLOW, -BG_DEPTH]}
         scale={(PARK_HEIGHT * BG_FAR) / OVERFLOW}
       >
         <planeGeometry args={[fondo.width / fondo.height, 1, 96, 72]} />
