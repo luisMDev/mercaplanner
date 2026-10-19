@@ -94,6 +94,9 @@ export default function StoreScene(props: SceneProps) {
       linear
       flat
       dpr={[1, 1.5]}
+      // Its own size, not the scaled one (store-illustration.tsx), and not
+      // measured again on every scroll
+      resize={{ offsetSize: true, scroll: false }}
       gl={{ alpha: true, antialias: true }}
       camera={{ fov: FOV, position: [0, 0, DISTANCE] }}
       aria-hidden="true"

@@ -34,6 +34,7 @@ export function StoreStage({ children }: { children: ReactNode }) {
     }
     b.style.visibility = "";
     b.style.width = r.width + "px";
+    b.style.setProperty("--store-w", String(r.width));
     b.style.transform = `translate(${r.left}px, ${r.top}px)`;
   }, []);
 

@@ -8,6 +8,10 @@ import { cn } from "@/lib/utils";
 import { STORE_BOTTOM, STORE_SCALE } from "./layout";
 import { ParkLayer } from "./park-layer";
 
+const ASPECT = tienda.width / tienda.height;
+// Width in px the 3D store is drawn at, about its size on Inicio
+const SCENE_WIDTH = 600;
+
 // three.js only downloads where the 3D store is shown
 const StoreScene = dynamic(() => import("./store-scene"), { ssr: false });
 
@@ -83,10 +87,7 @@ export function StoreIllustration({
       {PETALS.map((p) => (
         <span key={p} aria-hidden="true" className={cn("absolute rounded-[60%_10%] animate-float", p)} />
       ))}
-      <div
-        className="relative dark:brightness-[.82] dark:saturate-[.9]"
-        style={{ aspectRatio: tienda.width / tienda.height }}
-      >
+      <div className="relative dark:brightness-[.82] dark:saturate-[.9]" style={{ aspectRatio: ASPECT }}>
         {/* Flat park until the 3D scene, which draws it with relief, is ready */}
         <ParkLayer className={cn("transition-opacity duration-500", ready && "opacity-0")} />
         <Image
@@ -105,12 +106,20 @@ export function StoreIllustration({
         />
         {show3d && (
           // Room for the whole park and for the store over the frame (OVERFLOW in
-          // store-scene.tsx); the park spreads behind the page's panels
+          // store-scene.tsx); the park spreads behind the page's panels. Drawn
+          // at one size and scaled to the store's width (--store-w, set by
+          // store-stage.tsx): resizing the canvas on a page change left it
+          // blurry for a moment at the end of the view transition
           <div
             className={cn(
-              "pointer-events-none absolute -inset-x-[40%] -inset-y-[12%] opacity-0 transition-opacity duration-500",
+              "pointer-events-none absolute -top-[12%] -left-[40%] origin-top-left opacity-0 transition-opacity duration-500",
               ready && "opacity-100",
             )}
+            style={{
+              width: SCENE_WIDTH * 1.8,
+              height: (SCENE_WIDTH / ASPECT) * 1.24,
+              transform: `scale(calc(var(--store-w, ${SCENE_WIDTH}) / ${SCENE_WIDTH}))`,
+            }}
           >
             <StoreScene onReady={onReady} />
           </div>
