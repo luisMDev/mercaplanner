@@ -1,4 +1,5 @@
 import { TomatoLogo } from "@/components/cozy/tomato-logo";
+import { DishArt } from "@/features/plan/components/dish-art";
 import { nextMeal } from "@/features/plan/model/meals";
 import type { Plan } from "@/features/plan/model/types";
 import { navigate } from "@/features/shell/use-route";
@@ -26,7 +27,15 @@ export function NextMealNote({ plan }: { plan: Plan }) {
   return (
     <div className="relative mt-4 -rotate-1 rounded-2xl glass p-2 shadow-card">
       <Clip />
-      <TomatoLogo className="absolute -bottom-3 -left-5 size-24 -rotate-12 drop-shadow-sm" />
+      {r ? (
+        // The next meal's dish, with a little tomato in its corner
+        <span aria-hidden="true" className="absolute -bottom-3 -left-2 w-28 -rotate-6 lg:-left-6 drop-shadow-sm">
+          <DishArt receta={r} />
+          <TomatoLogo className="absolute top-[22%] left-0 size-8 -rotate-12" />
+        </span>
+      ) : (
+        <TomatoLogo className="absolute -bottom-3 -left-5 size-24 -rotate-12 drop-shadow-sm" />
+      )}
       <div className="flex min-h-28 flex-col justify-center gap-1 rounded-xl border border-dashed border-primary/40 py-4 pr-4 pl-24">
         {next ? (
           <>
