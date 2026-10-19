@@ -256,14 +256,22 @@
 ::view-transition-new(root) {
   animation: 0.3s 0.05s ease-out both vt-fade-in;
 }
-/* A panel that opens slides in; one that closes fades out */
+/* A panel that opens is opaque at once, so the store is already behind it,
+   and slides in; one that closes fades out */
 ::view-transition-new(panel):only-child,
 ::view-transition-new(panel-side):only-child {
-  animation: 0.5s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) both vt-slide-in;
+  animation:
+    0.12s ease-out both vt-fade-in,
+    0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both vt-slide-x;
 }
 ::view-transition-old(panel):only-child,
 ::view-transition-old(panel-side):only-child {
   animation: 0.2s ease-out both vt-fade-out;
+}
+@keyframes vt-slide-x {
+  from {
+    transform: translateX(64px);
+  }
 }
 @keyframes vt-fade-in {
   from {
