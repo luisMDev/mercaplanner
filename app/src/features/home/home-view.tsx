@@ -17,9 +17,11 @@ import { WeekBanner } from "./week-banner";
 export function HomeView({ plan, pending }: { plan: Plan; pending: number }) {
   return (
     <div className="flex flex-col gap-6 pt-2 lg:grid lg:gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(340px,440px)]">
-      {/* Menu and store side by side, their bottoms lined up */}
-      <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(230px,260px)_minmax(0,1fr)] lg:items-end lg:gap-8 xl:sticky xl:top-24 xl:grid-cols-[minmax(230px,280px)_minmax(0,1fr)] xl:self-start">
-        <div className="relative z-10 order-2 flex flex-col gap-8 lg:order-none">
+      {/* Menu and store side by side, as tall as the screen under the header,
+          both down at its bottom */}
+      <div className="flex flex-col gap-6 lg:grid lg:min-h-[calc(100dvh-7.5rem)] lg:grid-cols-[minmax(230px,260px)_minmax(0,1fr)] lg:items-end lg:gap-8 xl:sticky xl:top-24 xl:grid-cols-[minmax(230px,280px)_minmax(0,1fr)] xl:self-start">
+        {/* Own layers in view transitions, over the store (globals.css) */}
+        <div className="relative z-10 order-2 flex flex-col gap-8 [view-transition-name:home-menu] lg:order-none">
           <div className="max-lg:hidden">
             <SideMenu active="inicio" pending={pending} />
           </div>
@@ -31,7 +33,7 @@ export function HomeView({ plan, pending }: { plan: Plan; pending: number }) {
           <StoreSlot park="backdrop" className="mx-auto w-full max-w-[360px] sm:max-w-[420px] xl:max-w-[600px]" />
         </div>
       </div>
-      <div className="relative z-10 flex flex-col gap-5 xl:pt-4">
+      <div className="relative z-10 flex flex-col gap-5 [view-transition-name:home-panels] xl:pt-4">
         <WeekBanner plan={plan} />
         <RecipesPanel plan={plan} />
         <ProductsPanel plan={plan} />

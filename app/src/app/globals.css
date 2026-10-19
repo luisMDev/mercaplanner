@@ -244,7 +244,9 @@
   z-index: 1;
 }
 ::view-transition-group(panel),
-::view-transition-group(panel-side) {
+::view-transition-group(panel-side),
+::view-transition-group(home-menu),
+::view-transition-group(home-panels) {
   z-index: 2;
 }
 ::view-transition-group(header) {
@@ -265,8 +267,15 @@
     0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both vt-slide-x;
 }
 ::view-transition-old(panel):only-child,
-::view-transition-old(panel-side):only-child {
+::view-transition-old(panel-side):only-child,
+::view-transition-old(home-menu):only-child,
+::view-transition-old(home-panels):only-child {
   animation: 0.2s ease-out both vt-fade-out;
+}
+/* Back to Inicio: its menu and panels fade in over the store */
+::view-transition-new(home-menu):only-child,
+::view-transition-new(home-panels):only-child {
+  animation: 0.35s 0.1s ease-out both vt-fade-in;
 }
 @keyframes vt-slide-x {
   from {
