@@ -790,6 +790,41 @@
       .product-card {
         gap: 8px;
       }
+      /* Front photo next to the name, price and size */
+      .product-top {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .product-head {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      /* The photos come on white, so they keep it in the dark theme too */
+      .product-photo {
+        flex: none;
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-s);
+      }
+      .product-label img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-s);
+      }
+      .product-label-missing {
+        font-size: 0.8rem;
+        color: var(--text-faint);
+      }
       .product-name {
         font-weight: 600;
         flex: 1 1 auto;
@@ -853,10 +888,27 @@
       .product-foot span:first-child {
         flex-basis: 100%;
       }
-      .product-foot a {
+      .product-links {
         margin-left: auto;
+        display: flex;
+        gap: 14px;
+      }
+      .product-links a,
+      .product-links button {
         font-size: 0.8rem;
         font-weight: 600;
+      }
+      .product-links button {
+        padding: 0;
+        border: 0;
+        background: none;
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        cursor: pointer;
+      }
+      .product-links button:hover {
+        color: var(--accent-strong);
       }
       .more-button {
         align-self: center;
@@ -1790,8 +1842,26 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         );
       }
 
+      // Photo from imagenes/productos/ (build-imagenes.py), with `zoom` a link
+      // to itself full size. If it cannot load, e.g. in the published artifact,
+      // which does not carry the photos, `fallback` (or nothing) instead
+      function ProductPhoto(props) {
+        const [failed, setFailed] = React.useState(false);
+        if (failed) return props.fallback || null;
+        const img = h('img', {
+          src: props.src,
+          alt: props.alt,
+          className: props.zoom ? null : props.className,
+          loading: 'lazy',
+          decoding: 'async',
+          onError: () => setFailed(true),
+        });
+        return props.zoom ? h('a', { className: props.className, href: props.src, target: '_blank', rel: 'noopener' }, img) : img;
+      }
+
       function ProductCard(props) {
         const p = props.p;
+        const [labelOpen, setLabelOpen] = React.useState(false);
         const per = p.unidad === 'ml' ? '100 ml' : '100 g';
         const meta = [p.marca, p.envase, fmtQty(p), Number.isInteger(p.unidades_pack) && p.unidades_pack > 1 ? p.unidades_pack + ' uds.' : null].filter(Boolean);
         const estimated = p.fuente_nutricion === 'generico_estimado';
@@ -1800,19 +1870,28 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           { className: 'group-card product-card' },
           h(
             'div',
-            { className: 'group-heading' },
-            h('span', { className: 'product-name' }, p.nombre),
-            estimated ? h(Badge, { tone: 'warning' }, 'Estimado') : null,
-          ),
-          h(
-            'div',
-            { className: 'product-meta' },
-            meta.map((m, i) => h(React.Fragment, { key: i }, i ? h('span', { className: 'dot' }, '·') : null, h('span', null, m))),
-            meta.length ? h('span', { className: 'dot' }, '·') : null,
-            h('span', { className: 'product-price' }, fmtEur(p.precio_eur)),
-            p.precio_referencia_eur != null
-              ? h('span', null, '(' + fmtEur(p.precio_referencia_eur) + '/' + (p.formato_referencia || '') + ')')
-              : null,
+            { className: 'product-top' },
+            p.imagen ? h(ProductPhoto, { src: p.imagen, alt: '', className: 'product-photo' }) : null,
+            h(
+              'div',
+              { className: 'product-head' },
+              h(
+                'div',
+                { className: 'group-heading' },
+                h('span', { className: 'product-name' }, p.nombre),
+                estimated ? h(Badge, { tone: 'warning' }, 'Estimado') : null,
+              ),
+              h(
+                'div',
+                { className: 'product-meta' },
+                meta.map((m, i) => h(React.Fragment, { key: i }, i ? h('span', { className: 'dot' }, '·') : null, h('span', null, m))),
+                meta.length ? h('span', { className: 'dot' }, '·') : null,
+                h('span', { className: 'product-price' }, fmtEur(p.precio_eur)),
+                p.precio_referencia_eur != null
+                  ? h('span', null, '(' + fmtEur(p.precio_referencia_eur) + '/' + (p.formato_referencia || '') + ')')
+                  : null,
+              ),
+            ),
           ),
           h(
             'div',
@@ -1824,12 +1903,33 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             h(NutriCell, { label: 'Fibra', value: p.fibra_100, unit: ' g' }),
             h(NutriCell, { label: 'Sal', value: p.sal_100, unit: ' g', digits: 2 }),
           ),
+          // Back of the pack, full size in a new tab to zoom in on the table
+          labelOpen
+            ? h(ProductPhoto, {
+                src: p.imagen_etiqueta,
+                alt: 'Etiqueta de ' + p.nombre,
+                className: 'product-label',
+                zoom: true,
+                fallback: h('p', { className: 'product-label-missing' }, 'No se ha podido cargar la foto de la etiqueta.'),
+              })
+            : null,
           h(
             'div',
             { className: 'product-foot' },
             h('span', null, 'Por ' + per + ' · ' + (estimated ? 'valores genéricos estimados, no los de la etiqueta' : 'Open Food Facts')),
             h('span', null, p.categoria + ' › ' + p.subcategoria),
-            p.url ? h('a', { href: p.url, target: '_blank', rel: 'noopener' }, 'Ver en Mercadona') : null,
+            h(
+              'span',
+              { className: 'product-links' },
+              p.imagen_etiqueta
+                ? h(
+                    'button',
+                    { type: 'button', 'aria-expanded': labelOpen, onClick: () => setLabelOpen((o) => !o) },
+                    labelOpen ? 'Ocultar etiqueta' : 'Ver etiqueta',
+                  )
+                : null,
+              p.url ? h('a', { href: p.url, target: '_blank', rel: 'noopener' }, 'Ver en Mercadona') : null,
+            ),
           ),
         );
       }

@@ -26,6 +26,10 @@ export type Producto = {
   // "openfoodfacts", or "generico_estimado" for generic values, not the label's
   fuente_nutricion: string;
   url?: string;
+  // Photos of the front and of the back label, "imagenes/productos/<id>.webp"
+  // and "...-etiqueta.webp", from scripts/build-imagenes.py
+  imagen?: string;
+  imagen_etiqueta?: string;
   // Normalized name, brand and sections, for the search
   _text: string;
 };

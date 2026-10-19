@@ -53,5 +53,6 @@ Reglas que sigue el código:
 
 - **Fecha y localStorage**: lo que depende del dispositivo (el día de hoy, la pestaña abierta, el tema) se pinta en el navegador; la página prerenderizada enseña un esqueleto mientras tanto. El tema se aplica con un script en `<head>` antes del primer pintado, sin parpadeo.
 - **Colores por comida**: cada `id` de `comidas` tiene su color en `features/plan/model/meals.ts`; uno nuevo sale en gris hasta que se añada ahí.
+- **Fotos de los productos**: `public/imagenes` es un enlace simbólico a `../imagenes` de la raíz, así que Next sirve las fotos en `/imagenes/productos/...` sin copiarlas. Ya van reducidas y en WebP, así que `next/image` las sirve tal cual (`unoptimized`). Si una no carga, la tarjeta sale sin ella.
 - **Cargar JSON**: el botón del pie carga otro `recetas.json` para probarlo; dura hasta recargar la página. Si `productos.json` no se puede descargar, la pestaña Productos permite elegirlo a mano.
 - Se guarda en `localStorage` la pestaña abierta (`dieta-view`) y el tema (`dieta-theme`), con las mismas claves que `index.html`.

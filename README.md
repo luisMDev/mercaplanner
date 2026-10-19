@@ -12,8 +12,10 @@ Nacio en el vault `luisMDev/jarvis` (`brain/04-sandbox/diet-app/`) y se movio aq
 | `index.html` | La app entera: React 18.3.1 y las fuentes (Newsreader y Figtree) van dentro, entre los marcadores `@offline-react` y `@offline-fonts`, asi que funciona sin conexion |
 | `recetas.json` | Recetas y plan de la semana (formato abajo) |
 | `productos.json` | 2.966 alimentos de Mercadona, generado por `scripts/build-productos.py` |
+| `imagenes/productos/` | Las fotos de cada producto: el frente y la etiqueta de detras con la tabla nutricional (ver abajo) |
 | `scripts/receta.py` | Buscar productos, calcular kcal y macros de una receta y validar `recetas.json` |
 | `scripts/build-productos.py` | Regenera `productos.json` desde el catalogo completo de Mercadona |
+| `scripts/build-imagenes.py` | Descarga las fotos de los productos de la tienda de Mercadona y las enlaza en `productos.json` |
 | `.claude/skills/receta/` | Skill `/receta` de Claude Code para añadir recetas |
 
 ## Verla en local
@@ -53,13 +55,28 @@ y abrir `http://localhost:3000`. Estructura y detalles en `app/README.md`.
 python3 scripts/build-productos.py [ruta/a/productos.json]
 ```
 
-Pesa ~1,6 MB, asi que la app no lo pide hasta que se abre la pestaña Productos. Los productos con `fuente_nutricion: generico_estimado` (970) llevan la etiqueta "Estimado": sus valores son genericos, no los de la etiqueta; el resto vienen de Open Food Facts.
+Pesa ~1,9 MB, asi que la app no lo pide hasta que se abre la pestaña Productos. Los productos con `fuente_nutricion: generico_estimado` (970) llevan la etiqueta "Estimado": sus valores son genericos, no los de la etiqueta; el resto vienen de Open Food Facts.
+
+## Fotos de los productos
+
+`scripts/build-imagenes.py` descarga de la tienda de Mercadona (`tienda.mercadona.es/api/products/<id>/`) dos fotos de cada producto de `productos.json` y las guarda en `imagenes/productos/`:
+
+- `<id>.webp`: el frente del producto (la primera foto de la tienda), 400 × 400 px.
+- `<id>-etiqueta.webp`: la parte de detras, con la tabla nutricional y los ingredientes (en la API, la siguiente foto con `perspective` 9), recortada al contenido y de hasta 900 px para que la tabla se lea. En la fruta, la verdura y la carne frescas suele ser la etiqueta de la bandeja, sin tabla.
+
+El CDN de imagenes de Mercadona (imgix) las recorta, las reduce y las pasa a WebP a partir de los originales, de 4.000 a 6.000 px. Se enlazan en `productos.json` con `imagen` e `imagen_etiqueta` (rutas desde la raiz del repositorio), y `build-productos.py` los vuelve a poner al regenerarlo si estan las fotos.
+
+```
+python3 scripts/build-imagenes.py [--todas] [id ...]
+```
+
+Sin argumentos baja solo las que faltan, asi que sirve para los productos nuevos despues de regenerar `productos.json`; `--todas` las vuelve a bajar todas (y borra las que la tienda ya no tenga), y con ids solo las de esos productos. Todas juntas tardan una media hora y ocupan ~290 MB: 2.958 fotos del frente y 2.814 etiquetas. A 8 productos les faltan las dos porque la tienda ya no los tiene, y a 144 la etiqueta (sobre todo pan, fruta, verdura y charcuteria al corte).
 
 ## Pestañas
 
 - **Hoy**: el dia de la semana de hoy con el total de kcal y macros y cada comida con ingredientes y preparacion. Las comidas que pasaron hace mas de una hora salen con el circulo relleno.
 - **Recetas**: todas las recetas agrupadas por tipo, con un buscador por nombre o ingrediente y en que dias del plan aparece cada una.
 - **Semana**: una tarjeta por dia con sus comidas y el total de kcal; hoy va marcado.
-- **Productos**: los alimentos de Mercadona con precio, precio por kg o litro y kcal, proteinas, hidratos, grasas, fibra y sal por 100 g o 100 ml. Buscador, filtro por categoria y orden por nombre, proteina, calorias o precio.
+- **Productos**: los alimentos de Mercadona con su foto, precio, precio por kg o litro y kcal, proteinas, hidratos, grasas, fibra y sal por 100 g o 100 ml. "Ver etiqueta" enseña la foto de la etiqueta de detras, y al tocarla se abre a tamaño completo para leer la tabla. Buscador, filtro por categoria y orden por nombre, proteina, calorias o precio.
 
 En el movil (hasta 440 px) las pestañas que no estan abiertas solo enseñan el icono. Selector de tema (automatico, claro, oscuro) en el pie.

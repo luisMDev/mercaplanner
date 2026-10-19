@@ -14,7 +14,7 @@ App personal de dieta de Luis (LuismDev): un solo `index.html` en React que lee 
 - No inventes productos: todo ingrediente enlazado lleva el `id` real de `productos.json`, buscado con `scripts/receta.py buscar`. Si Mercadona no lo vende, `{texto, sin_producto: true}`.
 - Las kcal y los macros nunca se escriben a mano: `python3 scripts/receta.py calcular <id>`.
 - Antes de cada commit que toque `recetas.json`: `python3 scripts/receta.py validar` tiene que dar OK.
-- No toques `productos.json` a mano; se regenera con `scripts/build-productos.py`.
+- No toques `productos.json` a mano; se regenera con `scripts/build-productos.py`, y las fotos de `imagenes/productos/` se bajan y se enlazan con `scripts/build-imagenes.py`.
 - `index.html` lleva React y las fuentes en base64 dentro; no los cambies por CDN ni los borres (la app tiene que funcionar sin conexion).
 
 ## Añadir una receta
@@ -31,7 +31,7 @@ y abrir `http://localhost:8765` a 375 px de ancho: comprobar que la pestaña afe
 
 ## Publicar el artifact
 
-Artifact privado: https://claude.ai/artifact/DL15iPmJeDDpadwV4TQK1U. Para actualizarlo, publicar `index.html` en ese `url` con `files` `{"recetas.json": "recetas.json"}` (y `productos.json` solo si ha cambiado). Si la sesion no tiene la herramienta de Artifacts, dilo y deja solo el push.
+Artifact privado: https://claude.ai/artifact/DL15iPmJeDDpadwV4TQK1U. Para actualizarlo, publicar `index.html` en ese `url` con `files` `{"recetas.json": "recetas.json"}` (y `productos.json` solo si ha cambiado). Las fotos de `imagenes/` no van en el artifact (son casi 6.000 ficheros, mas de los que admite); alli la app no las enseña. Si la sesion no tiene la herramienta de Artifacts, dilo y deja solo el push.
 
 ## Commits
 
