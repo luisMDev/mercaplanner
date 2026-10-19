@@ -108,6 +108,51 @@
         "Enfriar al menos 15 minutos, coronar con el tomate y decorar con el resto del cilantro y la hierbabuena antes de servir."
       ],
       "notas": "Las kcal y los macros por ración se calculan con los productos enlazados (sin la pasta de ají, que no está en Mercadona). La patata cocida de bote sustituye a la papa amarilla de la receta peruana."
+    },
+    {
+      "id": "hamburguesa-cordero-batata",
+      "nombre": "Hamburguesa de cordero al romero con batata",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Hamburguesas de cordero a la plancha con batata hecha en el microondas en su propia bolsa.",
+      "minutos": 15,
+      "raciones": 2,
+      "kcal": 372,
+      "macros": {
+        "proteinas": 27,
+        "carbohidratos": 25,
+        "grasas": 18
+      },
+      "ingredientes": [
+        {
+          "texto": "1 paquete de hamburguesas de cordero al romero (2 unidades, 240 g)",
+          "producto": "8839",
+          "gramos": 240,
+          "producto_nombre": "Hamburguesa de cordero al romero"
+        },
+        {
+          "texto": "1 paquete de batatas para microondas (400 g)",
+          "producto": "69465",
+          "gramos": 400,
+          "producto_nombre": "Batatas para microondas"
+        },
+        {
+          "texto": "1 cucharada de aceite de oliva virgen extra (unos 10 g)",
+          "producto": "4740",
+          "gramos": 10,
+          "producto_nombre": "Aceite de oliva virgen extra Hacendado"
+        },
+        "Sal, pimienta y una pizca de pimentón (opcional)"
+      ],
+      "pasos": [
+        "Hacer las batatas en el microondas en su bolsa, siguiendo el tiempo del paquete (unos 8 minutos).",
+        "Mientras, calentar una sartén o plancha con unas gotas del aceite y hacer las hamburguesas 3-4 minutos por cada lado, hasta que estén hechas por dentro.",
+        "Abrir las batatas, cortarlas por la mitad o en rodajas y aliñarlas con el resto del aceite, sal, pimienta y el pimentón.",
+        "Servir cada hamburguesa con la mitad de las batatas."
+      ],
+      "notas": "Las kcal y los macros por ración se calculan con los productos enlazados. La carne de cordero tiene que quedar bien hecha por dentro."
     }
   ],
   "semana": {
