@@ -2,9 +2,9 @@
 """Build productos.json for the Productos tab from the Mercadona catalog.
 
 Keeps only the food products (es_alimento) and the fields the tab shows,
-drops empty values and writes compact JSON next to this script.
+drops empty values and writes compact JSON in the repo root.
 
-Usage: python3 build-productos.py [ruta/a/productos.json]
+Usage: python3 scripts/build-productos.py [ruta/a/productos.json]
 (default: /mnt/project-files/mercadona/productos.json)
 """
 import json
@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 SRC = Path(sys.argv[1] if len(sys.argv) > 1 else '/mnt/project-files/mercadona/productos.json')
-OUT = Path(__file__).with_name('productos.json')
+OUT = Path(__file__).resolve().parent.parent / 'productos.json'
 FIELDS = [
     'id', 'nombre', 'marca', 'categoria', 'subcategoria', 'seccion', 'envase',
     'cantidad_neta', 'unidad', 'unidades_pack', 'peso_aproximado',
