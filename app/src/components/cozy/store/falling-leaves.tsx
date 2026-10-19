@@ -1,14 +1,28 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
-import { Color, DoubleSide, LinearSRGBColorSpace, Object3D, Shape, ShapeGeometry, type InstancedMesh } from "three";
+import {
+  Color,
+  DoubleSide,
+  InstancedBufferAttribute,
+  LinearSRGBColorSpace,
+  MeshBasicMaterial,
+  Object3D,
+  Shape,
+  ShapeGeometry,
+  type InstancedMesh,
+} from "three";
 
 const COUNT = 34;
 // Leaf colours, from fresh green to the first yellows of autumn (sRGB, kept
 // as is: the canvas does no colour conversion)
 const COLORS = ["#8fbf5c", "#6f9a45", "#a9c95f", "#5f8a3c", "#c9c35a", "#d8b04a"];
-// Where leaves fall, in the scene's units (the frame is about one unit high)
+// Where leaves fall, in the scene's units (the frame is about one unit high).
+// They fade in under TOP and fade out from FADE down to GONE, well before the
+// bottom of the scene, where they start again at the top
 const TOP = 0.62;
-const BOTTOM = -0.62;
+const FADE_IN = 0.5;
+const FADE = -0.05;
+const GONE = -0.38;
 const WIDTH = 1.5;
 
 // Same numbers on every load, without calling Math.random while rendering
@@ -46,10 +60,10 @@ function makeLeaves(): Leaf[] {
   const rand = seeded(7);
   return Array.from({ length: COUNT }, (_, i) => ({
     x: (rand() - 0.5) * WIDTH,
-    y: BOTTOM + rand() * (TOP - BOTTOM),
+    y: GONE + rand() * (TOP - GONE),
     // A few fall between the park and the store, most in front of the store
     z: i % 5 === 0 ? -0.25 - rand() * 0.2 : 0.05 + rand() * 0.4,
-    size: 0.03 + rand() * 0.026,
+    size: 0.015 + rand() * 0.013,
     fall: 0.035 + rand() * 0.035,
     sway: 0.6 + rand() * 0.9,
     phase: rand() * Math.PI * 2,
@@ -58,12 +72,41 @@ function makeLeaves(): Leaf[] {
   }));
 }
 
-// Leaves falling over the store, turning and swaying as the wind carries
-// them. They live in the scene's group, so they tilt with it
+// 0 to 1 between edge0 and edge1, eased
+function smoothstep(edge0: number, edge1: number, x: number) {
+  const t = Math.min(Math.max((x - edge0) / (edge1 - edge0), 0), 1);
+  return t * t * (3 - 2 * t);
+}
+
+// Basic material that takes each leaf's opacity from the aAlpha attribute
+function leafMaterial() {
+  const material = new MeshBasicMaterial({ side: DoubleSide, transparent: true, depthWrite: false });
+  material.onBeforeCompile = (shader) => {
+    shader.vertexShader =
+      "attribute float aAlpha;\nvarying float vAlpha;\n" +
+      shader.vertexShader.replace("#include <begin_vertex>", "#include <begin_vertex>\nvAlpha = aAlpha;");
+    shader.fragmentShader =
+      "varying float vAlpha;\n" +
+      shader.fragmentShader.replace(
+        "#include <color_fragment>",
+        "#include <color_fragment>\ndiffuseColor.a *= vAlpha;",
+      );
+  };
+  return material;
+}
+
+// Little leaves falling over the store, turning and swaying in a faint breeze
+// to the right, fading out before they reach the ground. They live in the
+// scene's group, so they tilt with it
 export function FallingLeaves() {
   const mesh = useRef<InstancedMesh>(null);
   const leaves = useMemo(() => makeLeaves(), []);
-  const geometry = useMemo(() => new ShapeGeometry(leafShape()), []);
+  const geometry = useMemo(() => {
+    const g = new ShapeGeometry(leafShape());
+    g.setAttribute("aAlpha", new InstancedBufferAttribute(new Float32Array(COUNT), 1));
+    return g;
+  }, []);
+  const material = useMemo(() => leafMaterial(), []);
   const dummy = useMemo(() => new Object3D(), []);
 
   useEffect(() => {
@@ -76,37 +119,39 @@ export function FallingLeaves() {
       m.setColorAt(i, color.setRGB(r, g, b, LinearSRGBColorSpace));
     });
     if (m.instanceColor) m.instanceColor.needsUpdate = true;
-    return () => geometry.dispose();
-  }, [leaves, geometry]);
+    return () => {
+      geometry.dispose();
+      material.dispose();
+    };
+  }, [leaves, geometry, material]);
 
   useFrame(({ clock }, delta) => {
     const m = mesh.current;
     if (!m) return;
     const t = clock.elapsedTime;
     const dt = Math.min(delta, 0.05);
-    // A soft breeze to the right, with slow gusts
-    const wind = 0.03 + Math.sin(t * 0.35) * 0.025 + Math.sin(t * 0.13 + 1) * 0.015;
+    const alpha = geometry.getAttribute("aAlpha") as InstancedBufferAttribute;
+    // A faint breeze to the right, barely gusting
+    const wind = 0.006 + Math.sin(t * 0.3) * 0.003;
     leaves.forEach((l, i) => {
       l.y -= l.fall * dt;
-      l.x += (wind + Math.sin(t * l.sway + l.phase) * 0.05) * dt;
+      l.x += (wind + Math.sin(t * l.sway + l.phase) * 0.02) * dt;
       l.rot[0] += l.spin[0] * dt;
       l.rot[1] += l.spin[1] * dt;
       l.rot[2] += l.spin[2] * dt;
-      // Back to the top once fallen, and round the sides with the wind
-      if (l.y < BOTTOM) l.y = TOP;
+      // Back to the top once faded out, and round the sides with the wind
+      if (l.y < GONE) l.y = TOP;
       if (l.x > WIDTH / 2) l.x -= WIDTH;
-      dummy.position.set(l.x + Math.sin(t * l.sway * 1.7 + l.phase) * 0.02, l.y, l.z);
+      alpha.setX(i, 0.92 * smoothstep(GONE, FADE, l.y) * (1 - smoothstep(FADE_IN, TOP, l.y)));
+      dummy.position.set(l.x + Math.sin(t * l.sway * 1.7 + l.phase) * 0.012, l.y, l.z);
       dummy.rotation.set(l.rot[0], l.rot[1], l.rot[2]);
       dummy.scale.setScalar(l.size);
       dummy.updateMatrix();
       m.setMatrixAt(i, dummy.matrix);
     });
     m.instanceMatrix.needsUpdate = true;
+    alpha.needsUpdate = true;
   });
 
-  return (
-    <instancedMesh ref={mesh} args={[geometry, undefined, COUNT]}>
-      <meshBasicMaterial side={DoubleSide} transparent opacity={0.92} depthWrite={false} />
-    </instancedMesh>
-  );
+  return <instancedMesh ref={mesh} args={[geometry, material, COUNT]} />;
 }
