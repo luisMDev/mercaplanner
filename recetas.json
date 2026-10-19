@@ -152,6 +152,44 @@
         "carbohidratos": 34,
         "grasas": 15
       }
+    },
+    {
+      "id": "arroz-marinera-alioli",
+      "nombre": "Arroz a la marinera con alioli",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Bolsa de arroz a la marinera ultracongelado hecho en la sartén, servido con un sobre de alioli.",
+      "minutos": 10,
+      "raciones": 1,
+      "ingredientes": [
+        {
+          "texto": "1 bolsa de arroz a la marinera ultracongelado (350 g)",
+          "producto": "12782",
+          "gramos": 350,
+          "producto_nombre": "Arroz marinera Hacendado ultracongelado"
+        },
+        {
+          "texto": "1 sobre de alioli (unos 20 g)",
+          "producto": "7973",
+          "gramos": 20,
+          "producto_nombre": "Alioli con perejil Hacendado"
+        }
+      ],
+      "pasos": [
+        "Echar el arroz congelado, sin descongelar, en una sartén a fuego medio-alto con un chorrito de agua (unos 50 ml).",
+        "Taparlo y cocinarlo 8-10 minutos, removiendo de vez en cuando, hasta que esté caliente y sin líquido.",
+        "Servir con el alioli por encima."
+      ],
+      "notas": "Mercadona no vende alioli en sobres: las kcal cuentan 20 g del alioli con perejil Hacendado en bote, que es lo que suele traer un sobre. También se puede hacer en el microondas siguiendo el envase.",
+      "kcal": 532,
+      "macros": {
+        "proteinas": 15,
+        "carbohidratos": 60,
+        "grasas": 26
+      },
+      "imagen": "imagenes/arroz-marinera-alioli.png"
     }
   ],
   "semana": {
