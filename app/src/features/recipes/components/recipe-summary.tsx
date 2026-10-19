@@ -1,5 +1,4 @@
 import { ClockIcon, HeartIcon, ShoppingBagIcon, UsersIcon } from "lucide-react";
-import { BackLink } from "@/components/cozy/back-link";
 import { CtaButton } from "@/components/cozy/cta-button";
 import { Stepper } from "@/components/cozy/stepper";
 import { Tag } from "@/components/cozy/tag";
@@ -18,22 +17,17 @@ export function RecipeSummary({
   receta: r,
   servings,
   onServingsChange,
-  onBack,
 }: {
   plan: Plan;
   receta: Receta;
   servings: number;
   onServingsChange: (servings: number) => void;
-  onBack: () => void;
 }) {
   const basket = useBasket();
   const inPlan = recipeCount(plan, r.id);
   const inBasket = basket.state.recipes[r.id] ?? 0;
   return (
     <div className="flex min-w-0 flex-col items-start gap-4">
-      <BackLink onClick={onBack} className="@max-3xl:hidden">
-        Todas las recetas
-      </BackLink>
       <p className="caps font-semibold">{r.tipos.map((t) => comidaLabel(plan, t)).join(" · ")}</p>
       <h2 className="font-display text-[clamp(2rem,1.4rem+1.8vw,3rem)] leading-[1.04] font-semibold text-primary italic">
         {r.nombre}

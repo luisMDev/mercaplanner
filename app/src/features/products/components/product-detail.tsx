@@ -73,7 +73,7 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
   const strip = related(catalog, p);
   return (
     <Panel key={p.id} className="bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
-      <BackLink onClick={onBack} className="mb-4 @3xl:hidden">
+      <BackLink onClick={onBack} className="mb-4">
         Todos los productos
       </BackLink>
       <div className="grid gap-6 @3xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] @3xl:items-center @3xl:gap-8">
@@ -85,9 +85,6 @@ export function ProductDetail({ plan, catalog, id, onBack, onOpenProduct, onOpen
           <p className="font-script text-2xl text-muted-foreground @max-3xl:hidden">valores por {per100(p)}</p>
         </div>
         <div className="flex min-w-0 flex-col items-start gap-4">
-          <BackLink onClick={onBack} className="@max-3xl:hidden">
-            Todos los productos
-          </BackLink>
           <p className="caps font-semibold text-foreground">
             {p.categoria} · {p.subcategoria}
           </p>

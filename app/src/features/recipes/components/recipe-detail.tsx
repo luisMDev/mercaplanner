@@ -22,7 +22,7 @@ function RecipePanel({ plan, receta: r, onBack, onOpen, onOpenProduct }: DetailP
   const factor = servings / (r.raciones ?? 1);
   return (
     <Panel className="bg-linear-to-br from-card/60 via-card/50 to-primary-soft/40 p-5 sm:p-8">
-      <BackLink onClick={onBack} className="mb-2 @3xl:hidden">
+      <BackLink onClick={onBack} className="mb-4">
         Todas las recetas
       </BackLink>
       <div className="grid gap-4 @3xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] @3xl:items-center @3xl:gap-10">
@@ -30,7 +30,7 @@ function RecipePanel({ plan, receta: r, onBack, onOpen, onOpenProduct }: DetailP
           <DishArt receta={r} sides className="max-w-[260px] animate-float drop-shadow-md @3xl:max-w-[440px]" />
           <p className="font-script text-2xl text-muted-foreground @max-3xl:hidden">hecho en casa, con cariño</p>
         </div>
-        <RecipeSummary plan={plan} receta={r} servings={servings} onServingsChange={setServings} onBack={onBack} />
+        <RecipeSummary plan={plan} receta={r} servings={servings} onServingsChange={setServings} />
       </div>
       <div className="mt-8 grid gap-8 border-t border-dashed pt-6 @3xl:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
         {r.ingredientes.length > 0 && (
