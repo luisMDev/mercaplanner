@@ -13,7 +13,7 @@ Nacio en el vault `luisMDev/jarvis` (`brain/04-sandbox/diet-app/`) y se movio aq
 | `recetas.json` | Recetas y plan de la semana (formato abajo) |
 | `productos.json` | 2.966 alimentos de Mercadona, generado por `scripts/build-productos.py` |
 | `scripts/receta.py` | Buscar productos, calcular kcal y macros de una receta y validar `recetas.json` |
-| `scripts/imagen.py` | Ilustracion en acuarela de una receta (a partir de una foto del plato) con fondo transparente, con Nano Banana 2.1 o GPT Image 2 |
+| `scripts/imagen.py` | Ilustracion en acuarela de una receta (a partir de una foto del plato, o de la propia receta) con fondo transparente, con Nano Banana 2.1 o GPT Image 2 |
 | `imagenes/` | `estilo-referencia.webp` (el estilo que copian las ilustraciones) y una `<id>.png` por receta con imagen |
 | `.env.example` | Plantilla de `.env` (no se sube a git) con las claves `GEMINI_API_KEY` / `OPENAI_API_KEY` |
 | `scripts/build-productos.py` | Regenera `productos.json` desde el catalogo completo de Mercadona |

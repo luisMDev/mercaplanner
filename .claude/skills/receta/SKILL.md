@@ -1,11 +1,21 @@
 ---
 name: receta
-description: Añadir una receta nueva a la app de dieta (recetas.json) con sus ingredientes enlazados a productos de Mercadona, kcal y macros calculados, imagen en acuarela si Luis manda una foto, y preguntar con AskUserQuestion si modificarla o enviarla (push a main). Usar con /receta o cuando Luis diga "añade una receta", "nueva receta" o describa un plato para la app.
+description: Añadir una receta nueva a la app de dieta (recetas.json) con sus ingredientes enlazados a productos de Mercadona, kcal y macros calculados, imagen en acuarela (de la foto que mande Luis, o de la receta si lo pide al empezar), y preguntar con AskUserQuestion si modificarla o enviarla (push a main). Usar con /receta o cuando Luis diga "añade una receta", "nueva receta" o describa un plato para la app.
 ---
 
 # /receta
 
 Añade una receta a `recetas.json` siguiendo las reglas de `CLAUDE.md`. El argumento es la receta tal como la cuenta Luis (nombre, ingredientes, a veces cantidades o pasos).
+
+## 0. Preguntar por la imagen (solo si Luis no manda foto)
+
+Si el mensaje no trae foto del plato, lo primero, antes de buscar nada, es preguntar con `AskUserQuestion`:
+
+- Pregunta "¿Genero una imagen de la receta a partir de sus ingredientes?", cabecera `Imagen`, con dos opciones:
+  - `No`: "Receta sin imagen (se puede añadir luego)".
+  - `Si`: "Ilustracion en acuarela pintada a partir de la receta y sus ingredientes".
+- Con `Si`, haz el paso 5b sin foto; con `No`, sáltalo. Si manda foto, no preguntes: la imagen se hace de la foto.
+- Si la sesion no tiene `AskUserQuestion`, pregúntalo en texto y espera la respuesta.
 
 ## 1. Entender la receta
 
@@ -50,20 +60,20 @@ python3 scripts/receta.py validar
 
 Sirve la carpeta (`python3 -m http.server 8765`) y abre la pestaña Recetas a 375 px: la receta sale en su grupo, el desplegable enseña ingredientes con sus productos y no hay errores en la consola. Para el servidor al acabar.
 
-## 5b. Imagen (solo si Luis manda una foto del plato)
+## 5b. Imagen (si Luis manda foto, o si dijo `Si` en el paso 0)
 
-Convierte la foto en una ilustracion de acuarela con el estilo de `imagenes/estilo-referencia.webp` y fondo transparente:
+Pinta una ilustracion de acuarela con el estilo de `imagenes/estilo-referencia.webp` y fondo transparente:
 
 ```
-python3 scripts/imagen.py <id> --foto <ruta-de-la-foto>
+python3 scripts/imagen.py <id> --foto <ruta-de-la-foto>   # con foto
+python3 scripts/imagen.py <id>                            # sin foto: a partir de la receta y sus ingredientes
 ```
 
 - La foto adjunta esta en disco (en la sesion en la nube, en la carpeta `images/` de la sesion, junto al scratchpad); busca la ruta si no la tienes.
 - El script elige el servicio segun la clave que haya en `.env` o en el entorno: `GEMINI_API_KEY` → Nano Banana 2.1 (~0,034 $), `OPENAI_API_KEY` → GPT Image 2 en calidad baja (~0,006 $). Con las dos usa Gemini salvo `IMAGEN_PROVEEDOR=openai` o `--proveedor openai`. Plantilla en `.env.example`; `.env` no se sube a git.
 - Si no hay ninguna clave, no inventes la imagen: dile a Luis que añada una (en la nube, como secreto del entorno) y sigue sin imagen.
 - Guarda `imagenes/<id>.png` (RGBA, fondo quitado y recortado) y escribe `"imagen": "imagenes/<id>.png"` en la receta; `validar` comprueba que el fichero existe.
-- Abre el PNG y miralo antes de seguir: que sea el plato de la foto, con el estilo de la referencia y sin restos de fondo. Si sale mal, repite una vez (o con el otro proveedor) y si sigue mal, dilo en el resumen.
-- Sin foto no se genera imagen, salvo que Luis la pida (`python3 scripts/imagen.py <id>` la pinta a partir de la receta).
+- Abre el PNG y miralo antes de seguir: que sea el plato (el de la foto, o uno que encaje con los ingredientes), con el estilo de la referencia y sin restos de fondo. Si sale mal, repite una vez (o con el otro proveedor) y si sigue mal, dilo en el resumen.
 
 ## 6. Commit en local y preguntar con AskUserQuestion
 
