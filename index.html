@@ -184,7 +184,8 @@
       .page {
         max-width: 860px;
         margin: 0 auto;
-        padding-inline: 10px;
+        padding-left: max(16px, env(safe-area-inset-left, 0px));
+        padding-right: max(16px, env(safe-area-inset-right, 0px));
         padding-block: 28px 64px;
       }
 
