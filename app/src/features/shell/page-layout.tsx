@@ -33,7 +33,7 @@ export function PageLayout({
         <StoreSlot here className="mt-auto hidden w-full max-w-[300px] lg:block" />
       </aside>
       {/* Over the store and its park (z-10), also in view transitions (globals.css) */}
-      <div className="relative z-10 min-w-0 [view-transition-name:panel]">{children}</div>
+      <div className="relative z-10 min-w-0 [.vt_&]:[view-transition-name:panel]">{children}</div>
     </div>
   );
 }

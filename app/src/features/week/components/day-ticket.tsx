@@ -13,7 +13,7 @@ export function DayTicket({ plan, date, isToday }: { plan: Plan; date: Date; isT
   const meals = dateMeals(plan, date);
   const main = mainMeal(meals);
   return (
-    <section className="flex flex-col gap-3 [view-transition-name:panel-side]">
+    <section className="flex flex-col gap-3 [.vt_&]:[view-transition-name:panel-side]">
       <p className="caps flex items-center gap-2 font-semibold">
         {isToday ? "Hoy" : "El día"}
       </p>

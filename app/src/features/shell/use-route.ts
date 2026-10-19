@@ -14,7 +14,13 @@ function withTransition(update: () => void) {
     update();
     return;
   }
-  document.startViewTransition(() => flushSync(update));
+  // The view-transition-name of the store, the header and the panels only
+  // apply under html.vt, while a transition runs: an element with a name
+  // stops the frosted cards inside it from blurring what is behind it
+  const root = document.documentElement;
+  root.classList.add("vt");
+  const transition = document.startViewTransition(() => flushSync(update));
+  transition.finished.finally(() => root.classList.remove("vt"));
 }
 
 function notify() {

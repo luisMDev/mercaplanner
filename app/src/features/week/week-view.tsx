@@ -28,7 +28,7 @@ export function WeekView({ plan }: { plan: Plan }) {
   return (
     <div className="grid gap-8 pt-4 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)] lg:pt-8">
       {/* Calendar and ticket over the store and its park (z-10) */}
-      <div className="relative z-10 min-w-0 [view-transition-name:panel]">
+      <div className="relative z-10 min-w-0 [.vt_&]:[view-transition-name:panel]">
         <MonthCalendar
           plan={plan}
           month={month}

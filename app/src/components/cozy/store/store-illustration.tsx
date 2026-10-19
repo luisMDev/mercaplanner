@@ -73,7 +73,7 @@ export function StoreIllustration({
   const onReady = useCallback(() => setReady(true), []);
   return (
     // One name on every page: view transitions move it from page to page
-    <figure className={cn("relative [view-transition-name:tienda]", className)}>
+    <figure className={cn("relative [.vt_&]:[view-transition-name:tienda]", className)}>
       {here && (
         <figcaption className="pointer-events-none absolute -top-12 right-2 flex -rotate-6 flex-col items-start">
           <span className="font-script text-2xl text-primary">estás aquí</span>
