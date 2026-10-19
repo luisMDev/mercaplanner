@@ -8,6 +8,7 @@ import fondo from "@/assets/fondo.webp";
 import depthMap from "@/assets/tienda-profundidad.webp";
 import tienda from "@/assets/tienda.webp";
 import { PARK_CENTER, PARK_HEIGHT, STORE_CENTER, STORE_SCALE } from "./layout";
+import { FallingLeaves } from "./falling-leaves";
 import { reliefMaterial } from "./relief-material";
 import { usePointerX } from "./use-pointer-x";
 
@@ -77,12 +78,14 @@ function Scene({ onReady }: SceneProps) {
       <mesh material={material} position={[0, STORE_Y / OVERFLOW, 0]} scale={STORE_SCALE / OVERFLOW}>
         <planeGeometry args={[ASPECT, 1, 112, 140]} />
       </mesh>
+      <FallingLeaves />
     </group>
   );
 }
 
 // The store drawing on a plane with relief from its depth map, in front of the
-// park, further back and with its own relief, turning with the mouse. Loaded on its own (three.js is
+// park, further back and with its own relief, and leaves falling over both,
+// all turning with the mouse. Loaded on its own (three.js is
 // heavy), only where it is used
 export default function StoreScene(props: SceneProps) {
   return (
