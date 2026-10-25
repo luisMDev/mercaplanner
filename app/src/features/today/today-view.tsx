@@ -1,11 +1,11 @@
 "use client";
 
-import { CalendarX2Icon } from "lucide-react";
+import { CalendarX2Icon, TreePalmIcon } from "lucide-react";
 import { DateStub } from "@/components/cozy/date-stub";
 import { Panel, PanelHeader } from "@/components/cozy/panel";
 import { Notice } from "@/components/shared/notice";
 import { MacroBars } from "@/features/plan/components/macro-bars";
-import { todayDia } from "@/features/plan/model/days";
+import { isLibre, todayDia } from "@/features/plan/model/days";
 import { dayMeals, dayTotals, pastCount } from "@/features/plan/model/meals";
 import { DATA_FILE } from "@/features/plan/model/plan-file";
 import type { Plan } from "@/features/plan/model/types";
@@ -63,6 +63,12 @@ export function TodayView({ plan }: { plan: Plan }) {
               </ol>
             </div>
           </Panel>
+        ) : isLibre(plan, dia.id) ? (
+          <Notice
+            icon={<TreePalmIcon />}
+            title={`Hoy, ${dia.label.toLowerCase()}, es día libre`}
+            description="Sin plan: come lo que te apetezca."
+          />
         ) : (
           <Notice
             icon={<CalendarX2Icon />}

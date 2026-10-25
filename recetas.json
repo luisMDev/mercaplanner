@@ -470,5 +470,9 @@
       "comida": "causa-limena",
       "desayuno": "tostada-integral-tomate"
     }
-  }
+  },
+  "dias_libres": [
+    "sabado",
+    "domingo"
+  ]
 }

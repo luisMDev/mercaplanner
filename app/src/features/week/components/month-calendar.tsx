@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { WashiTape } from "@/components/cozy/washi-tape";
+import { DIAS } from "@/features/plan/model/days";
 import type { Plan } from "@/features/plan/model/types";
 import { cn } from "@/lib/utils";
 import { MONTHS, WEEKDAYS_SHORT, addMonths, monthWeeks, sameDay, type Month } from "../model/calendar";
@@ -17,6 +18,12 @@ function MonthButton({ label, onClick, children }: { label: string; onClick: () 
       {children}
     </button>
   );
+}
+
+// "sábado y domingo", in the order of the week
+function freeDaysText(libres: string[]) {
+  const labels = DIAS.filter((dia) => libres.includes(dia.id)).map((dia) => dia.label.toLowerCase());
+  return labels.length > 1 ? labels.slice(0, -1).join(", ") + " y " + labels.at(-1) : labels[0];
 }
 
 // The month as a paper calendar held with tape: each day with what the plan
@@ -81,6 +88,12 @@ export function MonthCalendar({
         <span className="size-2 rounded-full bg-primary" />
         El plan se repite cada semana, de lunes a domingo
       </p>
+      {plan.libres.length > 0 && (
+        <p className="mt-1 flex items-center gap-2 px-1 font-script text-[1.35rem] text-muted-foreground">
+          <span className="size-2 rounded-full bg-gold" />
+          Días libres: {freeDaysText(plan.libres)}
+        </p>
+      )}
     </section>
   );
 }

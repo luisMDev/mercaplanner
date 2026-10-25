@@ -1,11 +1,15 @@
+import { TreePalmIcon } from "lucide-react";
 import { DishArt } from "@/features/plan/components/dish-art";
+import { FreeDayTag } from "@/features/plan/components/free-day-tag";
+import { isLibre, todayDia } from "@/features/plan/model/days";
 import { mealColor } from "@/features/plan/model/meals";
 import type { Plan } from "@/features/plan/model/types";
 import { cn } from "@/lib/utils";
 import { dateMeals, mainMeal } from "../model/calendar";
 
 // One day of the month: its number, the plate of its main meal and the
-// recipe's name (dots per meal on a phone, where names do not fit)
+// recipe's name (dots per meal on a phone, where names do not fit). Days off
+// show "Día libre" (a palm tree on a phone)
 export function DayCell({
   plan,
   date,
@@ -25,6 +29,7 @@ export function DayCell({
   const meals = dateMeals(plan, date);
   const main = mainMeal(meals);
   const weekend = date.getDay() === 0 || date.getDay() === 6;
+  const libre = isLibre(plan, todayDia(date).id);
   return (
     <button
       type="button"
@@ -46,6 +51,12 @@ export function DayCell({
       >
         {date.getDate()}
       </span>
+      {libre && (
+        <>
+          <FreeDayTag className="hidden h-6 px-2 text-[0.58rem] sm:inline-flex" />
+          <TreePalmIcon aria-label="Día libre" className="size-3.5 text-gold sm:hidden" />
+        </>
+      )}
       {main?.receta && (
         <span className="hidden w-full flex-col items-center gap-0.5 sm:flex">
           <DishArt receta={main.receta} className="w-14" />

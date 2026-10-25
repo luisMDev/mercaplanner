@@ -5,6 +5,7 @@
                 macros: {proteinas, carbohidratos, grasas}, ingredientes,
                 pasos, notas, imagen}]
      semana:  {lunes: {<comida id>: <receta id>}, martes: {...}, ...}
+     dias_libres: ["sabado", "domingo"]    days off: no plan, shown as "Día libre"
    }
    A day may leave a slot out (no merienda on Saturday, say) */
 
@@ -44,7 +45,11 @@ export type Plan = {
   comidas: Comida[];
   recetas: Receta[];
   byId: Record<string, Receta>;
+  // Without the days off: they keep their meals in recetas.json, so taking a
+  // day out of "dias_libres" brings its plan back
   semana: Record<string, Record<string, string>>;
+  // Ids of DIAS that are days off ("dias_libres")
+  libres: string[];
 };
 
 // One filled slot of a day, with its recipe (null when the id does not match any)

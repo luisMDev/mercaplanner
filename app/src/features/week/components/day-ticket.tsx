@@ -1,7 +1,8 @@
 import { ArrowRightIcon, ChefHatIcon } from "lucide-react";
 import { CtaButton } from "@/components/cozy/cta-button";
 import { DateStub } from "@/components/cozy/date-stub";
-import { todayDia } from "@/features/plan/model/days";
+import { FreeDayTag } from "@/features/plan/components/free-day-tag";
+import { isLibre, todayDia } from "@/features/plan/model/days";
 import { dayTotals, mealColor } from "@/features/plan/model/meals";
 import type { Plan } from "@/features/plan/model/types";
 import { navigate } from "@/features/shell/use-route";
@@ -12,6 +13,7 @@ import { dateMeals, mainMeal } from "../model/calendar";
 export function DayTicket({ plan, date, isToday }: { plan: Plan; date: Date; isToday: boolean }) {
   const meals = dateMeals(plan, date);
   const main = mainMeal(meals);
+  const libre = isLibre(plan, todayDia(date).id);
   return (
     <section className="flex flex-col gap-3 [.vt_&]:[view-transition-name:panel-side]">
       <p className="caps flex items-center gap-2 font-semibold">
@@ -24,11 +26,18 @@ export function DayTicket({ plan, date, isToday }: { plan: Plan; date: Date; isT
             <h2 className="font-display text-[1.9rem] leading-none font-semibold text-primary italic">{todayDia(date).label}</h2>
             <ChefHatIcon className="size-7 shrink-0 text-gold" strokeWidth={1.5} />
           </div>
-          <p className="caps text-[0.64rem] text-muted-foreground">
-            {meals.length
-              ? `${plural(meals.length, "comida", "comidas")} · ${fmtNum(dayTotals(meals).kcal)} kcal`
-              : "Sin comidas en el plan"}
-          </p>
+          {libre ? (
+            <div className="flex flex-col items-start gap-2">
+              <FreeDayTag />
+              <p className="font-serif text-muted-foreground italic">Sin plan: come lo que te apetezca.</p>
+            </div>
+          ) : (
+            <p className="caps text-[0.64rem] text-muted-foreground">
+              {meals.length
+                ? `${plural(meals.length, "comida", "comidas")} · ${fmtNum(dayTotals(meals).kcal)} kcal`
+                : "Sin comidas en el plan"}
+            </p>
+          )}
           {meals.length > 0 && (
             <ul className="flex flex-col">
               {meals.map((m) => (

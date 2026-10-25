@@ -13,7 +13,7 @@
   python3 scripts/receta.py validar
       Checks recetas.json: required keys, unique ids, meal types and plan
       entries that exist, product ids that exist in productos.json, image
-      files that exist.
+      files that exist, free days ("dias_libres") that are days of the week.
       Exit code 1 if anything is wrong.
 """
 import json
@@ -125,10 +125,18 @@ def validar(_args):
                 errores.append(f"semana.{dia}: comida '{comida}' no esta en comidas")
             if rid not in ids:
                 errores.append(f"semana.{dia}.{comida}: receta '{rid}' no existe")
+    libres = data.get('dias_libres', [])
+    if not isinstance(libres, list):
+        errores.append('dias_libres: tiene que ser una lista de dias')
+        libres = []
+    for dia in libres:
+        if dia not in DIAS:
+            errores.append(f"dias_libres: dia '{dia}' no valido (sin tildes: {', '.join(DIAS)})")
     if errores:
         print('\n'.join(errores))
         sys.exit(1)
-    print(f'OK: {len(ids)} recetas, {len(data.get("semana", {}))} dias en el plan')
+    texto_libres = f", dias libres: {', '.join(libres)}" if libres else ''
+    print(f'OK: {len(ids)} recetas, {len(data.get("semana", {}))} dias en el plan{texto_libres}')
 
 
 if __name__ == '__main__':

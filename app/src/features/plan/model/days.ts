@@ -11,6 +11,11 @@ export const DIAS = [
 
 export type Dia = (typeof DIAS)[number];
 
+// Days off ("dias_libres") have no plan and show as "Día libre"
+export function isLibre(plan: { libres: string[] }, diaId: string) {
+  return plan.libres.includes(diaId);
+}
+
 // Monday-first index into DIAS of the device's local date
 export function todayDia(now: Date): Dia {
   return DIAS[(now.getDay() + 6) % 7];

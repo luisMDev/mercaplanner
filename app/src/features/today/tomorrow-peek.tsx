@@ -1,6 +1,7 @@
 import { ArrowRightIcon, SunriseIcon } from "lucide-react";
 import { Panel, PanelAction, PanelHeader } from "@/components/cozy/panel";
-import { todayDia } from "@/features/plan/model/days";
+import { FreeDayTag } from "@/features/plan/components/free-day-tag";
+import { isLibre, todayDia } from "@/features/plan/model/days";
 import { dayMeals, mealColor } from "@/features/plan/model/meals";
 import type { Plan } from "@/features/plan/model/types";
 import { navigate } from "@/features/shell/use-route";
@@ -45,6 +46,10 @@ export function TomorrowPeek({ plan, now }: { plan: Plan; now: Date }) {
             </li>
           ))}
         </ul>
+      ) : isLibre(plan, dia.id) ? (
+        <p className="flex flex-wrap items-center gap-3 font-serif text-muted-foreground italic">
+          <FreeDayTag /> Mañana no hay plan.
+        </p>
       ) : (
         <p className="font-serif text-muted-foreground italic">Mañana no hay comidas en el plan.</p>
       )}
