@@ -438,12 +438,109 @@
         "grasas": 21
       },
       "imagen": "imagenes/fritada-pisto-huevos-plancha.png"
+    },
+    {
+      "id": "ensalada-garbanzos-aguacate-tortillas",
+      "nombre": "Ensalada de garbanzos con atún y aguacate, con tortillas de maíz crujientes",
+      "tipos": [
+        "comida",
+        "cena"
+      ],
+      "descripcion": "Garbanzos con atún, aguacate, tomate y cebolla, aliñados con queso fresco batido, lima, vinagre y hierbabuena, con tortillas de maíz crujientes hechas en la air fryer.",
+      "minutos": 15,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "1 tarro de garbanzos cocidos, escurridos y enjuagados (unos 400 g)",
+          "producto": "26029",
+          "gramos": 400,
+          "producto_nombre": "Garbanzo cocido Hacendado"
+        },
+        {
+          "texto": "2 latas de atún al natural, escurridas (unos 120 g)",
+          "producto": "18018",
+          "gramos": 120,
+          "producto_nombre": "Atún claro al natural Hacendado"
+        },
+        {
+          "texto": "150 g de aguacate en dados congelado, descongelado",
+          "producto": "14283",
+          "gramos": 150,
+          "producto_nombre": "Aguacate en dados Hacendado congelado"
+        },
+        {
+          "texto": "1 tomate de ensalada picado (unos 200 g)",
+          "producto": "69937",
+          "gramos": 200,
+          "producto_nombre": "Tomate ensalada"
+        },
+        {
+          "texto": "Media cebolla roja picada (unos 60 g)",
+          "producto": "69162",
+          "gramos": 60,
+          "producto_nombre": "Cebollas rojas"
+        },
+        {
+          "texto": "150 g de queso fresco batido 0%",
+          "producto": "51071",
+          "gramos": 150,
+          "producto_nombre": "Queso fresco batido desnatado 0% MG Hacendado"
+        },
+        {
+          "texto": "Unas hojas de hierbabuena picadas (unos 5 g)",
+          "producto": "68037",
+          "gramos": 5,
+          "producto_nombre": "Hierbabuena"
+        },
+        {
+          "texto": "1 cucharada de vinagre de vino blanco (15 g)",
+          "producto": "4940",
+          "gramos": 15,
+          "producto_nombre": "Vinagre de vino blanco Hacendado"
+        },
+        {
+          "texto": "1 cucharada de aceite de oliva virgen extra (10 g)",
+          "producto": "4740",
+          "gramos": 10,
+          "producto_nombre": "Aceite de oliva virgen extra Hacendado"
+        },
+        {
+          "texto": "1 lima (su zumo, unos 30 g)",
+          "producto": "3897",
+          "gramos": 30,
+          "producto_nombre": "Lima"
+        },
+        {
+          "texto": "4 tortillas de maíz, 2 por persona (unos 104 g)",
+          "producto": "86328",
+          "gramos": 104,
+          "producto_nombre": "Tortillas de maíz Hacendado"
+        },
+        "Sal y pimienta"
+      ],
+      "pasos": [
+        "Descongelar el aguacate (unos minutos a temperatura ambiente o 30 segundos en el microondas).",
+        "Escurrir y enjuagar los garbanzos y escurrir el atún. Picar el tomate, la cebolla y la hierbabuena.",
+        "Mezclar el queso fresco batido con el zumo de la lima, el vinagre, el aceite, sal y pimienta.",
+        "Juntar en un bol los garbanzos, el atún desmigado, el tomate, la cebolla y el aguacate, añadir el aliño y la hierbabuena y remover.",
+        "Hacer las tortillas de maíz en la air fryer a 180 °C unos 4-5 minutos, enteras o cortadas en triángulos, hasta que estén crujientes.",
+        "Servir la ensalada con dos tortillas por persona."
+      ],
+      "notas": "Puedes cambiar la hierbabuena por menta. La cebolla roja es más suave en crudo; vale también la blanca.",
+      "kcal": 586,
+      "macros": {
+        "proteinas": 35,
+        "carbohidratos": 55,
+        "grasas": 22
+      },
+      "imagen": "imagenes/ensalada-garbanzos-aguacate-tortillas.png"
     }
   ],
   "semana": {
     "lunes": {
       "desayuno": "tostada-integral-tomate",
-      "cena": "gyozas-pollo-sopa-miso"
+      "cena": "gyozas-pollo-sopa-miso",
+      "comida": "ensalada-garbanzos-aguacate-tortillas"
     },
     "martes": {
       "comida": "causa-limena",
