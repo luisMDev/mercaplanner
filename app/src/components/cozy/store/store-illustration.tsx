@@ -15,10 +15,10 @@ const SCENE_WIDTH = 600;
 // three.js only downloads where the 3D store is shown
 const StoreScene = dynamic(() => import("./store-scene"), { ssr: false });
 
-// 3D only with a mouse (it follows the pointer), with WebGL and without
-// "reduce motion"; elsewhere the flat drawing stays
+// 3D with WebGL and without "reduce motion" (with a mouse it follows the
+// pointer; on a phone it sways by itself); elsewhere the flat drawing stays
 function canShow3d() {
-  if (!matchMedia("(pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
   try {
     return !!document.createElement("canvas").getContext("webgl2");
   } catch {

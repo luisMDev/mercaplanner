@@ -21,6 +21,10 @@ const EASE = 0.02;
 // Largest turn following the mouse left and right, in radians (about 12°).
 // Only sideways: moving the mouse up and down does not tilt it
 const TILT = 0.21;
+// Without a mouse (a phone) the scene turns by itself, left and right and
+// back, once every this many seconds, to this share of TILT
+const LOOP_SECONDS = 12;
+const LOOP_REACH = 0.8;
 const FOV = 25;
 // The canvas is this much taller than the frame (12% over and under it,
 // store-illustration.tsx), so the store reaching over the frame and the
@@ -49,6 +53,7 @@ function Scene({ onReady }: SceneProps) {
   const parkMaterial = useMemo(() => reliefMaterial(park, parkDepth, PARK_RELIEF), [park, parkDepth]);
   const group = useRef<Group>(null);
   const pointerX = usePointerX();
+  const loop = useMemo(() => !matchMedia("(pointer: fine)").matches, []);
 
   useEffect(onReady, [onReady]);
   useEffect(
@@ -60,10 +65,12 @@ function Scene({ onReady }: SceneProps) {
   );
 
   // The store and the park turn together around the store, easing towards
-  // the mouse
-  useFrame(() => {
+  // the mouse, or swaying by themselves on a phone
+  useFrame(({ clock }) => {
     const g = group.current;
-    if (g) g.rotation.y += (pointerX.current * TILT - g.rotation.y) * EASE;
+    if (!g) return;
+    const x = loop ? Math.sin((clock.elapsedTime / LOOP_SECONDS) * 2 * Math.PI) * LOOP_REACH : pointerX.current;
+    g.rotation.y += (x * TILT - g.rotation.y) * EASE;
   });
 
   return (
