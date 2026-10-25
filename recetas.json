@@ -442,7 +442,6 @@
   ],
   "semana": {
     "lunes": {
-      "comida": "causa-limena",
       "desayuno": "tostada-integral-tomate",
       "cena": "gyozas-pollo-sopa-miso"
     },
@@ -465,11 +464,9 @@
       "desayuno": "tostada-integral-tomate"
     },
     "sabado": {
-      "comida": "causa-limena",
       "desayuno": "huevos-revueltos-tostada-integral"
     },
     "domingo": {
-      "comida": "causa-limena",
       "desayuno": "tostada-integral-tomate"
     }
   },
