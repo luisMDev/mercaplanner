@@ -448,15 +448,16 @@
     },
     "martes": {
       "comida": "causa-limena",
-      "desayuno": "huevos-revueltos-tostada-integral"
+      "desayuno": "huevos-revueltos-tostada-integral",
+      "cena": "kebab-patatas-asadas-salsa-yogur"
     },
     "miercoles": {
-      "comida": "causa-limena",
+      "comida": "burger-cordero-salteado-rustico",
       "desayuno": "tostada-integral-tomate",
       "cena": "fritada-pisto-huevos-plancha"
     },
     "jueves": {
-      "comida": "causa-limena",
+      "comida": "arroz-marinera-alioli",
       "desayuno": "huevos-revueltos-tostada-integral"
     },
     "viernes": {
