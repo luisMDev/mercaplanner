@@ -1,6 +1,7 @@
 import { ArrowRightIcon, ChefHatIcon } from "lucide-react";
 import { CtaButton } from "@/components/cozy/cta-button";
 import { DateStub } from "@/components/cozy/date-stub";
+import { DishThumb } from "@/features/plan/components/dish-thumb";
 import { FreeDayCard } from "@/features/plan/components/free-day-card";
 import { isLibre, todayDia } from "@/features/plan/model/days";
 import { dayTotals, mealColor } from "@/features/plan/model/meals";
@@ -21,7 +22,8 @@ function GoToToday() {
   );
 }
 
-// "EL DÍA": the day picked in the calendar as a ticket, with its meals (a
+// "EL DÍA": the day picked in the calendar as a ticket, with its meals and
+// their dishes (a
 // day off, as its cozy card)
 export function DayTicket({ plan, date, isToday }: { plan: Plan; date: Date; isToday: boolean }) {
   const meals = dateMeals(plan, date);
@@ -52,21 +54,24 @@ export function DayTicket({ plan, date, isToday }: { plan: Plan; date: Date; isT
             {meals.length > 0 && (
               <ul className="flex flex-col">
                 {meals.map((m) => (
-                  <li key={m.comida.id} className="flex flex-col border-b border-dashed py-1.5 last:border-b-0">
-                    <span className="caps text-[0.58rem] font-semibold" style={{ color: mealColor(m.comida.id) }}>
-                      {m.comida.hora} · {m.comida.label}
-                    </span>
-                    {m.receta ? (
-                      <button
-                        type="button"
-                        onClick={() => navigate({ section: "recetas", id: m.receta!.id })}
-                        className="cursor-pointer text-left font-serif text-[1rem] leading-snug hover:text-primary"
-                      >
-                        {m.receta.nombre}
-                      </button>
-                    ) : (
-                      <span className="font-serif text-warning italic">Receta no encontrada</span>
-                    )}
+                  <li key={m.comida.id} className="flex items-center gap-3 border-b border-dashed py-2 last:border-b-0">
+                    <DishThumb receta={m.receta} />
+                    <div className="flex min-w-0 flex-col">
+                      <span className="caps text-[0.58rem] font-semibold" style={{ color: mealColor(m.comida.id) }}>
+                        {m.comida.hora} · {m.comida.label}
+                      </span>
+                      {m.receta ? (
+                        <button
+                          type="button"
+                          onClick={() => navigate({ section: "recetas", id: m.receta!.id })}
+                          className="cursor-pointer text-left font-serif text-[1rem] leading-snug hover:text-primary"
+                        >
+                          {m.receta.nombre}
+                        </button>
+                      ) : (
+                        <span className="font-serif text-warning italic">Receta no encontrada</span>
+                      )}
+                    </div>
                   </li>
                 ))}
               </ul>
