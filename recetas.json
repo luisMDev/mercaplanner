@@ -152,7 +152,8 @@
         "proteinas": 27,
         "carbohidratos": 34,
         "grasas": 15
-      }
+      },
+      "imagen": "imagenes/burger-cordero-salteado-rustico.png"
     },
     {
       "id": "arroz-marinera-alioli",
