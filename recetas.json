@@ -243,29 +243,232 @@
         "grasas": 22
       },
       "imagen": "imagenes/kebab-patatas-asadas-salsa-yogur.png"
+    },
+    {
+      "id": "gyozas-pollo-sopa-miso",
+      "nombre": "Gyozas de pollo con sopa de miso",
+      "tipos": [
+        "cena"
+      ],
+      "descripcion": "Gyozas de pollo y verduras doradas en la sartén con un poco de agua, sin aceite, y un cuenco de sopa de miso caliente.",
+      "minutos": 15,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "2 paquetes de gyozas de pollo y verduras congeladas (460 g, 20 gyozas)",
+          "producto": "23155",
+          "gramos": 460,
+          "producto_nombre": "Gyozas de pollo y verduras Hacendado congeladas"
+        },
+        {
+          "texto": "2 sobres de sopa de miso (26 g cada uno)",
+          "producto": "80057",
+          "gramos": 52,
+          "producto_nombre": "Sopa de miso"
+        },
+        {
+          "texto": "500 ml de agua hirviendo para la sopa",
+          "sin_producto": true
+        }
+      ],
+      "pasos": [
+        "Poner las gyozas congeladas en una sartén antiadherente grande con el lado plano hacia abajo y dorarlas 2 minutos a fuego medio-alto.",
+        "Añadir medio vaso de agua, tapar y dejarlas 6-7 minutos hasta que se evapore el agua. Destapar y dejar que se doren por debajo otro minuto.",
+        "Mientras, vaciar un sobre de miso en cada cuenco, añadir 250 ml de agua hirviendo y remover hasta disolverlo.",
+        "Servir 10 gyozas por persona con su cuenco de sopa."
+      ],
+      "notas": "El paquete de gyozas recomienda un chorrito de aceite; aquí se hacen sin él. Si se usa, no cuenta en las kcal. La sopa de miso lleva mucha sal (2,5 g por sobre).",
+      "kcal": 408,
+      "macros": {
+        "proteinas": 16,
+        "carbohidratos": 54,
+        "grasas": 14
+      },
+      "imagen": "imagenes/gyozas-pollo-sopa-miso.png"
+    },
+    {
+      "id": "tostada-integral-tomate",
+      "nombre": "Tostada integral con tomate",
+      "tipos": [
+        "desayuno"
+      ],
+      "descripcion": "Una rebanada de hogaza integral de avena y semillas tostada con tomate para untar.",
+      "minutos": 5,
+      "raciones": 1,
+      "ingredientes": [
+        {
+          "texto": "1 rebanada de hogaza integral de avena, girasol y sésamo (30 g)",
+          "producto": "9369",
+          "gramos": 30,
+          "producto_nombre": "Media Hogaza integral de avena, semillas de girasol y sésamo Hacendado rebanado"
+        },
+        {
+          "texto": "2 cucharadas grandes de tomate para untar en tarro (unos 30 g)",
+          "producto": "17647",
+          "gramos": 30,
+          "producto_nombre": "Tomate para untar Hacendado con aceite de oliva"
+        }
+      ],
+      "pasos": [
+        "Tostar la rebanada de pan.",
+        "Untarla con las dos cucharadas de tomate."
+      ],
+      "kcal": 94,
+      "macros": {
+        "proteinas": 4,
+        "carbohidratos": 12,
+        "grasas": 3
+      },
+      "imagen": "imagenes/tostada-integral-tomate.png"
+    },
+    {
+      "id": "huevos-revueltos-tostada-integral",
+      "nombre": "Huevos revueltos con tostada integral",
+      "tipos": [
+        "desayuno"
+      ],
+      "descripcion": "Dos huevos revueltos sin aceite y una rebanada de hogaza integral de avena y semillas tostada.",
+      "minutos": 10,
+      "raciones": 1,
+      "ingredientes": [
+        {
+          "texto": "2 huevos (unos 110 g sin cáscara)",
+          "producto": "15768",
+          "gramos": 110,
+          "producto_nombre": "Huevos de gallinas camperas"
+        },
+        {
+          "texto": "1 rebanada de hogaza integral de avena, girasol y sésamo (30 g)",
+          "producto": "9369",
+          "gramos": 30,
+          "producto_nombre": "Media Hogaza integral de avena, semillas de girasol y sésamo Hacendado rebanado"
+        },
+        "Sal y pimienta"
+      ],
+      "pasos": [
+        "Batir los huevos con una pizca de sal y pimienta.",
+        "Echarlos en una sartén antiadherente a fuego medio-bajo, sin aceite, y remover con una espátula hasta que cuajen pero sigan jugosos.",
+        "Tostar la rebanada de pan y servirla con los huevos."
+      ],
+      "kcal": 227,
+      "macros": {
+        "proteinas": 17,
+        "carbohidratos": 12,
+        "grasas": 12
+      },
+      "imagen": "imagenes/huevos-revueltos-tostada-integral.png"
+    },
+    {
+      "id": "gnocchi-tomate-albahaca",
+      "nombre": "Ñoquis con tomate y albahaca",
+      "tipos": [
+        "comida"
+      ],
+      "descripcion": "Ñoquis frescos de patata con salsa de tomate con albahaca.",
+      "minutos": 10,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "1 paquete de ñoquis frescos (500 g)",
+          "producto": "6175",
+          "gramos": 500,
+          "producto_nombre": "Pasta fresca gnocchi Hacendado"
+        },
+        {
+          "texto": "1 tarro de salsa de tomate con albahaca (400 g)",
+          "producto": "52859",
+          "gramos": 400,
+          "producto_nombre": "Salsa de tomate con Albahaca Hacendado"
+        }
+      ],
+      "pasos": [
+        "Hervir agua con sal en una olla grande y echar los ñoquis. Están listos cuando suben a la superficie, en 2-3 minutos.",
+        "Mientras, calentar la salsa de tomate en una sartén.",
+        "Escurrir los ñoquis, mezclarlos con la salsa en la sartén un minuto y servir."
+      ],
+      "notas": "Las kcal de los ñoquis son estimadas (el producto no tiene los valores de su etiqueta en productos.json).",
+      "kcal": 443,
+      "macros": {
+        "proteinas": 11,
+        "carbohidratos": 92,
+        "grasas": 2
+      },
+      "imagen": "imagenes/gnocchi-tomate-albahaca.png"
+    },
+    {
+      "id": "fritada-pisto-huevos-plancha",
+      "nombre": "Fritada de pisto con huevos a la plancha",
+      "tipos": [
+        "cena"
+      ],
+      "descripcion": "Fritada de pisto caliente con dos huevos a la plancha por persona, sin aceite, y una rebanada de pan integral.",
+      "minutos": 10,
+      "raciones": 2,
+      "ingredientes": [
+        {
+          "texto": "1 brik de fritada de pisto (380 g)",
+          "producto": "17112",
+          "gramos": 380,
+          "producto_nombre": "Fritada pisto Hacendado"
+        },
+        {
+          "texto": "4 huevos (unos 220 g sin cáscara)",
+          "producto": "15768",
+          "gramos": 220,
+          "producto_nombre": "Huevos de gallinas camperas"
+        },
+        {
+          "texto": "2 rebanadas de hogaza integral de avena, girasol y sésamo (60 g)",
+          "producto": "9369",
+          "gramos": 60,
+          "producto_nombre": "Media Hogaza integral de avena, semillas de girasol y sésamo Hacendado rebanado"
+        },
+        "Sal y pimienta"
+      ],
+      "pasos": [
+        "Calentar la fritada de pisto en una sartén o en el microondas.",
+        "Hacer los huevos a la plancha en una sartén antiadherente bien caliente, sin aceite, hasta que la clara cuaje y la yema siga jugosa. Salpimentar.",
+        "Servir la fritada con dos huevos por persona encima y una rebanada de pan tostado."
+      ],
+      "kcal": 402,
+      "macros": {
+        "proteinas": 20,
+        "carbohidratos": 31,
+        "grasas": 21
+      },
+      "imagen": "imagenes/fritada-pisto-huevos-plancha.png"
     }
   ],
   "semana": {
     "lunes": {
-      "comida": "causa-limena"
+      "comida": "causa-limena",
+      "desayuno": "tostada-integral-tomate",
+      "cena": "gyozas-pollo-sopa-miso"
     },
     "martes": {
-      "comida": "causa-limena"
+      "comida": "causa-limena",
+      "desayuno": "huevos-revueltos-tostada-integral"
     },
     "miercoles": {
-      "comida": "causa-limena"
+      "comida": "causa-limena",
+      "desayuno": "tostada-integral-tomate",
+      "cena": "fritada-pisto-huevos-plancha"
     },
     "jueves": {
-      "comida": "causa-limena"
+      "comida": "causa-limena",
+      "desayuno": "huevos-revueltos-tostada-integral"
     },
     "viernes": {
-      "comida": "causa-limena"
+      "comida": "gnocchi-tomate-albahaca",
+      "desayuno": "tostada-integral-tomate"
     },
     "sabado": {
-      "comida": "causa-limena"
+      "comida": "causa-limena",
+      "desayuno": "huevos-revueltos-tostada-integral"
     },
     "domingo": {
-      "comida": "causa-limena"
+      "comida": "causa-limena",
+      "desayuno": "tostada-integral-tomate"
     }
   }
 }
