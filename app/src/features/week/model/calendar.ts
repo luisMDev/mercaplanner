@@ -58,3 +58,23 @@ export function dateMeals(plan: Plan, date: Date): Meal[] {
 export function mainMeal(meals: Meal[]) {
   return meals.find((m) => m.comida.id === "comida") ?? meals[0] ?? null;
 }
+
+// Lunch and dinner are the big plates of a calendar cell; breakfast and
+// snacks go smaller
+export function isMainMeal(meal: Meal) {
+  return meal.comida.id === "comida" || meal.comida.id === "cena";
+}
+
+// How a cell lays out the plates of a day, in rows: one alone, two side by
+// side, three as a pyramid (the main meal on top), four as a square and more
+// in rows of three
+export function dishRows(meals: Meal[]): Meal[][] {
+  if (meals.length === 3) {
+    const top = mainMeal(meals)!;
+    return [[top], meals.filter((m) => m !== top)];
+  }
+  const perRow = meals.length === 4 ? 2 : 3;
+  const rows: Meal[][] = [];
+  for (let i = 0; i < meals.length; i += perRow) rows.push(meals.slice(i, i + perRow));
+  return rows;
+}
