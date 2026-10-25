@@ -1,5 +1,4 @@
 import { CoffeeIcon, FootprintsIcon, HeartIcon, ShoppingBasketIcon } from "lucide-react";
-import type { ReactNode } from "react";
 import { CozyMug } from "@/components/cozy/cozy-mug";
 import { DateStub } from "@/components/cozy/date-stub";
 import { ScriptHeading, Squiggle } from "@/components/cozy/script-heading";
@@ -16,18 +15,7 @@ const IDEAS = [
 // A day of "dias_libres" as a paper card held with tape: the date in a gold
 // stub, "Día libre" handwritten, a steaming mug and a few ideas for the day.
 // Fits a whole column (Hoy) and the narrow side of Semana
-export function FreeDayCard({
-  date,
-  isToday,
-  className,
-  children,
-}: {
-  date: Date;
-  isToday: boolean;
-  className?: string;
-  // Actions at the bottom ("Ir a hoy")
-  children?: ReactNode;
-}) {
+export function FreeDayCard({ date, isToday, className }: { date: Date; isToday: boolean; className?: string }) {
   const dia = todayDia(date);
   return (
     <section
@@ -77,7 +65,6 @@ export function FreeDayCard({
         Pequeños placeres, días más ricos
         <HeartIcon aria-hidden="true" className="size-3 fill-primary text-primary" />
       </p>
-      {children && <div className="mt-3 flex flex-wrap items-center gap-3 px-1">{children}</div>}
     </section>
   );
 }
