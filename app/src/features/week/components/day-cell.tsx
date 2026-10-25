@@ -1,6 +1,5 @@
-import { TreePalmIcon } from "lucide-react";
+import { CozyMug } from "@/components/cozy/cozy-mug";
 import { DishArt } from "@/features/plan/components/dish-art";
-import { FreeDayTag } from "@/features/plan/components/free-day-tag";
 import { isLibre, todayDia } from "@/features/plan/model/days";
 import { mealColor } from "@/features/plan/model/meals";
 import type { Plan } from "@/features/plan/model/types";
@@ -9,7 +8,8 @@ import { dateMeals, mainMeal } from "../model/calendar";
 
 // One day of the month: its number, the plate of its main meal and the
 // recipe's name (dots per meal on a phone, where names do not fit). Days off
-// show "Día libre" (a palm tree on a phone)
+// get a warm gold tint, the steaming mug and "Día libre" handwritten (just
+// the mug on a phone)
 export function DayCell({
   plan,
   date,
@@ -38,7 +38,8 @@ export function DayCell({
       aria-label={date.toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
       className={cn(
         "relative flex min-h-16 min-w-0 cursor-pointer flex-col items-center gap-1 border-t border-r border-dashed p-1 text-center transition-colors hover:bg-primary-soft/40 sm:min-h-28 sm:items-start sm:p-2 sm:text-left [&:nth-child(7n)]:border-r-0",
-        selected && "bg-primary-soft/60 hover:bg-primary-soft/60",
+        libre && "bg-linear-to-b from-gold-soft/70 to-gold-soft/20 hover:from-gold-soft hover:to-gold-soft/40",
+        selected && "bg-primary-soft/60 from-primary-soft/60 to-primary-soft/60 hover:bg-primary-soft/60",
         outside && "opacity-40",
       )}
     >
@@ -46,16 +47,19 @@ export function DayCell({
         className={cn(
           "grid size-7 place-items-center rounded-full font-serif text-[1.05rem] tabular-nums sm:size-8 sm:text-[1.15rem]",
           weekend && "text-primary",
+          libre && "text-gold",
           today && "ring-2 ring-primary",
         )}
       >
         {date.getDate()}
       </span>
       {libre && (
-        <>
-          <FreeDayTag className="hidden h-6 px-2 text-[0.58rem] sm:inline-flex" />
-          <TreePalmIcon aria-label="Día libre" className="size-3.5 text-gold sm:hidden" />
-        </>
+        <span className="-mt-1 flex w-full flex-col items-center sm:-mt-2 sm:gap-2">
+          <CozyMug className="w-5 -rotate-6 sm:w-9" />
+          <span className="sr-only sm:not-sr-only sm:font-script sm:text-[1.2rem] sm:leading-none sm:text-gold">
+            Día libre
+          </span>
+        </span>
       )}
       {main?.receta && (
         <span className="hidden w-full flex-col items-center gap-0.5 sm:flex">
